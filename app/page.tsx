@@ -36,7 +36,7 @@ export default function HomePage() {
                   Join Our Program <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-purple-900">
+              <Button asChild variant="outline" size="lg" className="border-white text-black hover:bg-white hover:text-purple-900">
                 <Link href="#about">Learn More</Link>
               </Button>
             </div>

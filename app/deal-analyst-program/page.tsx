@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { CheckCircle, Clock, Users, Star, ArrowRight } from 'lucide-react'
+import { CheckCircle, Clock, Users, ArrowRight } from 'lucide-react'
 
 export default function DealAnalystProgram() {
   return (
@@ -105,7 +105,7 @@ export default function DealAnalystProgram() {
         </div>
       </section>
 
-      {/* Application Process (Interview removed) */}
+      {/* Application Process */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -118,99 +118,56 @@ export default function DealAnalystProgram() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
                   1
                 </div>
-                <h4 className="font-semibold text-purple-900 mb-2">Application</h4>
-                <p className="text-gray-600 text-sm">Submit your application with CV, transcripts, and motivation letter</p>
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-2">Open Call</h4>
+                  <p className="text-gray-600">Every September and January, we open the application window for around 10 weeks. Stay tuned to our social media and official channels to not miss the deadline.</p>
+                </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
                   2
                 </div>
-                <h4 className="font-semibold text-purple-900 mb-2">Assessment</h4>
-                <p className="text-gray-600 text-sm">Complete our online financial modeling and case study assessment</p>
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-2">Create & Apply</h4>
+                  <p className="text-gray-600">Applicants submit a short report analyzing a deal related to private markets. Use our template or get creative – it's up to you.</p>
+                </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
                   3
                 </div>
-                <h4 className="font-semibold text-purple-900 mb-2">Acceptance</h4>
-                <p className="text-gray-600 text-sm">Receive your acceptance letter and program details</p>
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-2">Assessment</h4>
+                  <p className="text-gray-600">We are not looking for perfection. We value motivation, creativity and genuine interest over technical expertise. There will be time to build that expertise once you're in the program.</p>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-purple-900 mb-6">
-                What Our Alumni Say
-              </h2>
-              <p className="text-lg text-gray-600">
-                Hear from past participants who have gone on to successful careers in finance.
-              </p>
-            </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
+                  4
+                </div>
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-2">Join</h4>
+                  <p className="text-gray-600">Selected applicants are placed into teams and assigned a mentor. From that moment on, the program begins.</p>
+                </div>
+              </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="border-purple-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-500 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    "The Deal Analyst Program gave me the practical skills and confidence I needed to land my dream job at a top-tier PE firm. The mentorship was invaluable."
-                  </p>
-                  <div>
-                    <p className="font-semibold text-purple-900">María González</p>
-                    <p className="text-sm text-gray-500">Associate at KKR</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-purple-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-500 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    "Working on real deals and getting feedback from industry professionals was a game-changer. I felt prepared for every interview I had."
-                  </p>
-                  <div>
-                    <p className="font-semibold text-purple-900">Carlos Rodríguez</p>
-                    <p className="text-sm text-gray-500">Analyst at Goldman Sachs</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-purple-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-500 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    "The network I built through the program has been instrumental in my career. I still regularly connect with my cohort and mentors."
-                  </p>
-                  <div>
-                    <p className="font-semibold text-purple-900">Ana Martín</p>
-                    <p className="text-sm text-gray-500">VP at Bain Capital</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-yellow-500 text-purple-900 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
+                  5
+                </div>
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-2">Repeat</h4>
+                  <p className="text-gray-600">Once you have been part of the program, you are always welcome to repeat in future semesters without reapplying. We believe in long-term growth and love when people stick around and keep building with us. Over time, returning analysts may take on new responsibilities – including mentoring future cohorts.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
