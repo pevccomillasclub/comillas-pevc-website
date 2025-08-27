@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <Image
-                src="/images/club-logo.png"
+                src="/images/Adobe Express - file.png"
                 alt="Comillas PE&VC Club"
                 width={40}
                 height={40}

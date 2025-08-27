@@ -16,7 +16,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
             <Image
-              src="/images/club-logo.png"
+              src="/images/Adobe Express - file.png"
               alt="Comillas PE&VC Club"
               width={40}
               height={40}

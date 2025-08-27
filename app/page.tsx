@@ -16,7 +16,7 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
               <Image
-                src="/images/club-logo.png"
+                src="/images/Adobe Express - file.png"
                 alt="Comillas PE&VC Club Logo"
                 width={120}
                 height={120}
