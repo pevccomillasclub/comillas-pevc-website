@@ -125,7 +125,7 @@ export default function DealAnalystProgram() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-purple-900 mb-2">Open Call</h4>
-                  <p className="text-gray-600">Every September and January, we open the application window for around 10 weeks. Stay tuned to our social media and official channels to not miss the deadline.</p>
+                  <p className="text-gray-600">Every September and January, we open the application window. Stay tuned to our social media and official channels to not miss the deadline.</p>
                 </div>
               </div>
 
