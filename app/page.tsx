@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { TrendingUp, Users, BookOpen, Award, ArrowRight } from 'lucide-react'
+import { TrendingUp, Users, BookOpen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 export default function HomePage() {
@@ -80,7 +80,7 @@ export default function HomePage() {
             </div>
 
             {/* Key Activities */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               <Card className="border-purple-200 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6 text-center">
                   <TrendingUp className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
@@ -107,16 +107,6 @@ export default function HomePage() {
                   <h4 className="text-lg font-semibold text-purple-900 mb-2">Education</h4>
                   <p className="text-gray-600 text-sm">
                     Workshops, seminars, and training sessions on PE/VC fundamentals
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-purple-200 hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <Award className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                  <h4 className="text-lg font-semibold text-purple-900 mb-2">Recognition</h4>
-                  <p className="text-gray-600 text-sm">
-                    Certificates and recognition for outstanding performance and participation
                   </p>
                 </CardContent>
               </Card>
