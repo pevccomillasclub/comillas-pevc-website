@@ -5,7 +5,7 @@ import { MessageCircle } from 'lucide-react'
 export default function WhatsAppButton() {
   const handleWhatsAppClick = () => {
     // Replace with actual WhatsApp number
-    const phoneNumber = '+34123456789'
+    const phoneNumber = '+34610210452'
     const message = 'Hello! I would like to know more about the Comillas PE&VC Club.'
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
