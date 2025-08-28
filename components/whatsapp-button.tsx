@@ -6,7 +6,7 @@ export default function WhatsAppButton() {
   const handleWhatsAppClick = () => {
     // Replace with actual WhatsApp number
     const phoneNumber = '+34610210452'
-    const message = 'Hello! I would like to know more about the Comillas PE&VC Club.'
+    const message = 'Hola! Me gustaría saber más sobre el Comillas PE&VC Club.'
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
   }
