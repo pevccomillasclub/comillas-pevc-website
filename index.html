@@ -68,34 +68,61 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    #scroll-container {
-      height: 100vh;
-      width: 100vw;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
+    /* Desktop: Screen-by-Screen Snapping (1024px and up) */
+    @media (min-width: 1024px) {
+      #scroll-container {
+        height: 100vh;
+        width: 100vw;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      #scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+      .snap-screen {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #FFFFFF;
+      }
     }
 
-    #scroll-container::-webkit-scrollbar {
-      display: none;
-    }
-    #scroll-container {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    .snap-screen {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      height: 100vh;
-      width: 100vw;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: #FFFFFF;
+    /* Mobile & Tablet: Natural Fluid Scroll (< 1024px) */
+    @media (max-width: 1023px) {
+      #scroll-container {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: visible;
+        scroll-snap-type: none;
+        scroll-behavior: smooth;
+      }
+      .snap-screen {
+        height: auto !important;
+        min-height: auto !important;
+        width: 100% !important;
+        position: relative;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 6rem !important;
+        padding-bottom: 4rem !important;
+        background-color: #FFFFFF;
+        gap: 2.5rem;
+      }
+      .card-clean-interactive {
+        min-height: auto !important;
+      }
     }
 
     .card-clean {
@@ -136,15 +163,15 @@
     <div class="w-full px-6 sm:px-10 md:px-12 py-3.5 flex items-center justify-between">
       
       <!-- Brand Logo & Name (Far Left) -->
-      <button onclick="switchView('home'); scrollToHomeScreen(0);" class="flex items-center space-x-3.5 group text-left focus:outline-none">
-        <img src="assets/club-logo.png" alt="Comillas PE&VC Club Emblem" class="w-9 h-9 object-contain group-hover:opacity-85 transition-opacity" />
-        <span class="font-serif text-base sm:text-lg font-bold tracking-tight text-club-purple group-hover:text-club-purpleHighlight transition-colors">
+      <button onclick="switchView('home'); scrollToHomeScreen(0);" class="flex items-center space-x-3 group text-left focus:outline-none">
+        <img src="assets/club-logo.png" alt="Comillas PE&VC Club Emblem" class="w-8 sm:w-9 h-8 sm:h-9 object-contain group-hover:opacity-85 transition-opacity shrink-0" />
+        <span class="font-serif text-sm sm:text-lg font-bold tracking-tight text-club-purple group-hover:text-club-purpleHighlight transition-colors truncate">
           Comillas PE&VC Club
         </span>
       </button>
 
-      <!-- Right Section: Navigation Links & Join Club CTA (Right Aligned) -->
-      <div class="flex items-center space-x-8">
+      <!-- Right Section: Desktop Nav + CTA + Mobile Hamburger -->
+      <div class="flex items-center space-x-3 sm:space-x-6">
         <nav class="hidden md:flex items-center space-x-7">
           <button onclick="switchView('home')" id="nav-link-home" class="nav-item text-xs font-semibold tracking-wider text-club-purple hover:text-club-purpleHighlight transition-colors py-1">
             HOME
@@ -160,12 +187,45 @@
           </button>
         </nav>
 
-        <a href="https://chat.whatsapp.com/HLazwxHRJiKKeSJCA5w662?s=cl&p=i&ilr=0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm">
+        <a href="https://chat.whatsapp.com/HLazwxHRJiKKeSJCA5w662?s=cl&p=i&ilr=0" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm shrink-0">
           <span>Join Club</span>
           <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
         </a>
+
+        <!-- Mobile Hamburger Toggle Button (md:hidden) -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-700 hover:text-club-purple hover:bg-slate-100 transition-colors focus:outline-none" aria-label="Toggle navigation menu">
+          <i id="mobile-menu-icon" data-lucide="menu" class="w-6 h-6"></i>
+        </button>
       </div>
 
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="hidden md:hidden border-t border-slate-200/80 bg-white/98 backdrop-blur-xl px-6 py-5 space-y-3 shadow-xl transition-all duration-200">
+      <div class="flex flex-col space-y-1.5">
+        <button onclick="switchView('home'); toggleMobileMenu();" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-club-purple hover:bg-club-purpleSubtle/50 transition-colors flex items-center justify-between">
+          <span>HOME</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </button>
+        <button onclick="switchView('deal-analyst'); toggleMobileMenu();" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-slate-700 hover:text-club-purple hover:bg-slate-50 transition-colors flex items-center justify-between">
+          <span>DEAL ANALYST PROGRAM</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </button>
+        <button onclick="switchView('resources'); toggleMobileMenu();" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-slate-700 hover:text-club-purple hover:bg-slate-50 transition-colors flex items-center justify-between">
+          <span>RESOURCES</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </button>
+        <button onclick="switchView('contact'); toggleMobileMenu();" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-slate-700 hover:text-club-purple hover:bg-slate-50 transition-colors flex items-center justify-between">
+          <span>CONTACT</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </button>
+      </div>
+      <div class="pt-3 border-t border-slate-100">
+        <a href="https://chat.whatsapp.com/HLazwxHRJiKKeSJCA5w662?s=cl&p=i&ilr=0" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-2 shadow-sm">
+          <span>Join Club on WhatsApp</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -1952,6 +2012,22 @@
     const scrollContainer = document.getElementById('scroll-container');
     const snapDots = document.querySelectorAll('.snap-dot');
     const navItems = document.querySelectorAll('.nav-item');
+
+    // Mobile Hamburger Menu Toggle
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (!drawer) return;
+      const isHidden = drawer.classList.contains('hidden');
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        if (icon) icon.setAttribute('data-lucide', 'x');
+      } else {
+        drawer.classList.add('hidden');
+        if (icon) icon.setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
+    }
 
     // Switch between views (Home, Deal Analyst, Resources)
     function switchView(viewName) {
