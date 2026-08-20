@@ -68,61 +68,34 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* Desktop: Screen-by-Screen Snapping (1024px and up) */
-    @media (min-width: 1024px) {
-      #scroll-container {
-        height: 100vh;
-        width: 100vw;
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      #scroll-container::-webkit-scrollbar {
-        display: none;
-      }
-      .snap-screen {
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-        height: 100vh;
-        width: 100vw;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #FFFFFF;
-      }
+        #scroll-container {
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
 
-    /* Mobile & Tablet: Natural Fluid Scroll (< 1024px) */
-    @media (max-width: 1023px) {
-      #scroll-container {
-        height: auto;
-        min-height: 100vh;
-        overflow-y: visible;
-        scroll-snap-type: none;
-        scroll-behavior: smooth;
-      }
-      .snap-screen {
-        height: auto !important;
-        min-height: auto !important;
-        width: 100% !important;
-        position: relative;
-        overflow: visible;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 6rem !important;
-        padding-bottom: 4rem !important;
-        background-color: #FFFFFF;
-        gap: 2.5rem;
-      }
-      .card-clean-interactive {
-        min-height: auto !important;
-      }
+    #scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .snap-screen {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #FFFFFF;
     }
 
     .card-clean {
@@ -296,57 +269,57 @@
           </h2>
         </div>
 
-        <!-- 4 Verticals Grid: Maximized Vertical Rectangles -->
-        <div class="max-w-7xl w-full mx-auto my-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 4 Verticals Grid: 2x2 Grid on Mobile, 4 Columns on Desktop -->
+        <div class="max-w-7xl w-full mx-auto my-auto grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
           
           <!-- Vertical 1: Events -->
-          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
-            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+          <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-8 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-start min-h-0 lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
               01
             </div>
-            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+            <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
               Industry Events & Office Visits
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+            <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
               Direct access and keynote discussions with senior investment leaders from top PE and VC firms, combined with closed-door corporate headquarters sessions.
             </p>
           </div>
 
           <!-- Vertical 2: Hands-on Experience -->
-          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
-            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+          <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-8 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-start min-h-0 lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
               02
             </div>
-            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+            <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
               Hands-on Deal Experience
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+            <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
               The Deal Analyst Program: small cohorts conducting end-to-end buyout and venture transaction analysis, financial modeling, and investment committee defense.
             </p>
           </div>
 
           <!-- Vertical 3: Open Education -->
-          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
-            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+          <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-8 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-start min-h-0 lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
               03
             </div>
-            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+            <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
               Public Financial Education
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+            <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
               Open courses including <em>Private Markets 101</em> (10 sessions, 180+ slides) and <em>VC 201: The Deal Room</em>, technical study guides, and free learning resources.
             </p>
           </div>
 
           <!-- Vertical 4: Networking & Community -->
-          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
-            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+          <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-8 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-start min-h-0 lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
               04
             </div>
-            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+            <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
               Networking & Career Access
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+            <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
               Connecting ambitious students across engineering and business with motivated peers, alumni in high finance, and recruitment pipelines via partner platforms.
             </p>
           </div>
@@ -480,7 +453,7 @@
 
         <!-- STAGE 2: ACTION VERBS IN A SINGLE LINE -->
         <div id="da-stage-2" class="absolute top-[52vh] left-6 sm:left-12 md:left-20 max-w-7xl text-left opacity-0 z-10 transition-all duration-75">
-          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[4.15rem] xl:text-[4.5rem] text-club-dark font-normal tracking-tight leading-none whitespace-nowrap">
+          <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[4.15rem] xl:text-[4.5rem] text-club-dark font-normal tracking-tight leading-tight sm:leading-none whitespace-normal sm:whitespace-nowrap">
             Analyze. Model. Pitch. In Teams.
           </h2>
         </div>
@@ -490,7 +463,7 @@
           
           <!-- Dynamic Headline on a single clean line -->
           <div class="mb-10 overflow-visible">
-            <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-club-dark font-normal tracking-tight leading-none whitespace-nowrap">
+            <h2 class="font-serif text-xl sm:text-3xl md:text-5xl lg:text-6xl text-club-dark font-normal tracking-tight leading-tight sm:leading-none whitespace-normal sm:whitespace-nowrap">
               <span id="da-words-prefix" class="transition-opacity duration-300 opacity-0">How the </span><span>1–2 Week <span class="font-serif italic font-semibold text-club-purpleHighlight">Sprint</span> Projects</span><span id="da-words-suffix" class="transition-opacity duration-300 opacity-0"> work.</span>
             </h2>
           </div>
