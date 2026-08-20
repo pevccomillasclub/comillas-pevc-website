@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comillas PE&VC Club — Private Equity & Venture Capital</title>
+  <meta name="description" content="The official student-led Private Equity and Venture Capital Club at Universidad Pontificia Comillas (ICAI & ICADE)." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/club-logo.png" />
+  <link rel="apple-touch-icon" href="assets/club-logo.png" />
+
+  <!-- Google Fonts: Playfair Display + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            numeral: ['Cormorant Garamond', 'Bodoni Moda', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            club: {
+              purple: '#380538',
+              purpleHighlight: '#6C146C',
+              purpleDeep: '#260226',
+              purpleLight: '#520E52',
+              purpleSubtle: '#F8F3F8',
+              purpleBorder: '#E8DCE8',
+              dark: '#111827',
+              muted: '#64748B',
+              surface: '#FCFAFC',
+              border: '#E2E8F0',
+            }
+          },
+          animation: {
+            'marquee': 'marquee 32s linear infinite',
+          },
+          keyframes: {
+            'marquee': {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #FFFFFF;
+      color: #111827;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    #scroll-container {
+      height: 100vh;
+      width: 100vw;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    #scroll-container {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .snap-screen {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #FFFFFF;
+    }
+
+    .card-clean {
+      background-color: #FFFFFF;
+      border: 1px solid #ECE4EC;
+      box-shadow: 0 4px 20px -2px rgba(56, 5, 56, 0.04);
+      transition: all 0.25s ease;
+    }
+
+    .card-clean-interactive {
+      background-color: #FFFFFF;
+      border: 1px solid #ECE4EC;
+      box-shadow: 0 4px 20px -2px rgba(56, 5, 56, 0.04);
+      transition: all 0.25s ease;
+    }
+    .card-clean-interactive:hover {
+      border-color: #380538;
+      box-shadow: 0 10px 25px -4px rgba(56, 5, 56, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .ribbon-arrow {
+      clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+    }
+
+    .view-container {
+      display: none;
+    }
+    .view-container.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 selection:bg-club-purple selection:text-white">
+
+  <!-- FULL-WIDTH FIXED HEADER -->
+  <header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300" id="navbar">
+    <div class="w-full px-6 sm:px-10 md:px-12 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo & Name (Far Left) -->
+      <button onclick="switchView('home'); scrollToHomeScreen(0);" class="flex items-center space-x-3.5 group text-left focus:outline-none">
+        <img src="assets/club-logo.png" alt="Comillas PE&VC Club Emblem" class="w-9 h-9 object-contain group-hover:opacity-85 transition-opacity" />
+        <span class="font-serif text-base sm:text-lg font-bold tracking-tight text-club-purple group-hover:text-club-purpleHighlight transition-colors">
+          Comillas PE&VC Club
+        </span>
+      </button>
+
+      <!-- Right Section: Navigation Links & Join Club CTA (Right Aligned) -->
+      <div class="flex items-center space-x-8">
+        <nav class="hidden md:flex items-center space-x-7">
+          <button onclick="switchView('home')" id="nav-link-home" class="nav-item text-xs font-semibold tracking-wider text-club-purple hover:text-club-purpleHighlight transition-colors py-1">
+            HOME
+          </button>
+          <button onclick="switchView('deal-analyst')" id="nav-link-deal-analyst" class="nav-item text-xs font-semibold tracking-wider text-slate-600 hover:text-club-purple transition-colors py-1">
+            DEAL ANALYST PROGRAM
+          </button>
+          <button onclick="switchView('resources')" id="nav-link-resources" class="nav-item text-xs font-semibold tracking-wider text-slate-600 hover:text-club-purple transition-colors py-1">
+            RESOURCES
+          </button>
+          <button onclick="switchView('contact')" id="nav-link-contact" class="nav-item text-xs font-semibold tracking-wider text-slate-600 hover:text-club-purple transition-colors py-1">
+            CONTACT
+          </button>
+        </nav>
+
+        <a href="https://chat.whatsapp.com/HLazwxHRJiKKeSJCA5w662?s=cl&p=i&ilr=0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm">
+          <span>Join Club</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 1: HOME PAGE (WITH INTERNAL SECTION-BY-SECTION SCROLL-SNAP) -->
+  <!-- ========================================================================= -->
+  <div id="view-home" class="view-container active">
+    
+    <!-- SIDE FLOATING SNAP DOTS (HOME PAGE ONLY) -->
+    <div class="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col space-y-4">
+      <button onclick="scrollToHomeScreen(0)" class="snap-dot group relative flex items-center justify-end" data-index="0">
+        <span class="dot-tooltip absolute right-6 px-2.5 py-1 rounded-md text-[11px] font-medium bg-white border border-slate-200 text-slate-800 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Hero</span>
+        <div class="w-2 h-2 rounded-full border border-club-purple bg-club-purple transition-all duration-300 dot-active"></div>
+      </button>
+      <button onclick="scrollToHomeScreen(1)" class="snap-dot group relative flex items-center justify-end" data-index="1">
+        <span class="dot-tooltip absolute right-6 px-2.5 py-1 rounded-md text-[11px] font-medium bg-white border border-slate-200 text-slate-800 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Track Record</span>
+        <div class="w-2 h-2 rounded-full border border-slate-300 bg-transparent transition-all duration-300"></div>
+      </button>
+      <button onclick="scrollToHomeScreen(2)" class="snap-dot group relative flex items-center justify-end" data-index="2">
+        <span class="dot-tooltip absolute right-6 px-2.5 py-1 rounded-md text-[11px] font-medium bg-white border border-slate-200 text-slate-800 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Pillars</span>
+        <div class="w-2 h-2 rounded-full border border-slate-300 bg-transparent transition-all duration-300"></div>
+      </button>
+    </div>
+
+    <!-- HOME SCROLL CONTAINER -->
+    <div id="scroll-container">
+
+      <!-- HOME SCREEN 1: HERO STATEMENT (PURE, LEFT-ALIGNED WITH TRANSLUCENT ICADE ARCHITECTURAL TRACE) -->
+      <section class="snap-screen pt-32 pb-10 px-8 md:px-16 lg:px-24 justify-between relative overflow-hidden">
+        
+        <!-- Subtle Translucent Architectural Building Trace Watermark -->
+        <div class="absolute right-0 top-0 bottom-0 w-full md:w-3/5 pointer-events-none flex items-center justify-end z-0 opacity-50 select-none overflow-hidden">
+          <img src="assets/icade_architectural_trace.png" alt="ICADE Architectural Line Trace" class="h-full max-h-[85vh] w-auto object-contain object-right-bottom" />
+        </div>
+
+        <div></div>
+
+        <div class="max-w-4xl w-full my-auto text-left z-10 relative">
+          
+          <!-- Refined Left-Aligned Statement -->
+          <h1 class="font-serif font-normal text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-club-dark tracking-tight leading-[1.12]">
+            Bridging top <br />
+            academic talent <br />
+            with <span class="font-serif italic font-semibold text-club-purpleHighlight">Private Markets.</span>
+          </h1>
+
+        </div>
+
+        <!-- Bottom Left Scroll Indicator -->
+        <div class="flex items-center justify-between w-full max-w-6xl pb-4 border-t border-slate-100 pt-4 z-10 relative">
+          <div class="flex items-center gap-3 text-slate-400 cursor-pointer" onclick="scrollToHomeScreen(1)">
+            <span class="text-xs font-semibold uppercase tracking-widest text-slate-500">Scroll to explore</span>
+            <i data-lucide="arrow-down" class="w-4 h-4 text-club-purple animate-bounce"></i>
+          </div>
+          <div class="text-xs text-slate-400 font-medium hidden sm:block">
+            Comillas Private Equity & Venture Capital Club
+          </div>
+        </div>
+      </section>
+
+            <!-- HOME SCREEN 2: WHO WE ARE & OUR 4 VERTICALS -->
+      <section class="snap-screen pt-28 pb-10 px-8 md:px-14 lg:px-20 justify-between">
+        
+        <div class="max-w-7xl w-full mx-auto">
+          <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block mb-1.5">Who We Are & What We Do</span>
+          <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-club-dark font-normal tracking-tight max-w-5xl leading-snug">
+            Dedicated to helping university students <span class="font-serif italic font-semibold text-club-purpleHighlight">explore, learn, and build</span> careers in private markets.
+          </h2>
+        </div>
+
+        <!-- 4 Verticals Grid: Maximized Vertical Rectangles -->
+        <div class="max-w-7xl w-full mx-auto my-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Vertical 1: Events -->
+          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+              01
+            </div>
+            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+              Industry Events & Office Visits
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              Direct access and keynote discussions with senior investment leaders from top PE and VC firms, combined with closed-door corporate headquarters sessions.
+            </p>
+          </div>
+
+          <!-- Vertical 2: Hands-on Experience -->
+          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+              02
+            </div>
+            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+              Hands-on Deal Experience
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              The Deal Analyst Program: small cohorts conducting end-to-end buyout and venture transaction analysis, financial modeling, and investment committee defense.
+            </p>
+          </div>
+
+          <!-- Vertical 3: Open Education -->
+          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+              03
+            </div>
+            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+              Public Financial Education
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              Open courses including <em>Private Markets 101</em> (10 sessions, 180+ slides) and <em>VC 201: The Deal Room</em>, technical study guides, and free learning resources.
+            </p>
+          </div>
+
+          <!-- Vertical 4: Networking & Community -->
+          <div class="card-clean-interactive pt-6 pb-8 px-6 rounded-2xl flex flex-col justify-start min-h-[430px] lg:min-h-[460px] text-left border-slate-200/90">
+            <div class="font-numeral text-4xl sm:text-5xl text-club-purpleHighlight font-light mb-4 tracking-tight">
+              04
+            </div>
+            <h3 class="font-serif font-normal text-xl sm:text-2xl text-club-dark mb-4 leading-snug">
+              Networking & Career Access
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              Connecting ambitious students across engineering and business with motivated peers, alumni in high finance, and recruitment pipelines via partner platforms.
+            </p>
+          </div>
+
+        </div>
+
+        <div></div>
+      </section>
+
+      <!-- HOME SCREEN 3: IMPACT & COMMUNITY NUMBERS (LAST SCREEN) -->
+      <section class="snap-screen pt-28 pb-8 px-8 md:px-14 lg:px-20 justify-between" id="screen-impact">
+        
+        <div class="max-w-7xl w-full mx-auto">
+          <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block mb-1.5">Impact & Community</span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-club-dark font-normal tracking-tight max-w-4xl leading-tight">
+            Our journey began in 2024. <br class="hidden sm:inline" />
+            <span class="font-serif italic font-semibold text-club-purpleHighlight">And we are just getting started.</span>
+          </h2>
+        </div>
+
+        <!-- Clean Metric Grid (No Boxes / Pure Minimalist Typography with Count-Up) -->
+        <div class="max-w-7xl w-full mx-auto my-auto">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-left py-4">
+            
+            <!-- Metric 1 -->
+            <div class="flex flex-col border-l-2 border-slate-100 pl-5 sm:pl-7">
+              <div class="font-numeral font-light text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-club-purpleHighlight tracking-tight leading-none mb-3">
+                <span class="counter" data-target="500">0</span><span class="font-numeral font-light text-4xl sm:text-5xl lg:text-6xl align-top ml-0.5">+</span>
+              </div>
+              <div class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-club-dark mb-1">
+                Community Members
+              </div>
+              <p class="text-xs text-slate-500 font-normal leading-relaxed">
+                Passionate engineering and business students across ICAI and ICADE.
+              </p>
+            </div>
+
+            <!-- Metric 2 -->
+            <div class="flex flex-col border-l-2 border-slate-100 pl-5 sm:pl-7">
+              <div class="font-numeral font-light text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-club-purpleHighlight tracking-tight leading-none mb-3">
+                <span class="counter" data-target="150">0</span><span class="font-numeral font-light text-4xl sm:text-5xl lg:text-6xl align-top ml-0.5">+</span>
+              </div>
+              <div class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-club-dark mb-1">
+                Trained Analysts
+              </div>
+              <p class="text-xs text-slate-500 font-normal leading-relaxed">
+                Formed across 4 completed cohorts of the Deal Analyst Program.
+              </p>
+            </div>
+
+            <!-- Metric 3 -->
+            <div class="flex flex-col border-l-2 border-slate-100 pl-5 sm:pl-7">
+              <div class="font-numeral font-light text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-club-purpleHighlight tracking-tight leading-none mb-3">
+                <span class="counter" data-target="16">0</span><span class="font-numeral font-light text-4xl sm:text-5xl lg:text-6xl align-top ml-0.5">+</span>
+              </div>
+              <div class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-club-dark mb-1">
+                Deals Analyzed
+              </div>
+              <p class="text-xs text-slate-500 font-normal leading-relaxed">
+                Real-world buyout, venture, and growth transaction case studies.
+              </p>
+            </div>
+
+            <!-- Metric 4 -->
+            <div class="flex flex-col border-l-2 border-slate-100 pl-5 sm:pl-7">
+              <div class="font-numeral font-light text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-club-purpleHighlight tracking-tight leading-none mb-3">
+                <span class="counter" data-target="10">0</span><span class="font-numeral font-light text-4xl sm:text-5xl lg:text-6xl align-top ml-0.5">+</span>
+              </div>
+              <div class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-club-dark mb-1">
+                Collaborating Firms
+              </div>
+              <p class="text-xs text-slate-500 font-normal leading-relaxed">
+                Leading global PE, VC, and asset management partner institutions.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Partners Marquee & Footer -->
+        <div class="max-w-7xl w-full mx-auto space-y-4">
+          
+          <div class="border-t border-slate-100 pt-3">
+            <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5 text-center">Industry Network & Collaborations</div>
+            <div class="overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+              <div class="flex gap-8 whitespace-nowrap animate-marquee items-center text-xs font-semibold text-slate-600 tracking-wider">
+                <span>Cinven</span> • <span>Alantra</span> • <span>Crescenta</span> • <span>AltamarCAM</span> • <span>Seaya Ventures</span> • <span>MCH Private Equity</span> • <span>Forged Finance</span> • <span>Hult International</span> • <span>Kibo Ventures</span> • <span>Mundi Ventures</span> •
+                <span>Cinven</span> • <span>Alantra</span> • <span>Crescenta</span> • <span>AltamarCAM</span> • <span>Seaya Ventures</span> • <span>MCH Private Equity</span> • <span>Forged Finance</span> • <span>Hult International</span> • <span>Kibo Ventures</span> • <span>Mundi Ventures</span> •
+              </div>
+            </div>
+          </div>
+
+          <footer class="border-t border-slate-100 pt-3 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+            <div>© 2026 Comillas PE&VC Club · Universidad Pontificia Comillas.</div>
+            <div class="flex items-center space-x-4 text-slate-500 font-medium">
+              <button onclick="switchView('legal')" class="hover:text-club-purple transition-colors text-slate-500 hover:underline underline-offset-2">Legal Notice & Disclaimers</button>
+              <span>·</span>
+              <a href="https://www.linkedin.com/company/comillas-pe-vc-club/" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">LinkedIn</a>
+              <a href="https://www.instagram.com/comillaspevcclub" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">Instagram</a>
+              <a href="mailto:comillaspevcclub@comillas.edu" class="hover:text-club-purple transition-colors">Email</a>
+            </div>
+          </footer>
+
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 2: DEAL ANALYST PROGRAM VIEW (DYNAMIC PINNED SCROLLYTELLING) -->
+  <!-- ========================================================================= -->
+  <div id="view-deal-analyst" class="view-container bg-white text-club-dark min-h-screen">
+    
+    <!-- STICKY PINNED SCROLL STAGE (400vh Height) -->
+    <div id="da-pinned-wrapper" class="relative h-[400vh] w-full">
+      <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-start px-6 sm:px-12 md:px-20 max-w-7xl mx-auto pointer-events-none">
+        
+        <!-- STAGE 1: HERO TITLE (Aligned Left, Starts Large, Shrinks and floats to Top) -->
+        <div id="da-stage-1" class="absolute top-[28vh] left-6 sm:left-12 md:left-20 max-w-5xl text-left origin-top-left z-20 transition-all duration-75">
+          <h1 class="font-serif font-normal text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-club-dark tracking-tight leading-[1.08]">
+            Deal Analyst Program: <br />
+            <span class="font-serif italic font-semibold text-club-purpleHighlight">Hands-on</span> Dealmaking.
+          </h1>
+          <div id="da-scroll-hint" class="mt-8 flex items-center gap-3 text-slate-400">
+            <span class="text-xs font-semibold uppercase tracking-widest text-slate-500">Scroll to explore</span>
+            <i data-lucide="arrow-down" class="w-4 h-4 text-club-purple animate-bounce"></i>
+          </div>
+        </div>
+
+        <!-- STAGE 2: ACTION VERBS IN A SINGLE LINE -->
+        <div id="da-stage-2" class="absolute top-[52vh] left-6 sm:left-12 md:left-20 max-w-7xl text-left opacity-0 z-10 transition-all duration-75">
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[4.15rem] xl:text-[4.5rem] text-club-dark font-normal tracking-tight leading-none whitespace-nowrap">
+            Analyze. Model. Pitch. In Teams.
+          </h2>
+        </div>
+
+        <!-- STAGE 3: HOW IT WORKS + CONNECTED STEPPER -->
+        <div id="da-stage-3" class="absolute inset-x-0 mx-auto max-w-6xl px-6 sm:px-12 md:px-20 text-left opacity-0 w-full z-30 transition-all duration-75">
+          
+          <!-- Dynamic Headline on a single clean line -->
+          <div class="mb-10 overflow-visible">
+            <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-club-dark font-normal tracking-tight leading-none whitespace-nowrap">
+              <span id="da-words-prefix" class="transition-opacity duration-300 opacity-0">How the </span><span>1–2 Week <span class="font-serif italic font-semibold text-club-purpleHighlight">Sprint</span> Projects</span><span id="da-words-suffix" class="transition-opacity duration-300 opacity-0"> work.</span>
+            </h2>
+          </div>
+
+          <!-- Linear Stepper Grid (Connected Flow) -->
+          <div id="da-stepper" class="grid grid-cols-1 md:grid-cols-3 gap-8 relative transition-all duration-300 opacity-0 translate-y-6">
+            
+            <!-- Step 1 -->
+            <div class="space-y-3 relative">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0 shadow-sm">
+                  1
+                </span>
+                <div class="h-[1px] bg-slate-200 flex-1 hidden md:block"></div>
+              </div>
+              <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark">
+                New Batches Every 1–2 Weeks
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                Periodic project briefs are released across multiple topics. You sign up for what excites you most and can pause during exam periods with zero penalty.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="space-y-3 relative">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0 shadow-sm">
+                  2
+                </span>
+                <div class="h-[1px] bg-slate-200 flex-1 hidden md:block"></div>
+              </div>
+              <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark">
+                Small Teams & Board Mentors
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                Work in agile cohorts of 3–4 analysts with direct guidance from a senior Board mentor who answers questions and polishes your financial analysis.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="space-y-3 relative">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0 shadow-sm">
+                  3
+                </span>
+                <div class="h-[1px] bg-slate-200 flex-1 hidden md:block"></div>
+              </div>
+              <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark">
+                Deliverable & Next Rotation
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                Submit a high-caliber investment memo or financial model, receive feedback, and pick your next project when the upcoming batch launches.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- REST OF THE PAGE: PROJECT TOPICS & ADMISSIONS (UNPINNED FLOW) -->
+    <section class="py-20 px-6 sm:px-12 md:px-20 max-w-7xl mx-auto border-t border-slate-100 text-left space-y-8">
+      <div>
+        <h2 class="font-serif text-3xl sm:text-4xl text-club-dark font-normal tracking-tight">
+          Project topics & coverage.
+        </h2>
+      </div>
+
+      <!-- Sleek Editorial Bullet List -->
+      <div class="border-t border-b border-slate-200 divide-y divide-slate-100">
+        
+        <!-- Bullet 1 -->
+        <div class="py-5 flex items-start group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+          <div class="w-2 h-2 rounded-[2px] bg-club-purple rotate-45 shrink-0 mt-2.5 mr-4 group-hover:scale-125 transition-transform"></div>
+          <div>
+            <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Transaction & Deal Analysis
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 font-normal mt-0.5 leading-relaxed">
+              End-to-end analysis of landmark buyouts, growth equity rounds, and venture investments.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bullet 2 -->
+        <div class="py-5 flex items-start group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+          <div class="w-2 h-2 rounded-[2px] bg-club-purple rotate-45 shrink-0 mt-2.5 mr-4 group-hover:scale-125 transition-transform"></div>
+          <div>
+            <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              PE Firms & Fund Economics
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 font-normal mt-0.5 leading-relaxed">
+              How top GPs operate: investment theses, management fees, carried interest, and portfolio governance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bullet 3 -->
+        <div class="py-5 flex items-start group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+          <div class="w-2 h-2 rounded-[2px] bg-club-purple rotate-45 shrink-0 mt-2.5 mr-4 group-hover:scale-125 transition-transform"></div>
+          <div>
+            <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Valuation & LBO Modeling
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 font-normal mt-0.5 leading-relaxed">
+              Financial modeling in Excel from scratch: DCF valuation, trading comps, debt waterfalls, and returns sensitivity.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bullet 4 -->
+        <div class="py-5 flex items-start group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+          <div class="w-2 h-2 rounded-[2px] bg-club-purple rotate-45 shrink-0 mt-2.5 mr-4 group-hover:scale-125 transition-transform"></div>
+          <div>
+            <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Interview & Technical Preparation
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 font-normal mt-0.5 leading-relaxed">
+              Paper LBOs, financial modeling tests, and case-study drills designed to clear recruitment rounds in high finance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bullet 5 -->
+        <div class="py-5 flex items-start group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+          <div class="w-2 h-2 rounded-[2px] bg-club-purple rotate-45 shrink-0 mt-2.5 mr-4 group-hover:scale-125 transition-transform"></div>
+          <div>
+            <h3 class="font-serif font-normal text-lg sm:text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Thematic Focus Groups
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 font-normal mt-0.5 leading-relaxed">
+              Specialized research tracks in emerging verticals: Asset Tokenization, Private Credit, Energy, and Infrastructure.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ADMISSION PROCESS & ACTION BANNER -->
+    <section class="py-20 px-6 sm:px-12 md:px-20 max-w-7xl mx-auto border-t border-slate-100 text-left space-y-10">
+      <div>
+        <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block mb-1">Application Process</span>
+        <h2 class="font-serif text-3xl sm:text-4xl text-club-dark font-normal tracking-tight">
+          How to apply as an Analyst.
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-3xl">
+          No prior finance background is required. We evaluate intellectual curiosity, motivation, and the willingness to learn in team environments.
+        </p>
+      </div>
+
+      <!-- 4-Step Stepper -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 rounded-xl border border-slate-200 bg-white space-y-2">
+          <span class="font-numeral text-3xl text-club-purpleHighlight font-light block">01</span>
+          <h4 class="font-serif font-semibold text-base text-club-dark">Select a Deal</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Pick any real PE or VC transaction (historical or recent) that genuinely sparks your interest.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-slate-200 bg-white space-y-2">
+          <span class="font-numeral text-3xl text-club-purpleHighlight font-light block">02</span>
+          <h4 class="font-serif font-semibold text-base text-club-dark">Analyze the Core</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Research the macro context, key players, transaction rationale, and strategic value creation.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-slate-200 bg-white space-y-2">
+          <span class="font-numeral text-3xl text-club-purpleHighlight font-light block">03</span>
+          <h4 class="font-serif font-semibold text-base text-club-dark">Complete Template</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Fill out our one-page template. Logical reasoning and clarity matter far more than visual design.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-club-purpleBorder bg-club-purpleSubtle space-y-2">
+          <span class="font-numeral text-3xl text-club-purpleHighlight font-light block">04</span>
+          <h4 class="font-serif font-semibold text-base text-club-dark">Submit Application</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Upload your brief via the form before Friday, Sept 18th at 23:59h.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Action Banner -->
+      <div class="p-8 sm:p-10 rounded-2xl bg-club-dark text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-md text-left">
+        <div class="space-y-1.5 text-left">
+          <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest block">Fall 2026/27 Intake</span>
+          <h3 class="font-serif font-normal text-2xl sm:text-3xl text-white">Ready to apply for the Q1 2026/27 Cohort?</h3>
+          <p class="text-xs sm:text-sm text-slate-300">Applications open on Wednesday, September 9th, 2026 · Deadline: Friday, September 18th at 23:59h.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <a href="assets/Deal Analyst Template.pptx" download="Deal_Analyst_Application_Template.pptx" id="btn-download-template" class="px-6 py-3 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all flex items-center gap-2">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>Download Template</span>
+          </a>
+          <div class="px-7 py-3.5 rounded-full text-xs font-bold bg-white text-club-dark shadow-lg flex items-center gap-2 select-none">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span>Applications Open Sept 9th, 2026</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer for Deal Analyst Page -->
+    <footer class="py-8 px-6 sm:px-12 md:px-20 max-w-7xl mx-auto border-t border-slate-100 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-3 text-left">
+      <div>© 2026 Comillas PE&VC Club · Universidad Pontificia Comillas.</div>
+      <div class="flex items-center space-x-4 text-slate-500 font-medium">
+        <button onclick="switchView('legal')" class="hover:text-club-purple transition-colors text-slate-500 hover:underline underline-offset-2">Legal Notice & Disclaimers</button>
+        <span>·</span>
+        <a href="https://www.linkedin.com/company/comillas-pe-vc-club/" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">LinkedIn</a>
+        <a href="https://www.instagram.com/comillaspevcclub" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">Instagram</a>
+        <a href="mailto:comillaspevcclub@comillas.edu" class="hover:text-club-purple transition-colors">Email</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 3: RESOURCES HUB (CLEAN HIGH-LEVEL REPOSITORY PORTAL) -->
+  <!-- ========================================================================= -->
+  <div id="view-resources" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-7xl mx-auto space-y-16">
+      
+      <!-- Top Title Header -->
+      <div class="pb-6 border-b border-slate-100">
+        <h1 class="font-serif text-3xl sm:text-5xl text-club-dark font-normal tracking-tight">
+          Resources & <span class="font-serif italic font-semibold text-club-purpleHighlight">Curriculum.</span>
+        </h1>
+      </div>
+
+      <!-- BLOCK 1: ACADEMIC COURSES -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block">Academic Curriculum</span>
+            <h2 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal tracking-tight">Our Courses</h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Course 1: Private Markets 101 (Active) -->
+          <div class="p-8 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-club-purple/40 hover:shadow-md transition-all flex flex-col justify-between group">
+            <div class="space-y-3">
+              <h3 class="font-serif text-2xl text-club-dark group-hover:text-club-purple transition-colors">
+                Private Markets 101
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                The complete foundational program covering the alternative asset ecosystem: Private Equity, Venture Capital, Private Credit, Real Estate and Infrastructure Investing.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-200/60 flex items-center justify-end">
+              <button onclick="switchView('pm101')" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-club-purple text-white hover:bg-club-purpleDeep transition-colors shadow-sm flex items-center gap-2">
+                <span>Explore Course & Sessions</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Course 2: Venture Capital 201 (In Progress) -->
+          <div class="p-8 rounded-2xl border border-dashed border-slate-300 bg-slate-50/30 flex flex-col justify-between relative overflow-hidden">
+            <div class="space-y-4">
+              <div class="flex items-center justify-start">
+                <span class="text-xs font-semibold text-amber-700 bg-amber-50/80 px-2.5 py-0.5 rounded-full border border-amber-200">
+                  In Development · Fall 2026
+                </span>
+              </div>
+              <div>
+                <h3 class="font-serif text-2xl text-slate-700">
+                  Venture Capital 201: The Deal Room
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+                  Deep immersion into early-stage and growth tech investing: cap tables, SAFE / convertible notes, term sheet negotiations, liquidation preferences, and Investment Committee defense memos.
+                </p>
+              </div>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-200/60 flex items-center justify-between">
+              <span class="text-xs text-slate-400">Led by the VC Board Division</span>
+              <span class="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 bg-slate-100 border border-slate-200 cursor-not-allowed select-none">
+                Curriculum in Progress
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BLOCK 2: RESEARCH & REPORTS REPOSITORIES (CLEAN CATEGORY CARDS) -->
+      <section class="space-y-6 pt-8 border-t border-slate-100">
+        <div>
+          <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block">Institutional Intelligence</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal tracking-tight">Research & Reports</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Subpage Card 1: Analyst Insights -->
+          <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-club-purpleSubtle text-club-purple flex items-center justify-center border border-club-purpleBorder">
+                <i data-lucide="file-text" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-serif text-xl text-club-dark group-hover:text-club-purple transition-colors">
+                Analyst Insights & Deal Briefs
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                Deal analyses and reports prepared by our analysts, offering insights into real-world transactions and market trends.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-slate-100 flex items-center justify-end">
+              <button onclick="switchView('analyst-insights')" class="px-4 py-2 rounded-xl text-xs font-bold bg-club-purple text-white hover:bg-club-purpleDeep transition-colors shadow-sm flex items-center gap-1.5">
+                <span>Explore Reports</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Subpage Card 2: Industry Reports -->
+          <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200">
+                <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-serif text-xl text-club-dark group-hover:text-club-purple transition-colors">
+                Industry & Sector Reports
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                Access top-tier reports from Bain, McKinsey, BCG, and more, covering key insights and performance benchmarks to understand private markets.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-slate-100 flex items-center justify-end">
+              <button onclick="switchView('industry-reports')" class="px-4 py-2 rounded-xl text-xs font-bold bg-club-purple text-white hover:bg-club-purpleDeep transition-colors shadow-sm flex items-center gap-1.5">
+                <span>Explore Reports</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Subpage Card 3: Specialized External Reports -->
+          <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200">
+                <i data-lucide="layers" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-serif text-xl text-club-dark group-hover:text-club-purple transition-colors">
+                Specialized External Reports
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                Playbooks, due diligence templates, and additional learning materials from leading industry sources, expanding your professional toolkit.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-slate-100 flex items-center justify-end">
+              <button onclick="switchView('specialized-reports')" class="px-4 py-2 rounded-xl text-xs font-bold bg-club-purple text-white hover:bg-club-purpleDeep transition-colors shadow-sm flex items-center gap-1.5">
+                <span>Explore Whitepapers</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BLOCK 3: PROPRIETARY TOOLS & APPS -->
+      <section class="space-y-6 pt-8 border-t border-slate-100">
+        <div>
+          <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block">Interactive Toolkits</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal tracking-tight">Proprietary Tools & Simulators</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <!-- Tool 1: Purple Institute CAIA App -->
+          <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-4 flex flex-col justify-between group text-left">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-club-purpleSubtle text-club-purple flex items-center justify-center border border-club-purpleBorder">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-serif text-2xl text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                Purple Institute: CAIA Study App
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                Proprietary active-recall study platform and question bank tailored to alternative investment foundations and CAIA exam preparation.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-slate-100 flex items-center justify-end">
+              <a href="#" onclick="alert('Purple Institute CAIA App link will be connected.'); return false;" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-club-purple text-white hover:bg-club-purpleDeep transition-colors shadow-sm flex items-center gap-2">
+                <span>Launch App</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Tool 2: Debt Structure Simulator -->
+          <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-4 flex flex-col justify-between group text-left">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-club-purpleSubtle text-club-purple flex items-center justify-center border border-club-purpleBorder">
+                <i data-lucide="calculator" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-serif text-2xl text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                Debt Structure Simulator
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                Interactive financial modeling tool to simulate senior, mezzanine, and PIK tranches, debt covenants, and cash sweep waterfalls in LBO transactions.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-slate-100 flex items-center justify-end">
+              <a href="#" onclick="alert('Debt Structure Simulator link will be connected.'); return false;" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-club-purple text-white hover:bg-club-purpleDeep transition-colors shadow-sm flex items-center gap-2">
+                <span>Launch Simulator</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Footer for Resources Page -->
+      <footer class="py-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-3 text-left">
+        <div>© 2026 Comillas PE&VC Club · Universidad Pontificia Comillas.</div>
+        <div class="flex items-center space-x-4 text-slate-500 font-medium">
+          <button onclick="switchView('legal')" class="hover:text-club-purple transition-colors text-slate-500 hover:underline underline-offset-2">Legal Notice & Disclaimers</button>
+          <span>·</span>
+          <a href="https://www.linkedin.com/company/comillas-pe-vc-club/" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">LinkedIn</a>
+          <a href="https://www.instagram.com/comillaspevcclub" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">Instagram</a>
+          <a href="mailto:comillaspevcclub@comillas.edu" class="hover:text-club-purple transition-colors">Email</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+    <!-- ========================================================================= -->
+  <!-- SUBPAGE 1: PRIVATE MARKETS 101 COURSE PAGE -->
+  <!-- ========================================================================= -->
+  <div id="view-pm101" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <!-- Back Navigation -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <button onclick="switchView('resources')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Resources Hub</span>
+        </button>
+        
+      </div>
+
+      <!-- Course Header -->
+      <div class="space-y-3">
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-club-dark font-normal tracking-tight">
+          Private Markets 101
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-3xl leading-relaxed">
+          The structured syllabus covering PE, VC, Private Credit, Real Estate & Infrastructure. Download each module below.
+        </p>
+      </div>
+
+      <!-- Syllabus & Session Download Grid -->
+      <div class="space-y-4">
+        <h2 class="font-serif text-2xl text-club-dark font-normal">Curriculum Breakdown & Slide Decks</h2>
+        
+        <div class="border-t border-b border-slate-200 divide-y divide-slate-100">
+          
+          <!-- Session 0.1 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">0.1</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Course Introduction
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  How to use this course: objectives, structure, progress tracking, and recommended study flow.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/0.1.%20Course%20Intro.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 01 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">01</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Private Markets
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  Overview of private markets: asset classes, capital formation, risk/return, and the role in diversified portfolios.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/1%20Private%20Markets.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 2.1 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">2.1</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Private Equity
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  PE landscape and value creation: sourcing, underwriting, operational levers, and exit pathways.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/2.1.%20Private%20Equity.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 2.2 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">2.2</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Fund Structure & Investment Lifecycle
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  GP-LP structure, fees & carry, governance, cash flows, and the end-to-end investment lifecycle.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/2.2.%20Fund%20Structure%20%26%20Investment%20Lifecycle.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 2.3 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">2.3</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  PE Strategies
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  Buyout, growth, turnaround, secondaries & co-investments. Targets, value creation and key risks.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/2.3.%20PE%20Strategies.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 2.4 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">2.4</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Understanding Legal
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  Core legal docs and concepts: LPA, SHA/SPA, governance provisions, reps & warranties, closing mechanics.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/2.4.%20Understanding%20Legal%20in%20PE.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 2.5 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">2.5</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Sustainability in PE
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  ESG integration in diligence and ownership, regulatory drivers, reporting frameworks, and value creation.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/2.5.%20Sustainability%20In%20PE.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 2.6 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">2.6</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  LBO Model
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  LBO fundamentals: capital structure, sources & uses, value drivers, MOIC/IRR and a starter modeling workflow.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/2.6.%20LBO%20Model.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 03 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">03</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Venture Capital
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  VC economics and process: stages, term sheets, cap tables & dilution, portfolio construction, exits.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/3%20Venture%20Capital.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 04 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">04</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Private Credit
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  Instrument types (senior, unitranche, mezz), covenants, underwriting, risk management, and return profile.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/4%20Private%20Credit.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+          <!-- Session 05 -->
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+            <div class="flex items-start sm:items-center gap-4">
+              <span class="font-numeral text-2xl text-club-purpleHighlight font-light w-10 shrink-0">05</span>
+              <div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors">
+                  Infrastructure & Real Estate
+                </h3>
+                <p class="text-xs text-slate-500 font-normal mt-0.5">
+                  Real asset fundamentals, core vs core-plus infrastructure, project finance basics, revenue models, risk allocation.
+                </p>
+              </div>
+            </div>
+            <a href="resources/Private%20Markets%20101/5%20Infra%20and%20Real%20Estate.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Module</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- SUBPAGE 2: ANALYST INSIGHTS & DEAL BRIEFS -->
+  <!-- ========================================================================= -->
+  <div id="view-analyst-insights" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <!-- Back Navigation -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <button onclick="switchView('resources')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Resources Hub</span>
+        </button>
+        
+      </div>
+
+      <!-- Header -->
+      <div class="space-y-3">
+        <h1 class="font-serif text-4xl sm:text-5xl text-club-dark font-normal tracking-tight">
+          Analyst Insights & Deal Briefs
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-3xl leading-relaxed">
+          Deal analyses and reports prepared by our analysts, offering insights into real-world transactions and market trends.
+        </p>
+      </div>
+
+      <!-- Reports List -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Deal 1: Idealista -->
+        <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all flex flex-col justify-between group space-y-4">
+          <div class="space-y-3">
+            <h3 class="font-serif text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Idealista Comillas PE&VC Coverage
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              Analysis of the secondary buyouts of Idealista and its private equity journey, evaluating valuation multiples, debt financing, and sponsor returns.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100">
+            <a href="resources/Analyst%20Insights/Idealista%20Comillas%20PE%26VC%20Coverage.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Report (PDF)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Deal 2: Premier Padel -->
+        <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all flex flex-col justify-between group space-y-4">
+          <div class="space-y-3">
+            <h3 class="font-serif text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Premier Padel & Sports PE
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              Strategic breakdown on private equity capital entering professional sports leagues, media rights monetization, and global franchise consolidation.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100">
+            <a href="resources/Analyst%20Insights/Premier%20Padel%20Sports%20PE.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Report (PDF)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Deal 3: Spotify -->
+        <div class="p-7 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all flex flex-col justify-between group space-y-4">
+          <div class="space-y-3">
+            <h3 class="font-serif text-xl text-club-dark group-hover:text-club-purple transition-colors">
+              Spotify Journey Report
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              End-to-end journey from early venture funding rounds to growth equity staging and its landmark direct listing on the NYSE.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100">
+            <a href="resources/Analyst%20Insights/Spotify%20Journey%20Report.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Download Report (PDF)</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- SUBPAGE 3: INDUSTRY & SECTOR REPORTS -->
+  <!-- ========================================================================= -->
+  <div id="view-industry-reports" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <!-- Back Navigation -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <button onclick="switchView('resources')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Resources Hub</span>
+        </button>
+        
+      </div>
+
+      <!-- Header -->
+      <div class="space-y-3">
+        <h1 class="font-serif text-4xl sm:text-5xl text-club-dark font-normal tracking-tight">
+          Industry & Sector Reports
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-3xl leading-relaxed">
+          Access top-tier reports from Bain, McKinsey, BCG, and more, covering key insights and performance benchmarks to understand private markets.
+        </p>
+      </div>
+
+      <!-- Grouped Reports Sections -->
+      <div class="space-y-12">
+        
+        <!-- SECTION 1: 2026 Reports -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <h2 class="font-serif text-2xl text-club-dark font-normal">2026 Reports</h2>
+            <div class="h-[1px] bg-slate-200 flex-1"></div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            
+            <div class="p-6 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-4">
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">Bain & Company · 2026</span>
+                <h4 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">Global PE Report 2026</h4>
+                <p class="text-xs text-slate-500 font-normal">Flagship global buyout, fund returns, and exit trends.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Report%202026%20Bain.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download Report (PDF)</span>
+              </a>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-4">
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">McKinsey & Co · 2026</span>
+                <h4 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">Global Private Markets 2026</h4>
+                <p class="text-xs text-slate-500 font-normal">AUM growth, dry powder, and macroeconomic asset allocation.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Report%202026%20McKinsey.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download Report (PDF)</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION 2: 2025 Reports -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <h2 class="font-serif text-2xl text-club-dark font-normal">2025 Reports</h2>
+            <div class="h-[1px] bg-slate-200 flex-1"></div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            
+            <div class="p-6 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-4">
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">Bain & Company · 2025</span>
+                <h4 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">Global PE Report 2025</h4>
+                <p class="text-xs text-slate-500 font-normal">Valuations, exit environment, and LP liquidity dynamics.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Report%202025%20Bain.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download Report (PDF)</span>
+              </a>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-4">
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">McKinsey & Co · 2025</span>
+                <h4 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">Global Private Markets 2025</h4>
+                <p class="text-xs text-slate-500 font-normal">Capital raising, infrastructure investments, and GP strategies.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Report%202025%20McKinsey.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download Report (PDF)</span>
+              </a>
+            </div>
+
+            <div class="p-6 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-4">
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">PwC · 2025</span>
+                <h4 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">Global PE & M&A 2025</h4>
+                <p class="text-xs text-slate-500 font-normal">Dealmaking velocity, corporate carve-outs, and regulatory outlook.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Report%202025%20PWC.pdf" download class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download Report (PDF)</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION 3: Other Reports -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <h2 class="font-serif text-2xl text-club-dark font-normal">Other Reports</h2>
+            <div class="h-[1px] bg-slate-200 flex-1"></div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-3">
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">Bain & Co · Sector</span>
+                <h4 class="font-serif text-base text-club-dark group-hover:text-club-purple transition-colors font-medium">PE Healthcare Report</h4>
+                <p class="text-xs text-slate-500 font-normal">Healthcare provider consolidation and medtech.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Healthcare%20Report%20Bain.pdf" download class="w-full py-2 px-3 rounded-lg bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-1.5 text-xs font-semibold">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-3">
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">McKinsey · Tech</span>
+                <h4 class="font-serif text-base text-club-dark group-hover:text-club-purple transition-colors font-medium">Tech Investments</h4>
+                <p class="text-xs text-slate-500 font-normal">SaaS unit economics and software buyouts.</p>
+              </div>
+              <a href="resources/Industry%20Reports/PE%20Tech%20Investments%20McKinsey.pdf" download class="w-full py-2 px-3 rounded-lg bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-1.5 text-xs font-semibold">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-3">
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">BCG · Alternative Debt</span>
+                <h4 class="font-serif text-base text-club-dark group-hover:text-club-purple transition-colors font-medium">Private Credit</h4>
+                <p class="text-xs text-slate-500 font-normal">Non-bank lending and unitranche facilities.</p>
+              </div>
+              <a href="resources/Industry%20Reports/Private%20Credit%20BCG.pdf" download class="w-full py-2 px-3 rounded-lg bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-1.5 text-xs font-semibold">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-sm transition-all flex flex-col justify-between group space-y-3">
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">CB Insights · Venture</span>
+                <h4 class="font-serif text-base text-club-dark group-hover:text-club-purple transition-colors font-medium">State of Venture 2024</h4>
+                <p class="text-xs text-slate-500 font-normal">Global tech funding and unicorn valuations.</p>
+              </div>
+              <a href="resources/Industry%20Reports/VC%20Report%20CBInsights%202024.pdf" download class="w-full py-2 px-3 rounded-lg bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center justify-center gap-1.5 text-xs font-semibold">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+    <!-- ========================================================================= -->
+  <!-- SUBPAGE 4: SPECIALIZED EXTERNAL REPORTS (CLEAN LIST FORMAT) -->
+  <!-- ========================================================================= -->
+  <div id="view-specialized-reports" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <!-- Back Navigation -->
+      <div class="flex items-center pb-4 border-b border-slate-100">
+        <button onclick="switchView('resources')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Resources Hub</span>
+        </button>
+      </div>
+
+      <!-- Header -->
+      <div class="space-y-3">
+        <h1 class="font-serif text-4xl sm:text-5xl text-club-dark font-normal tracking-tight">
+          Specialized External Reports
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-3xl leading-relaxed">
+          Playbooks, due diligence templates, and additional learning materials from leading industry sources, expanding your professional toolkit.
+        </p>
+      </div>
+
+      <!-- Content Sections -->
+      <div class="space-y-14">
+        
+        <!-- SECTION 1: PRIVATE EQUITY -->
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <h2 class="font-serif text-2xl text-club-dark font-normal">Private Equity</h2>
+            <div class="h-[1px] bg-slate-200 flex-1"></div>
+          </div>
+
+          <div class="border-t border-b border-slate-200 divide-y divide-slate-100">
+            
+            <!-- Doc 1: McKinsey PE Value -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-club-purple bg-club-purpleSubtle px-2.5 py-0.5 rounded-full border border-club-purpleBorder uppercase tracking-wider">
+                    McKinsey & Company
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Maximizing Value in Private Equity Portfolios
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Value creation strategies, operational improvement playbooks, EBITDA growth levers, and portfolio governance frameworks.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/PE%20Maximize%20Value%20McKinsey.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- Doc 2: PE 101 -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Industry Primer
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Private Equity 101 Primer
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Core buyout mechanics, fund structure, GP/LP dynamics, debt tranches, and investment underwriting foundations.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/PE%20Private%20Equity%20101.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- Doc 3: PE ESG -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 uppercase tracking-wider">
+                    PRI & PwC
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  ESG & Responsible Investing in Private Equity
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Integrating environmental, social, and governance factors into deal screening, commercial due diligence, and ownership.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/PE%20ESG.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- Doc 4: PE Early Stage / Growth -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Invest Europe
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Growth Capital & Early-Stage PE Frameworks
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Structuring growth capital investments, minority protections, scaling operational platforms, and liquidity rights.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/PE%20Early%20Stage.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION 2: VENTURE CAPITAL -->
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <h2 class="font-serif text-2xl text-club-dark font-normal">Venture Capital</h2>
+            <div class="h-[1px] bg-slate-200 flex-1"></div>
+          </div>
+
+          <div class="border-t border-b border-slate-200 divide-y divide-slate-100">
+            
+            <!-- VC Doc 1: HSBC Term Sheet -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-club-purple bg-club-purpleSubtle px-2.5 py-0.5 rounded-full border border-club-purpleBorder uppercase tracking-wider">
+                    HSBC Innovation Banking
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Venture Capital Term Sheet Guide
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Clause-by-clause breakdown of standard VC term sheets: liquidation preferences, anti-dilution, and founder vesting.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Term%20Sheet%20Guide%20HSBC.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 2: Legal Term Sheet Primer -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    NVCA Legal Guidelines
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Comprehensive VC Term Sheet Primer & Mechanics
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Detailed legal terms, governance rights, protective provisions, board representation, and drag-along covenants.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Term%20Sheet%20Guide.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 3: Big Book of VC -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    IVP
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  The Big Book of Venture Capital
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Complete industry handbook on venture capital fund economics, sourcing, deal evaluation, and portfolio construction.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Big%20Book%20of%20VC.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 4: How VC Works -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Harvard Business Review
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  How Venture Capital Works
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  The inner workings of VC partnerships, risk profile, power-law return distributions, and staging rounds.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20How%20Venture%20Capital%20Works.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 5: ESN Valuation -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    European Super Angels
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Startup Valuation Methodologies
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Practical early-stage valuation frameworks: Scorecard method, Berkus method, and Risk Factor summation.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Startup%20Valuation%20ESN.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 6: KPMG Valuation -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    KPMG Corporate Finance
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Startup Valuation & Multiples Analysis
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  DCF modifications for startups, comparable VC round transaction multiples, and VC method calculations.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Startup%20Valuation.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 7: Pre Revenue Valuation -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    CFA Institute
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Valuing Pre-Revenue Companies & Early Tech
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Advanced valuation methodologies for pre-revenue tech startups, milestone-based pricing, and option pricing models.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Valuing%20PreRevenue%20Companies.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 8: Corporate VC -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-club-purple bg-club-purpleSubtle px-2.5 py-0.5 rounded-full border border-club-purpleBorder uppercase tracking-wider">
+                    Bain & Company
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Corporate Venture Capital (CVC) Playbook
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Strategic vs financial returns in CVC, parent corporation synergies, and corporate investment structures.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Corporate%20Venture%20Capital.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 9: Beginners Guide -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Startup Genome
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Venture Capital: The Beginner’s Guide
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Foundational guide to startup funding stages from pre-seed angel syndicates to Series A/B rounds.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Beginners%20Guide.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 10: Raising Funding -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Sequoia Capital Frameworks
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Raising Capital & Pitch Deck Architecture
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Frameworks for crafting investor materials, dataroom preparation, narrative architecture, and fundraising timelines.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Raising%20Funding.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 11: Sources for Entrepreneurs -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Oxford Saïd Business School
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  Capital Sources for Tech Entrepreneurs
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Comparative analysis of SAFEs, convertible debt, venture debt, revenue-based financing, and priced equity.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Sources%20for%20Entrepreneurs.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+            <!-- VC Doc 12: Networks & Performance -->
+            <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50/80 px-4 -mx-4 rounded-xl transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                    Stanford University GSB
+                  </span>
+                </div>
+                <h3 class="font-serif text-lg text-club-dark group-hover:text-club-purple transition-colors font-medium">
+                  VC Syndicate Networks & Investment Performance
+                </h3>
+                <p class="text-xs text-slate-500 font-normal max-w-3xl leading-relaxed">
+                  Empirical research on how syndication networks, GP co-investing, and deal sharing affect venture returns.
+                </p>
+              </div>
+              <a href="resources/Specialized%20External%20Reports/VC%20Networks%20%26%20Investment%20Performance.pdf" download class="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Download PDF</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 5: CONTACT & PARTNERSHIPS -->
+  <!-- ========================================================================= -->
+  <div id="view-contact" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-5xl mx-auto space-y-14">
+      
+      <!-- Top Title Header -->
+      <div class="pb-6 border-b border-slate-100 space-y-3">
+        <h1 class="font-serif text-3xl sm:text-5xl text-club-dark font-normal tracking-tight">
+          Get in <span class="font-serif italic font-semibold text-club-purpleHighlight">Touch.</span>
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-2xl leading-relaxed">
+          Contact us for partnerships, events, opportunities or just to chat!
+        </p>
+      </div>
+
+      <!-- Contact Channels Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Channel 1: Email -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-5 flex flex-col justify-between group">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-club-purpleSubtle text-club-purple flex items-center justify-center border border-club-purpleBorder">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div>
+              <h3 class="font-serif text-2xl text-club-dark group-hover:text-club-purple transition-colors font-medium">Email</h3>
+              <p class="text-xs text-slate-500 mt-1 font-normal leading-relaxed break-all">
+                comillaspevcclub@comillas.edu
+              </p>
+            </div>
+          </div>
+          <div class="pt-5 border-t border-slate-100">
+            <a href="mailto:comillaspevcclub@comillas.edu" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-2 shadow-sm">
+              <span>Send an Email</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Channel 2: LinkedIn -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-5 flex flex-col justify-between group">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-club-purpleSubtle text-club-purple flex items-center justify-center border border-club-purpleBorder">
+              <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-serif text-2xl text-club-dark group-hover:text-club-purple transition-colors font-medium">LinkedIn</h3>
+              <p class="text-xs text-slate-500 mt-1 font-normal leading-relaxed">
+                Comillas PE&VC Club · Institutional network
+              </p>
+            </div>
+          </div>
+          <div class="pt-5 border-t border-slate-100">
+            <a href="https://www.linkedin.com/company/comillas-pe-vc-club/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-2 shadow-sm">
+              <span>Connect on LinkedIn</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Channel 3: Instagram -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 hover:shadow-md transition-all space-y-5 flex flex-col justify-between group">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-club-purpleSubtle text-club-purple flex items-center justify-center border border-club-purpleBorder">
+              <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-serif text-2xl text-club-dark group-hover:text-club-purple transition-colors font-medium">Instagram</h3>
+              <p class="text-xs text-slate-500 mt-1 font-normal leading-relaxed">
+                @comillaspevcclub
+              </p>
+            </div>
+          </div>
+          <div class="pt-5 border-t border-slate-100">
+            <a href="https://www.instagram.com/comillaspevcclub" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-2 shadow-sm">
+              <span>Follow on Instagram</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Campus Location Banner -->
+      <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div class="space-y-1">
+          <h4 class="font-serif text-lg text-club-dark font-medium">Club Associated with Universidad Pontificia Comillas</h4>
+          <p class="text-xs text-slate-500">C/ de Alberto Aguilera, 23, Chamberí, 28015 Madrid, Spain</p>
+        </div>
+        <a href="https://chat.whatsapp.com/HLazwxHRJiKKeSJCA5w662?s=cl&p=i&ilr=0" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-200 hover:bg-club-purple hover:text-white text-slate-700 transition-all flex items-center gap-2 shrink-0">
+          <span>Stay updated through our WhatsApp Group</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <!-- Footer for Contact Page -->
+      <footer class="py-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-3 text-left">
+        <div>© 2026 Comillas PE&VC Club · Universidad Pontificia Comillas.</div>
+        <div class="flex items-center space-x-4 text-slate-500 font-medium">
+          <button onclick="switchView('legal')" class="hover:text-club-purple transition-colors text-slate-500 hover:underline underline-offset-2">Legal Notice & Disclaimers</button>
+          <span>·</span>
+          <a href="https://www.linkedin.com/company/comillas-pe-vc-club/" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">LinkedIn</a>
+          <a href="https://www.instagram.com/comillaspevcclub" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">Instagram</a>
+          <a href="mailto:comillaspevcclub@comillas.edu" class="hover:text-club-purple transition-colors">Email</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 6: LEGAL NOTICE & DISCLAIMERS -->
+  <!-- ========================================================================= -->
+  <div id="view-legal" class="view-container pt-28 pb-16 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-4xl mx-auto space-y-12">
+      
+      <!-- Back Navigation -->
+      <div class="flex items-center pb-4 border-b border-slate-100">
+        <button onclick="switchView('home')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Home</span>
+        </button>
+      </div>
+
+      <!-- Header -->
+      <div class="space-y-3">
+        <h1 class="font-serif text-3xl sm:text-5xl text-club-dark font-normal tracking-tight">
+          Legal Notice & <span class="font-serif italic font-semibold text-club-purpleHighlight">Disclaimers.</span>
+        </h1>
+        <p class="text-slate-500 text-xs sm:text-sm font-normal">
+          Comillas Private Equity & Venture Capital Club · Academic Year 2026/27
+        </p>
+      </div>
+
+      <!-- Content Sections -->
+      <div class="space-y-8 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-8">
+        
+        <!-- Section 1: Independence -->
+        <div class="space-y-3 p-7 rounded-2xl bg-slate-50/70 border border-slate-200/80">
+          <h2 class="font-serif text-xl text-club-dark font-medium">Independence Disclaimer</h2>
+          <p class="text-slate-600 leading-relaxed font-normal">
+            This club and all materials on this website have been developed as an independent educational initiative led by students. While developed within the academic environment of Universidad Pontificia Comillas, Madrid, the institution has not participated in the design, supervision or validation of the content. Responsibility of all materials lies solely with the student creators.
+          </p>
+        </div>
+
+        <!-- Section 2: Educational Use Only -->
+        <div class="space-y-3 p-7 rounded-2xl bg-slate-50/70 border border-slate-200/80">
+          <h2 class="font-serif text-xl text-club-dark font-medium">Educational Use Only</h2>
+          <p class="text-slate-600 leading-relaxed font-normal">
+            All materials on this website have been developed using publicly available resources and institutional presentations for academic use. All content is used with educational intent and without commercial purposes. By using any material for educational purposes, Comillas Private Equity and Venture Capital Club does not by any means authorize the use of the content for any commercial purpose.
+          </p>
+        </div>
+
+        <!-- Section 3: Financial Disclaimer -->
+        <div class="space-y-3 p-7 rounded-2xl bg-slate-50/70 border border-slate-200/80">
+          <h2 class="font-serif text-xl text-club-dark font-medium">Financial Disclaimer</h2>
+          <p class="text-slate-600 leading-relaxed font-normal">
+            Any material on this website is intended for educational purposes only. The information contained should not be construed as financial, legal or investment advice. No part of this content constitutes a recommendation to buy, sell, or hold any financial instrument or strategy. The creators disclaim responsibility for any decisions made by users based on website content.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Footer for Legal Page -->
+      <footer class="py-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-3 text-left">
+        <div>© 2026 Comillas PE&VC Club · Universidad Pontificia Comillas. All rights reserved.</div>
+        <div class="flex items-center space-x-4 text-slate-600 font-medium">
+          <a href="https://www.linkedin.com/company/comillas-pe-vc-club/" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">LinkedIn</a>
+          <a href="https://www.instagram.com/comillaspevcclub" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple transition-colors">Instagram</a>
+          <a href="mailto:comillaspevcclub@comillas.edu" class="hover:text-club-purple transition-colors">Email</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: HOME SNAP SCROLL & VIEW ROUTER -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    const scrollContainer = document.getElementById('scroll-container');
+    const snapDots = document.querySelectorAll('.snap-dot');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    // Switch between views (Home, Deal Analyst, Resources)
+    function switchView(viewName) {
+      document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+      
+      const targetView = document.getElementById('view-' + viewName);
+      if (targetView) {
+        targetView.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update Nav links
+      navItems.forEach(link => {
+        link.classList.remove('text-club-purple', 'border-b-2', 'border-club-purple');
+        link.classList.add('text-slate-600');
+      });
+      const isResourceSubView = ['pm101', 'analyst-insights', 'industry-reports', 'specialized-reports'].includes(viewName);
+      const navTarget = isResourceSubView ? 'resources' : viewName;
+      const activeNav = document.getElementById('nav-link-' + navTarget);
+      if (activeNav) {
+        activeNav.classList.add('text-club-purple');
+        activeNav.classList.remove('text-slate-600');
+      }
+
+      // Re-initialize Lucide Icons
+      lucide.createIcons();
+
+      // Trigger initial scroll calculations if Deal Analyst is active
+      if (viewName === 'deal-analyst') {
+        setTimeout(triggerDaScrollyLoop, 50);
+      }
+    }
+
+    // Scroll within Home View section-by-section
+    function scrollToHomeScreen(index) {
+      if (scrollContainer) {
+        const height = window.innerHeight;
+        scrollContainer.scrollTo({ top: index * height, behavior: 'smooth' });
+      }
+    }
+
+    // Animated Counter Engine for Screen 3
+    let countersAnimated = false;
+    function animateCounters() {
+      if (countersAnimated) return;
+      countersAnimated = true;
+
+      document.querySelectorAll('.counter').forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 1400; // ms
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out expo / cubic
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const currentVal = Math.floor(easeOut * target);
+
+          counter.innerText = currentVal;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.innerText = target;
+          }
+        }
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
+    // Intersection Observer to reliably trigger counter on Screen 3
+    const impactScreen = document.getElementById('screen-impact');
+    if (impactScreen) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+          }
+        });
+      }, { threshold: 0.4 });
+      observer.observe(impactScreen);
+    }
+
+    
+    
+    
+    // =========================================================================
+    // DYNAMIC PINNED SCROLLYTELLING CONTROLLER
+    // =========================================================================
+    function handleDealAnalystScroll() {
+      const daView = document.getElementById('view-deal-analyst');
+      if (!daView || !daView.classList.contains('active')) return;
+
+      const wrapper = document.getElementById('da-pinned-wrapper');
+      if (!wrapper) return;
+
+      const rect = wrapper.getBoundingClientRect();
+      const totalScrollable = wrapper.offsetHeight - window.innerHeight;
+
+      if (totalScrollable <= 0) return;
+
+      const scrolled = -rect.top;
+      const progress = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+
+      const stage1 = document.getElementById('da-stage-1');
+      const stage2 = document.getElementById('da-stage-2');
+      const stage3 = document.getElementById('da-stage-3');
+      const scrollHint = document.getElementById('da-scroll-hint');
+      const wordsPrefix = document.getElementById('da-words-prefix');
+      const wordsSuffix = document.getElementById('da-words-suffix');
+      const stepper = document.getElementById('da-stepper');
+
+      // --- PHASE 1 & 2: HERO TITLE & ACTION VERBS (Progress 0.0 to 0.46) ---
+      if (progress < 0.44) {
+        // Stage 1 (Hero Title): Starts full size, shrinks to 0.50 scale and moves up to stay as header
+        if (progress < 0.18) {
+          const p1 = progress / 0.18;
+          const scale = 1 - p1 * 0.50; // Shrinks down to 0.50
+          const translateY = -p1 * 105;
+          stage1.style.transform = 'translateY(' + translateY + 'px) scale(' + scale + ')';
+          stage1.style.opacity = 1;
+          if (scrollHint) scrollHint.style.opacity = Math.max(1 - p1 * 2.5, 0);
+        } else if (progress < 0.38) {
+          // Stays visible and shrunk while Stage 2 is shown
+          stage1.style.transform = 'translateY(-105px) scale(0.50)';
+          stage1.style.opacity = 1;
+          if (scrollHint) scrollHint.style.opacity = 0;
+        } else {
+          // Fades out as we transition to phase 3
+          const exitP = (progress - 0.38) / 0.06;
+          stage1.style.transform = 'translateY(' + (-105 - exitP * 40) + 'px) scale(0.50)';
+          stage1.style.opacity = Math.max(1 - exitP, 0);
+        }
+
+        // Stage 2 (Action Verbs 'Analyze. Model. Pitch. In Teams.' in 1 line)
+        if (progress >= 0.14 && progress <= 0.42) {
+          if (progress < 0.24) {
+            const enterP = (progress - 0.14) / 0.10;
+            stage2.style.opacity = enterP;
+            stage2.style.transform = 'translateY(' + ((1 - enterP) * 30) + 'px)';
+          } else if (progress <= 0.36) {
+            stage2.style.opacity = 1;
+            stage2.style.transform = 'translateY(0px)';
+          } else {
+            const exitP2 = (progress - 0.36) / 0.06;
+            stage2.style.opacity = Math.max(1 - exitP2, 0);
+            stage2.style.transform = 'translateY(' + (-exitP2 * 40) + 'px)';
+          }
+        } else {
+          stage2.style.opacity = 0;
+        }
+      } else {
+        stage1.style.opacity = 0;
+        stage2.style.opacity = 0;
+      }
+
+      // --- PHASE 3: '1-2 WEEK SPRINT PROJECTS' -> 'HOW THE ... WORK.' -> STEPPER (Progress 0.46 to 1.0) ---
+      if (progress >= 0.46) {
+        const p3 = (progress - 0.46) / 0.54;
+        stage3.style.opacity = Math.min(p3 * 3, 1);
+
+        const showFullSentence = p3 > 0.35;
+        if (wordsPrefix) wordsPrefix.style.opacity = showFullSentence ? 1 : 0;
+        if (wordsSuffix) wordsSuffix.style.opacity = showFullSentence ? 1 : 0;
+
+        // Stepper rises and fades in
+        if (stepper) {
+          if (p3 > 0.58) {
+            stepper.style.opacity = 1;
+            stepper.style.transform = 'translateY(0)';
+          } else {
+            stepper.style.opacity = 0;
+            stepper.style.transform = 'translateY(28px)';
+          }
+        }
+      } else {
+        stage3.style.opacity = 0;
+        if (wordsPrefix) wordsPrefix.style.opacity = 0;
+        if (wordsSuffix) wordsSuffix.style.opacity = 0;
+        if (stepper) {
+          stepper.style.opacity = 0;
+          stepper.style.transform = 'translateY(28px)';
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleDealAnalystScroll, { passive: true });
+
+    // Track active screen in Home and update dots
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', () => {
+        const scrollPos = scrollContainer.scrollTop;
+        const height = window.innerHeight;
+        const activeIndex = Math.round(scrollPos / height);
+
+        if (activeIndex === 2) {
+          animateCounters();
+        }
+
+        snapDots.forEach((dot, idx) => {
+          const circle = dot.querySelector('div');
+          if (idx === activeIndex) {
+            circle.classList.add('w-3.5', 'h-3.5', 'bg-club-purple', 'border-club-purple');
+            circle.classList.remove('w-2', 'h-2', 'bg-transparent', 'border-slate-300');
+          } else {
+            circle.classList.remove('w-3.5', 'h-3.5', 'bg-club-purple', 'border-club-purple');
+            circle.classList.add('w-2', 'h-2', 'bg-transparent', 'border-slate-300');
+          }
+        });
+      });
+
+      // Keyboard navigation for Home
+      window.addEventListener('keydown', (e) => {
+        const homeView = document.getElementById('view-home');
+        if (homeView && homeView.classList.contains('active')) {
+        const scrollPos = scrollContainer.scrollTop;
+        const height = window.innerHeight;
+        const activeIndex = Math.round(scrollPos / height);
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+          if (activeIndex < 2) { e.preventDefault(); scrollToHomeScreen(activeIndex + 1); }
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          if (activeIndex > 0) { e.preventDefault(); scrollToHomeScreen(activeIndex - 1); }
+        }
+      }
+      const daView = document.getElementById('view-deal-analyst');
+      if (daView && daView.classList.contains('active')) {
+        const scrollPos = daContainer.scrollTop;
+        const height = window.innerHeight;
+        const activeIndex = Math.round(scrollPos / height);
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+          if (activeIndex < 4) { e.preventDefault(); scrollDaToScreen(activeIndex + 1); }
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          if (activeIndex > 0) { e.preventDefault(); scrollDaToScreen(activeIndex - 1); }
+        }
+      }
+      return;
+
+
+        const scrollPos = scrollContainer.scrollTop;
+        const height = window.innerHeight;
+        const activeIndex = Math.round(scrollPos / height);
+
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+          if (activeIndex < 2) {
+            e.preventDefault();
+            scrollToHomeScreen(activeIndex + 1);
+          }
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          if (activeIndex > 0) {
+            e.preventDefault();
+            scrollToHomeScreen(activeIndex - 1);
+          }
+        }
+      });
+    }
+
+    // Sub-tab switcher inside Deal Analyst view
+    function switchSubTab(tabId) {
+      document.querySelectorAll('.subtab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.subtab-pane').forEach(el => el.classList.remove('block'));
+      
+      const activeContent = document.getElementById('subtab-content-' + tabId);
+      if (activeContent) {
+        activeContent.classList.remove('hidden');
+        activeContent.classList.add('block');
+      }
+
+      document.querySelectorAll('.subtab-btn').forEach(btn => {
+        btn.classList.remove('bg-club-purple', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600');
+      });
+      
+      const activeBtn = document.getElementById('subtab-btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-club-purple', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-600');
+      }
+    }
+  </script>
+</body>
+</html>
