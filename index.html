@@ -1990,10 +1990,13 @@
     function closeMobileMenu() {
       const drawer = document.getElementById('mobile-drawer');
       const icon = document.getElementById('mobile-menu-icon');
-      if (drawer && !drawer.classList.contains('hidden')) {
+      if (drawer) {
         drawer.classList.add('hidden');
-        if (icon) icon.setAttribute('data-lucide', 'menu');
       }
+      if (icon) {
+        icon.setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
     }
 
     function toggleMobileMenu() {
@@ -2022,6 +2025,10 @@
       if (targetView) {
         targetView.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+
+      if (viewName === 'home') {
+        scrollToHomeScreen(0);
       }
 
       // Update Nav links
