@@ -1986,7 +1986,16 @@
     const snapDots = document.querySelectorAll('.snap-dot');
     const navItems = document.querySelectorAll('.nav-item');
 
-    // Mobile Hamburger Menu Toggle
+    // Mobile Hamburger Menu Functions
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (drawer && !drawer.classList.contains('hidden')) {
+        drawer.classList.add('hidden');
+        if (icon) icon.setAttribute('data-lucide', 'menu');
+      }
+    }
+
     function toggleMobileMenu() {
       const drawer = document.getElementById('mobile-drawer');
       const icon = document.getElementById('mobile-menu-icon');
@@ -2002,14 +2011,17 @@
       lucide.createIcons();
     }
 
-    // Switch between views (Home, Deal Analyst, Resources)
+    // Switch between views (Home, Deal Analyst, Resources, Contact, Legal, etc.)
     function switchView(viewName) {
+      // Always close mobile menu drawer when switching views
+      closeMobileMenu();
+
       document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
       
       const targetView = document.getElementById('view-' + viewName);
       if (targetView) {
         targetView.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
       }
 
       // Update Nav links
