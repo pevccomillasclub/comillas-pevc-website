@@ -166,8 +166,9 @@
         </a>
 
         <!-- Mobile Hamburger Toggle Button (md:hidden) -->
-        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-700 hover:text-club-purple hover:bg-slate-100 transition-colors focus:outline-none" aria-label="Toggle navigation menu">
-          <i id="mobile-menu-icon" data-lucide="menu" class="w-6 h-6"></i>
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-700 hover:text-club-purple hover:bg-slate-100 transition-colors focus:outline-none flex items-center justify-center" aria-label="Toggle navigation menu">
+          <svg id="icon-menu-open" class="w-6 h-6 block text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          <svg id="icon-menu-close" class="w-6 h-6 hidden text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
 
@@ -1989,29 +1990,28 @@
     // Mobile Hamburger Menu Functions
     function closeMobileMenu() {
       const drawer = document.getElementById('mobile-drawer');
-      const icon = document.getElementById('mobile-menu-icon');
-      if (drawer) {
-        drawer.classList.add('hidden');
-      }
-      if (icon) {
-        icon.setAttribute('data-lucide', 'menu');
-      }
-      lucide.createIcons();
+      const iconOpen = document.getElementById('icon-menu-open');
+      const iconClose = document.getElementById('icon-menu-close');
+      if (drawer) drawer.classList.add('hidden');
+      if (iconOpen) iconOpen.classList.remove('hidden');
+      if (iconClose) iconClose.classList.add('hidden');
     }
 
     function toggleMobileMenu() {
       const drawer = document.getElementById('mobile-drawer');
-      const icon = document.getElementById('mobile-menu-icon');
+      const iconOpen = document.getElementById('icon-menu-open');
+      const iconClose = document.getElementById('icon-menu-close');
       if (!drawer) return;
       const isHidden = drawer.classList.contains('hidden');
       if (isHidden) {
         drawer.classList.remove('hidden');
-        if (icon) icon.setAttribute('data-lucide', 'x');
+        if (iconOpen) iconOpen.classList.add('hidden');
+        if (iconClose) iconClose.classList.remove('hidden');
       } else {
         drawer.classList.add('hidden');
-        if (icon) icon.setAttribute('data-lucide', 'menu');
+        if (iconOpen) iconOpen.classList.remove('hidden');
+        if (iconClose) iconClose.classList.add('hidden');
       }
-      lucide.createIcons();
     }
 
     // Switch between views (Home, Deal Analyst, Resources, Contact, Legal, etc.)
