@@ -282,7 +282,7 @@
               <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
                 Industry Events & Office Visits
               </h3>
-              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal">
                 Direct access and keynote discussions with senior investment leaders from top PE and VC firms, combined with closed-door corporate headquarters sessions.
               </p>
             </div>
@@ -291,19 +291,26 @@
           <!-- Vertical 2: Hands-on Experience -->
           <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-6 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-between min-h-0 lg:min-h-[460px] text-left border-slate-200/90 group">
             <div>
-              <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
-                02
+              <div class="flex items-center justify-between mb-1.5 sm:mb-4">
+                <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light tracking-tight">
+                  02
+                </div>
+                <!-- Mobile Top-Right Action Arrow Button -->
+                <button onclick="switchView('deal-analyst')" class="sm:hidden w-7 h-7 rounded-lg bg-club-purple hover:bg-club-purpleDeep text-white flex items-center justify-center shadow-sm shrink-0" aria-label="Explore our Deal Analyst Program">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </button>
               </div>
               <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
                 Hands-on Deal Experience
               </h3>
-              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal">
                 The Deal Analyst Program: small cohorts conducting end-to-end buyout and venture transaction analysis, financial modeling, and investment committee defense.
               </p>
             </div>
-            <div class="mt-3 sm:mt-6 pt-2.5 sm:pt-4 border-t border-slate-100">
-              <button onclick="switchView('deal-analyst')" class="w-full py-1.5 sm:py-2.5 px-2 sm:px-3.5 rounded-lg sm:rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-1.5 shadow-sm" aria-label="Explore our Deal Analyst Program">
-                <span class="hidden sm:inline">Explore our Deal Analyst Program</span>
+            <!-- Desktop Bottom Button -->
+            <div class="hidden sm:block mt-6 pt-4 border-t border-slate-100">
+              <button onclick="switchView('deal-analyst')" class="w-full py-2.5 px-3.5 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-1.5 shadow-sm" aria-label="Explore our Deal Analyst Program">
+                <span>Explore our Deal Analyst Program</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -312,19 +319,26 @@
           <!-- Vertical 3: Open Education -->
           <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-6 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-between min-h-0 lg:min-h-[460px] text-left border-slate-200/90 group">
             <div>
-              <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
-                03
+              <div class="flex items-center justify-between mb-1.5 sm:mb-4">
+                <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light tracking-tight">
+                  03
+                </div>
+                <!-- Mobile Top-Right Action Arrow Button -->
+                <button onclick="switchView('resources')" class="sm:hidden w-7 h-7 rounded-lg bg-club-purple hover:bg-club-purpleDeep text-white flex items-center justify-center shadow-sm shrink-0" aria-label="Explore our Resources and Courses">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </button>
               </div>
               <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
                 Public Financial Education
               </h3>
-              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal">
                 Open courses including <em>Private Markets 101</em> (10 sessions, 180+ slides) and <em>VC 201: The Deal Room</em>, technical study guides, and free learning resources.
               </p>
             </div>
-            <div class="mt-3 sm:mt-6 pt-2.5 sm:pt-4 border-t border-slate-100">
-              <button onclick="switchView('resources')" class="w-full py-1.5 sm:py-2.5 px-2 sm:px-3.5 rounded-lg sm:rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-1.5 shadow-sm" aria-label="Explore our Resources and Courses">
-                <span class="hidden sm:inline">Explore our Resources and Courses</span>
+            <!-- Desktop Bottom Button -->
+            <div class="hidden sm:block mt-6 pt-4 border-t border-slate-100">
+              <button onclick="switchView('resources')" class="w-full py-2.5 px-3.5 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-1.5 shadow-sm" aria-label="Explore our Resources and Courses">
+                <span>Explore our Resources and Courses</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -333,19 +347,26 @@
           <!-- Vertical 4: Networking & Community -->
           <div class="card-clean-interactive p-3.5 sm:pt-6 sm:pb-6 sm:px-6 rounded-xl sm:rounded-2xl flex flex-col justify-between min-h-0 lg:min-h-[460px] text-left border-slate-200/90 group">
             <div>
-              <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light mb-1.5 sm:mb-4 tracking-tight">
-                04
+              <div class="flex items-center justify-between mb-1.5 sm:mb-4">
+                <div class="font-numeral text-2xl sm:text-5xl text-club-purpleHighlight font-light tracking-tight">
+                  04
+                </div>
+                <!-- Mobile Top-Right Action Arrow Button -->
+                <button onclick="switchView('contact')" class="sm:hidden w-7 h-7 rounded-lg bg-club-purple hover:bg-club-purpleDeep text-white flex items-center justify-center shadow-sm shrink-0" aria-label="Contact us for Opportunities">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </button>
               </div>
               <h3 class="font-serif font-medium sm:font-normal text-xs sm:text-2xl text-club-dark mb-1 sm:mb-4 leading-tight sm:leading-snug">
                 Networking & Career Access
               </h3>
-              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+              <p class="text-[10px] sm:text-sm text-slate-600 leading-snug sm:leading-relaxed font-normal">
                 Connecting ambitious students across engineering and business with motivated peers, alumni in high finance, and recruitment pipelines via partner platforms.
               </p>
             </div>
-            <div class="mt-3 sm:mt-6 pt-2.5 sm:pt-4 border-t border-slate-100">
-              <button onclick="switchView('contact')" class="w-full py-1.5 sm:py-2.5 px-2 sm:px-3.5 rounded-lg sm:rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-1.5 shadow-sm" aria-label="Contact us for Opportunities">
-                <span class="hidden sm:inline">Contact us for Opportunities</span>
+            <!-- Desktop Bottom Button -->
+            <div class="hidden sm:block mt-6 pt-4 border-t border-slate-100">
+              <button onclick="switchView('contact')" class="w-full py-2.5 px-3.5 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all flex items-center justify-center gap-1.5 shadow-sm" aria-label="Contact us for Opportunities">
+                <span>Contact us for Opportunities</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
