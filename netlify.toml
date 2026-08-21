@@ -1,6 +1,0 @@
-[build]
-  command = "echo Static Site Ready"
-  publish = "."
-
-[build.environment]
-  NPM_FLAGS = "--legacy-peer-deps"
