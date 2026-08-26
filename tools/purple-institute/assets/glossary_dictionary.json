@@ -1,0 +1,570 @@
+{
+  "active management": {
+    "definition": "An investment strategy where a manager makes specific asset selections with the goal of outperforming an investment benchmark index or target return.",
+    "application": "Hedge funds and private equity rely heavily on active management to generate alpha."
+  },
+  "adviser": {
+    "definition": "A professional or firm that provides investment advice, portfolio management services, or financial planning.",
+    "application": "In private equity, the General Partner typically acts as the investment adviser."
+  },
+  "alignment": {
+    "definition": "The structural mechanism ensuring the interests of fund managers (GPs) naturally coincide with the interests of the investors (LPs).",
+    "application": "Carried interest and GP co-investment are primary tools for maintaining alignment."
+  },
+  "alpha": {
+    "definition": "A measure of the active return on an investment relative to the return of a benchmark index.",
+    "application": "A positive alpha of 1.0 means the fund has outperformed its benchmark index by 1%."
+  },
+  "arbitrage": {
+    "definition": "The simultaneous purchase and sale of an asset to profit from an imbalance in the price.",
+    "application": "Convertible arbitrage involves taking a long position in a convertible bond and a short position in the underlying stock."
+  },
+  "asset": {
+    "definition": "A resource with economic value that an individual, corporation, or country owns or controls.",
+    "application": "Real estate, commodities, and derivatives are core alternative assets."
+  },
+  "asymmetry": {
+    "definition": "A risk profile where the potential for upside gains differs significantly from the potential for downside losses.",
+    "application": "Alternative investments often target positive asymmetry, where returns are skewed to capture large gains against controlled losses."
+  },
+  "backwardation": {
+    "definition": "A market condition in which the forward price of a commodity is lower than its current spot price.",
+    "application": "Backwardation often occurs when there is a short-term supply shortage, giving investors a positive 'roll yield'."
+  },
+  "basis": {
+    "definition": "The difference between the spot price of an asset and its futures price.",
+    "application": "Basis risk occurs when an investor hedges with a futures contract that doesn't perfectly correlate with the underlying actual asset."
+  },
+  "bearish": {
+    "definition": "A pessimistic outlook believing that a specific market, asset, or financial instrument is going to experience a downward price trend.",
+    "application": "A bearish hedge fund manager might aggressively short overvalued equities."
+  },
+  "benchmark": {
+    "definition": "A standard against which the performance of a security, mutual fund, or investment manager can be measured.",
+    "application": "Alternative investments often use specialized, non-public benchmarks unlike traditional stocks tracking the S&P 500."
+  },
+  "biological growth": {
+    "definition": "The physical volume increase and quality improvement of living assets over time.",
+    "application": "In timberland investments, biological growth is a primary driver of returns regardless of macroeconomic conditions."
+  },
+  "brownfield": {
+    "definition": "Investments in existing infrastructure or real estate projects that require improvement, expansion, or restructuring.",
+    "application": "A brownfield real estate fund might buy an aging strip mall to renovate it into a modern mixed-use development."
+  },
+  "business": {
+    "definition": "An organized approach to providing goods and services.",
+    "application": "Private equity funds acquire underlying businesses to improve operational efficiencies."
+  },
+  "capital call": {
+    "definition": "A legal right of a fund manager to demand that investors provide a portion of their committed capital to fund an investment.",
+    "application": "Instead of investing $10M upfront, an LP only wires funds when they receive a capital call for a specific buyout."
+  },
+  "carried": {
+    "definition": "Short for 'Carried Interest', referring to a share of any profits that the general partners of private equity and hedge funds receive as compensation.",
+    "application": "A standard PE fee structure includes 20% carried interest on profits above a specified hurdle rate."
+  },
+  "cash flow": {
+    "definition": "The net amount of cash and cash equivalents being transferred into and out of a business.",
+    "application": "Real estate and infrastructure assets are prized for their predictable, long-term cash flows."
+  },
+  "clawback": {
+    "definition": "A provision that requires general partners to return previously received carried interest to the limited partners if the fund later underperforms.",
+    "application": "If early exits generate high profits but later deals lose money, the clawback protects the overall agreed-upon profit split."
+  },
+  "committed": {
+    "definition": "The total amount of capital an investor (LP) has agreed to contribute to a fund over its lifespan.",
+    "application": "A pension fund might have $50M committed to a venture capital firm, drawn down over 3-5 years."
+  },
+  "commodity": {
+    "definition": "A basic good used in commerce that is interchangeable with other goods of the same type.",
+    "application": "Gold, oil, and agricultural products are typical commodity allocations to hedge against inflation."
+  },
+  "conditional": {
+    "definition": "A statistical outcome given that another specific event has already occurred.",
+    "application": "Conditional Value-at-Risk (CVaR) measures the expected loss only during the worst-case extreme tail events."
+  },
+  "consumption": {
+    "definition": "The use of goods and services by households.",
+    "application": "Investment is formally defined as deferred consumption."
+  },
+  "contango": {
+    "definition": "A market condition where the forward price of a commodity is higher than its spot price.",
+    "application": "Contango typically implies high storage costs and results in a negative roll yield for investors holding long futures positions."
+  },
+  "contract": {
+    "definition": "A legally binding agreement between parties to buy or sell an asset at a specified price and date.",
+    "application": "Futures and options are standard derivative contracts used heavily by hedge funds."
+  },
+  "convenience yield": {
+    "definition": "The benefit or premium associated with holding an underlying physical commodity rather than a derivative contract.",
+    "application": "An oil refinery has a high convenience yield holding physical crude oil so it can keep its operations running continuously."
+  },
+  "convertible": {
+    "definition": "A type of security, usually a bond or preferred stock, that can be converted into a predetermined number of shares of common stock.",
+    "application": "Convertible arbitrage strategies seek mispricing between a company's convertible bonds and its equity."
+  },
+  "convexity": {
+    "definition": "A measure of the curvature in the relationship between bond prices and bond yields.",
+    "application": "Positive convexity means a bond's price will increase more when rates fall than it will decrease when rates rise."
+  },
+  "core": {
+    "definition": "A low-risk strategy in real estate and infrastructure focusing on stabilized, fully leased assets generating predictable income.",
+    "application": "Core real estate investments rarely utilize high leverage and target steady 6-8% annualized returns."
+  },
+  "correlation": {
+    "definition": "A statistical measure of how two securities move in relation to each other.",
+    "application": "Alternative investments are attractive because they often have low correlation to traditional stock and bond markets."
+  },
+  "covariance": {
+    "definition": "A measure of the directional relationship between the returns of two assets.",
+    "application": "Covariance determines whether assets tend to move in tandem or opposite directions, directly impacting diversification."
+  },
+  "debt": {
+    "definition": "Money borrowed by one party from another, subject to an agreed repayment schedule of principal and interest.",
+    "application": "Distressed debt and mezzanine debt are common private credit alternatives."
+  },
+  "decline": {
+    "definition": "A drop in asset price, volume, or economic activity.",
+    "application": "Macro hedge funds aim to profit even during a broader economic decline."
+  },
+  "dedicated": {
+    "definition": "A strategy focused exclusively on a specific asset class or market inefficiency.",
+    "application": "Dedicated short bias funds maintain a net short exposure to extract profits from falling markets."
+  },
+  "deferred": {
+    "definition": "Put off to a later time.",
+    "application": "Investment represents deferred consumption, sacrificing current utilization for future wealth."
+  },
+  "delta": {
+    "definition": "The ratio that compares the change in the price of an asset, usually a marketable security, to the corresponding change in the price of its derivative.",
+    "application": "A delta-neutral hedge fund strategy pairs long and short positions to eliminate exposure to broad market movements."
+  },
+  "direct": {
+    "definition": "Investing directly into an underlying asset rather than through a pooled fund structure.",
+    "application": "Direct real estate investing means buying the physical building yourself rather than shares in a REIT."
+  },
+  "directional": {
+    "definition": "An investment strategy dependent on predicting the specific upward or downward movement of a market.",
+    "application": "Global macro is a directional strategy taking large bets on currency and interest rate shifts."
+  },
+  "distressed": {
+    "definition": "Securities of companies or government entities that are experiencing financial or operational difficulties, default, or are under bankruptcy protection.",
+    "application": "Distressed debt funds buy bonds of bankrupt companies at steep discounts, anticipating a favorable restructuring."
+  },
+  "diversification": {
+    "definition": "A risk management strategy that mixes a wide variety of investments within a portfolio.",
+    "application": "Adding alternative investments improves diversification by introducing non-correlated return drivers."
+  },
+  "dollar-weighted": {
+    "definition": "A return metric that accounts for the timing and size of cash flows into and out of an investment.",
+    "application": "The Internal Rate of Return (IRR) is a dollar-weighted return often used to measure private equity performance."
+  },
+  "downside deviation": {
+    "definition": "A measure of downside risk that focuses only on returns that fall below a minimum acceptable threshold.",
+    "application": "Downside deviation is preferred over standard deviation because it does not penalize an asset for positive upside volatility."
+  },
+  "downside risk": {
+    "definition": "An estimation of a security's potential loss in value if market conditions precipitate a decline in that security's price.",
+    "application": "Hedge funds use aggressive shorting specifically to limit overall portfolio downside risk."
+  },
+  "drawdown": {
+    "definition": "The peak-to-trough decline during a specific record period of an investment, fund or commodity.",
+    "application": "A low maximum drawdown indicates that a fund is resilient during market crashes."
+  },
+  "drivers": {
+    "definition": "The underlying economic or financial factors that cause asset prices to move.",
+    "application": "Inflation and supply shortages are key return drivers for the commodities asset class."
+  },
+  "early-stage": {
+    "definition": "A phase of venture capital financing provided to companies that have a product in testing or pilot production.",
+    "application": "Early-stage VC carries immense risk but offers the highest potential multiple on invested capital."
+  },
+  "enterprises": {
+    "definition": "Business organizations.",
+    "application": "Private equity funds purchase underlying business enterprises to implement turnarounds."
+  },
+  "equity": {
+    "definition": "Ownership interest in a corporation in the form of common stock or preferred stock.",
+    "application": "Private equity targets the equity of companies not listed on public stock exchanges."
+  },
+  "event-driven": {
+    "definition": "A hedge fund strategy that seeks to exploit pricing inefficiencies that may occur before or after a corporate event.",
+    "application": "Merger arbitrage is a classic event-driven strategy betting on the successful completion of an acquisition."
+  },
+  "existing asset": {
+    "definition": "An established property or infrastructure project.",
+    "application": "Brownfield investments target existing assets requiring rehabilitation."
+  },
+  "extreme event": {
+    "definition": "A rare, severe occurrence with a massive impact on financial markets (often called a black swan).",
+    "application": "Fat-tailed distributions indicate a higher likelihood of extreme events than a normal bell curve suggests."
+  },
+  "farmland": {
+    "definition": "An alternative real asset class involving the ownership of agricultural land.",
+    "application": "Farmland provides inflation protection and dual returns through crop yield income and land appreciation."
+  },
+  "fat tails": {
+    "definition": "A statistical distribution where extreme outcomes (very large gains or losses) occur more frequently than predicted by a normal distribution.",
+    "application": "Because alternative investments often exhibit fat tails, standard deviation drastically underestimates their true risk."
+  },
+  "fee structure": {
+    "definition": "The method by which an investment manager is compensated.",
+    "application": "The standard alternative fee structure is '2 and 20'—a 2% management fee and a 20% performance fee."
+  },
+  "fund": {
+    "definition": "A pool of money allocated for a specific investment purpose.",
+    "application": "A hedge fund is a private investment vehicle utilizing advanced strategies."
+  },
+  "fundraising": {
+    "definition": "The process of seeking and gathering voluntary financial contributions from limited partners.",
+    "application": "Fundraising is the initial stage of a Private Equity fund lifecycle, establishing the committed capital base."
+  },
+  "funds": {
+    "definition": "Plural of fund; multiple pooled investment vehicles.",
+    "application": "Fund of funds (FoFs) invest in a portfolio of other alternative funds to spread manager risk."
+  },
+  "futures": {
+    "definition": "Standardized legal agreements to buy or sell something at a predetermined price at a specified time in the future.",
+    "application": "Managed futures funds (CTAs) trade heavily in global futures markets to capture macro trends."
+  },
+  "gamma": {
+    "definition": "The rate of change in an option's delta given a 1-point move in the underlying asset's price.",
+    "application": "Gamma measures the acceleration of an option's price, forming the second derivative of the pricing equation."
+  },
+  "greenfield": {
+    "definition": "A project that lacks any constraints imposed by prior work, essentially building an asset entirely from scratch.",
+    "application": "Greenfield infrastructure projects carry high construction risk compared to operating brownfield assets."
+  },
+  "hedge": {
+    "definition": "An investment made with the intention of reducing the risk of adverse price movements in an asset.",
+    "application": "Taking a short position in an S&P 500 ETF can hedge a portfolio of long equities against a market crash."
+  },
+  "high risk": {
+    "definition": "An investment profile involving a high probability of loss or extreme volatility.",
+    "application": "Venture capital is a high-risk asset class because the majority of startups fail."
+  },
+  "high-water": {
+    "definition": "Short for High-Water Mark; the highest peak in value that an investment fund has reached.",
+    "application": "A high-water mark ensures a manager isn't paid performance fees for recovering previous losses, only for generating new profits."
+  },
+  "hurdle": {
+    "definition": "The minimum rate of return on a project or investment required by a manager or investor.",
+    "application": "If a private equity fund has an 8% hurdle rate, the GP cannot collect carried interest until LPs receive an 8% return."
+  },
+  "illiquid": {
+    "definition": "The state of a security or other asset that cannot easily be sold or exchanged for cash without a substantial loss in value.",
+    "application": "Real estate and private equity are inherently illiquid alternative investments."
+  },
+  "illiquidity": {
+    "definition": "The relative inability to convert an asset into cash quickly.",
+    "application": "Investors demand an 'illiquidity premium'—an expectation of higher returns to compensate for locking up their capital."
+  },
+  "indexers": {
+    "definition": "Investors or funds that attempt to passively replicate the performance of a specific market benchmark.",
+    "application": "Alternative beta drivers act similarly to passive indexers but target specific alternative risk premiums."
+  },
+  "inefficiency": {
+    "definition": "A market condition where asset prices do not accurately reflect their true fundamental value.",
+    "application": "Alternative fund managers aggressively seek market inefficiency to generate outsized returns (alpha)."
+  },
+  "inflation": {
+    "definition": "The decline of purchasing power of a given currency over time.",
+    "application": "Real assets like commodities and timberland naturally hedge against inflation."
+  },
+  "intellectual": {
+    "definition": "Relating to creations of the mind such as inventions, literary and artistic works, designs, and symbols.",
+    "application": "Intellectual property (IP) like patents and film rights is an emerging alternative real asset class."
+  },
+  "interest": {
+    "definition": "The charge for the privilege of borrowing money, typically expressed as annual percentage rate (APR).",
+    "application": "Mezzanine debt carries significantly higher interest rates than senior secured debt."
+  },
+  "investment": {
+    "definition": "An asset or item acquired with the goal of generating income or appreciation.",
+    "application": "Alternative investment categories include private equity, hedge funds, and real assets."
+  },
+  "investments": {
+    "definition": "Multiple allocations of capital into financial assets.",
+    "application": "Sophisticated portfolios hold traditional investments (stocks/bonds) and alternative investments."
+  },
+  "j-curve": {
+    "definition": "A line showing the tendency of private equity funds to deliver negative returns in early years and investment gains in the outlying years as the portfolios of companies mature.",
+    "application": "The J-curve occurs because high management fees are drawn immediately while successful exits take 5-7 years to realize."
+  },
+  "kurtosis": {
+    "definition": "A statistical measure that defines how heavily the tails of a distribution differ from the tails of a normal distribution.",
+    "application": "High kurtosis (leptokurtic) indicates fat tails, meaning a higher probability of extreme market events."
+  },
+  "lbo": {
+    "definition": "Leveraged Buyout: the acquisition of another company using a significant amount of borrowed money to meet the cost of acquisition.",
+    "application": "In an LBO, the assets of the company being acquired are often used as collateral for the loans."
+  },
+  "leverage": {
+    "definition": "The use of various financial instruments or borrowed capital to increase the potential return of an investment.",
+    "application": "Hedge funds use intense leverage to amplify the returns of low-margin arbitrage strategies."
+  },
+  "leveraged": {
+    "definition": "An investment or entity utilizing a high ratio of debt to equity.",
+    "application": "A leveraged loan is a commercial loan provided by a group of lenders to a company that already has significant debt."
+  },
+  "liquid": {
+    "definition": "An asset that can easily be converted into cash in a short amount of time.",
+    "application": "Public equities are highly liquid, whereas private equity is highly illiquid."
+  },
+  "liquid real estate": {
+    "definition": "Real estate investments that trade on public exchanges, primarily Real Estate Investment Trusts (REITs).",
+    "application": "Liquid real estate allows investors to gain property exposure without locking up capital for decades."
+  },
+  "liquidation": {
+    "definition": "The process of bringing a business or fund to an end and distributing its assets to claimants.",
+    "application": "The final stage of a Private Equity fund lifecycle involves the liquidation of all remaining portfolio companies."
+  },
+  "liquidity": {
+    "definition": "The efficiency or ease with which an asset can be converted into ready cash without affecting its market price.",
+    "application": "Institutional investors must carefully balance the liquidity needs of their liabilities against the illiquidity of their alternative assets."
+  },
+  "loans": {
+    "definition": "Money, property, or other material goods given to another party in exchange for future repayment of the loan value along with interest.",
+    "application": "Private credit funds provide loans directly to middle-market companies."
+  },
+  "lock-up": {
+    "definition": "A window of time when investors of a hedge fund or private equity fund are not allowed to redeem or sell shares.",
+    "application": "A 2-year lock-up period ensures a hedge fund manager isn't forced to liquidate illiquid positions during a panic."
+  },
+  "losses": {
+    "definition": "The depletion of capital when an investment decreases in value.",
+    "application": "A high-water mark provision guarantees managers aren't rewarded for simply recouping losses."
+  },
+  "low risk": {
+    "definition": "An investment demonstrating a low probability of capital depletion.",
+    "application": "Core real estate is considered low risk because it generates steady, contractual rental income."
+  },
+  "lp protection": {
+    "definition": "Clauses and covenants within a fund agreement designed to mitigate risk for Limited Partners.",
+    "application": "Clawbacks and hard hurdle rates are standard LP protection mechanisms."
+  },
+  "managed futures": {
+    "definition": "An alternative investment strategy in which professional portfolio managers use futures contracts as part of their overall investment strategy.",
+    "application": "Commodity Trading Advisors (CTAs) execute managed futures strategies based on complex trend-following algorithms."
+  },
+  "management": {
+    "definition": "The act of coordinating efforts to accomplish goals, or the fee paid for such services.",
+    "application": "A 2% management fee provides operational capital for the GP regardless of the fund's performance."
+  },
+  "mark": {
+    "definition": "To record the current value of an asset or portfolio.",
+    "application": "Private assets are difficult to 'mark-to-market' because they are rarely traded, often leading to smoothed appraisals."
+  },
+  "market": {
+    "definition": "A place or mechanism where buyers and sellers convene to exchange assets.",
+    "application": "Alternative managers seek out inefficient markets where asymmetrical information can be exploited."
+  },
+  "mbo": {
+    "definition": "Management Buyout: A transaction where a company's management team purchases the assets and operations of the business they manage.",
+    "application": "A private equity firm will often partner with an existing management team to execute an MBO."
+  },
+  "merger": {
+    "definition": "An agreement that unites two existing companies into one new company.",
+    "application": "Merger arbitrage hedge funds buy the stock of a target company and short the acquirer."
+  },
+  "mezzanine": {
+    "definition": "A hybrid of debt and equity financing that gives the lender the right to convert to an equity interest in the company in case of default.",
+    "application": "Mezzanine debt is heavily utilized in LBOs to bridge the gap between senior debt and equity."
+  },
+  "moderate risk": {
+    "definition": "A middle-ground investment profile balancing potential capital appreciation with income generation.",
+    "application": "Value-add real estate is considered moderate risk compared to conservative core or aggressive opportunistic strategies."
+  },
+  "nonlinear": {
+    "definition": "A relationship between variables that cannot be plotted as a straight line.",
+    "application": "Options exhibit nonlinear payoff profiles, breaking traditional risk-return assumptions."
+  },
+  "nonnormality": {
+    "definition": "Statistical distributions whose properties do not align with the standard bell curve.",
+    "application": "Because alternative investment returns exhibit nonnormality (skewness and kurtosis), relying on standard deviation is dangerous."
+  },
+  "opportunistic": {
+    "definition": "A high-risk, high-return real estate strategy involving heavy development, total redevelopment, or severe distressed situations.",
+    "application": "Buying raw land entirely on spec to build a skyscraper is an opportunistic investment."
+  },
+  "p-value": {
+    "definition": "The probability of obtaining test results at least as extreme as the results actually observed, under the assumption that the null hypothesis is correct.",
+    "application": "A low p-value (typically < 0.05) indicates that a fund manager's alpha is statistically significant and likely not due to luck."
+  },
+  "peak-to-trough": {
+    "definition": "The measurement of an asset's price decline from its highest point to its lowest point before a new peak is achieved.",
+    "application": "Maximum drawdown is calculated purely as a peak-to-trough percentage loss."
+  },
+  "performance": {
+    "definition": "The financial return generated by an investment.",
+    "application": "Performance fees (carried interest) heavily incentivize GPs to maximize returns."
+  },
+  "pledge": {
+    "definition": "A formal commitment of capital or assets.",
+    "application": "LPs pledge capital to a private equity fund, but do not release it until capital calls are issued."
+  },
+  "portfolio": {
+    "definition": "A grouping of financial assets such as stocks, bonds, commodities, cash equivalents, and closed-end funds.",
+    "application": "Modern Portfolio Theory suggests blending alternatives into a traditional portfolio to maximize the Sharpe ratio."
+  },
+  "price": {
+    "definition": "The amount of money expected, required, or given in payment for something.",
+    "application": "Pricing private assets is notoriously difficult because there is no continuous public market."
+  },
+  "pricing": {
+    "definition": "The process of determining the fair value of an asset.",
+    "application": "Stale pricing in private equity can artificially smooth return volatility."
+  },
+  "profits": {
+    "definition": "Financial gain obtained when revenue generates exceeds expenses.",
+    "application": "The general partner absorbs 20% of the fund's net profits via carried interest."
+  },
+  "protection": {
+    "definition": "Mechanisms designed to prevent loss.",
+    "application": "LP protection covenants restrict a manager from drifting into unapproved, high-risk strategies."
+  },
+  "redemption": {
+    "definition": "The return of an investor's principal in a security at or prior to maturity.",
+    "application": "Hedge funds enforce strict redemption periods (e.g., quarterly) to manage the liquidity of their underlying portfolio."
+  },
+  "regression": {
+    "definition": "A statistical method that attempts to determine the strength and character of the relationship between one dependent variable and a series of other variables.",
+    "application": "Linear regression is used to calculate a fund's beta against the broader market."
+  },
+  "reits": {
+    "definition": "Real Estate Investment Trusts: companies that own, operate, or finance income-generating real estate.",
+    "application": "REITs provide public market investors with a highly liquid way to gain diverse real estate exposure."
+  },
+  "resources": {
+    "definition": "Materials or substances such as minerals, forests, water, and fertile land that occur in nature.",
+    "application": "Natural resources act as excellent diversifiers and inflation hedges."
+  },
+  "risk-return": {
+    "definition": "The principle that potential return rises with an increase in risk.",
+    "application": "Adding alternative investments to a portfolio aims to optimize the overall risk-return profile by moving the efficient frontier."
+  },
+  "roll": {
+    "definition": "The process of closing an expiring futures contract and opening a new one in the next deferred month.",
+    "application": "Roll yield is the profit or loss generated when replacing an expiring contract, highly dependent on contango or backwardation."
+  },
+  "secondary": {
+    "definition": "A market where investors buy and sell pre-existing investor commitments to private equity and other alternative investment funds.",
+    "application": "Secondary funds provide rare liquidity to LPs who need to exit a 10-year private equity fund early."
+  },
+  "seed": {
+    "definition": "The earliest stage of venture capital financing, used to prove a new idea and develop a prototype.",
+    "application": "Seed investors face massive risk of failure but take the largest equity stake in exchange."
+  },
+  "sell-side": {
+    "definition": "Firms that facilitate trading, issue research, and sell securities to investors.",
+    "application": "Investment banks operating as prime brokers are the critical sell-side partners for buy-side hedge funds."
+  },
+  "sensitivity": {
+    "definition": "The magnitude of a financial instrument's reaction to changes in underlying factors.",
+    "application": "Beta is the primary measure of an asset's sensitivity to broad market movements."
+  },
+  "skewness": {
+    "definition": "A statistical metric measuring the asymmetry of a distribution curve surrounding its mean.",
+    "application": "Negative skewness indicates a tendency for small frequent gains punctuated by rare, massive losses."
+  },
+  "smoothed": {
+    "definition": "The artificial reduction of volatility due to using infrequent appraisal-based valuations rather than continuous market prices.",
+    "application": "Because real estate is appraised quarterly, its returns appear highly smoothed, drastically underestimating true risk."
+  },
+  "sortino": {
+    "definition": "A variation of the Sharpe ratio that differentiates harmful volatility from total overall volatility by using downside deviation.",
+    "application": "The Sortino ratio is highly favored in alternative investments because it doesn't penalize managers for massive upside gains."
+  },
+  "spot": {
+    "definition": "The current market price at which an asset is bought or sold for immediate payment and delivery.",
+    "application": "The difference between the spot price and the futures price determines the basis."
+  },
+  "storage": {
+    "definition": "The physical holding of a commodity.",
+    "application": "Storage costs are a critical component of the cost-of-carry model, pushing markets into contango."
+  },
+  "storage costs": {
+    "definition": "The expenses incurred for safely warehousing physical commodities like oil, grain, or gold.",
+    "application": "High storage costs guarantee that futures prices will be higher than current spot prices."
+  },
+  "stress": {
+    "definition": "A simulation technique used to test the resilience of an investment portfolio against severe, abnormal market conditions.",
+    "application": "Stress testing might model how a hedge fund's leverage would behave if the S&P 500 crashed 20% in one week."
+  },
+  "strike": {
+    "definition": "The set price at which a derivative contract can be bought or sold when it is exercised.",
+    "application": "A long straddle involves buying a put and a call option at the exact same strike price to bet on extreme volatility."
+  },
+  "subordinated": {
+    "definition": "A loan or security that ranks below other loans and securities with regard to claims on a company's assets or earnings.",
+    "application": "Mezzanine debt is subordinated to senior bank debt, demanding much higher yields for the assumed risk."
+  },
+  "subscription": {
+    "definition": "The formal agreement by which an investor commits capital to a private fund.",
+    "application": "The subscription agreement outlines exactly how much capital the LP is liable for during capital calls."
+  },
+  "systematic risk": {
+    "definition": "The inherent risk embedded in the broader market or entire market segment that cannot be diversified away.",
+    "application": "Beta measures systematic risk, whereas alpha attempts to strip it out entirely."
+  },
+  "tail risk": {
+    "definition": "The financial risk of an asset moving more than 3 standard deviations from its current price.",
+    "application": "Hedge funds actively implement tail risk protection to survive sudden black swan events."
+  },
+  "timberland": {
+    "definition": "Land covered with forest suitable or managed for timber.",
+    "application": "Timberland is a unique real asset because biological growth provides returns independent of financial markets."
+  },
+  "timing": {
+    "definition": "The strategy of making buy or sell decisions of financial assets by predicting future market price movements.",
+    "application": "Market timing is incredibly difficult; PE funds mitigate it by deploying capital across 3-5 year investment periods."
+  },
+  "top-down": {
+    "definition": "An investment approach that looks at the macroeconomic picture before examining individual assets.",
+    "application": "Global macro hedge funds employ a strictly top-down approach."
+  },
+  "treynor": {
+    "definition": "A risk-adjusted performance metric determining the excess return generated per unit of systematic risk (Beta).",
+    "application": "Unlike the Sharpe ratio which uses standard deviation, the Treynor ratio ignores unsystematic (diversifiable) risk."
+  },
+  "unhedged": {
+    "definition": "An investment position intentionally left fully exposed to market fluctuations without offsetting derivative protection.",
+    "application": "An unhedged long-only portfolio will suffer massive drawdowns during a bear market."
+  },
+  "unsmoothed": {
+    "definition": "Data that has been statistically adjusted to remove the lagging, artificial stability of appraisal-based valuations.",
+    "application": "Unsmoothed private equity data reveals that its true volatility is nearly identical to public small-cap stocks."
+  },
+  "valuation": {
+    "definition": "The analytical process of determining the current (or projected) worth of an asset or a company.",
+    "application": "Because alternative investments have no public daily price, rigorous independent valuation models are required."
+  },
+  "value": {
+    "definition": "The monetary worth of an asset, business entity, or good.",
+    "application": "Value-oriented managers seek out assets trading below their intrinsic value."
+  },
+  "value-add": {
+    "definition": "A moderate-risk real estate strategy involving acquiring underperforming properties and actively improving them.",
+    "application": "A value-add strategy might involve buying an aging apartment complex, renovating the units, and raising the rents."
+  },
+  "vega": {
+    "definition": "The measurement of an option's price sensitivity to changes in the volatility of the underlying asset.",
+    "application": "Hedge funds heavily long options are considered 'long vega' and profit directly from market panic and volatility spikes."
+  },
+  "venture": {
+    "definition": "Money provided by investors to startup firms and small businesses with perceived long-term growth potential.",
+    "application": "Venture capital (VC) accepts extreme failure rates to find the single “unicorn” that returns 100x."
+  },
+  "vintage": {
+    "definition": "The year in which a private equity or venture capital fund makes its first investment.",
+    "application": "Comparing a 2008 vintage PE fund to a 2018 vintage fund is futile due to entirely different macroeconomic conditions."
+  },
+  "volatility": {
+    "definition": "A statistical measure of the dispersion of returns for a given security or market index, commonly measured by standard deviation.",
+    "application": "Alternative investments often seek to reduce overall portfolio volatility due to low covariance with equities."
+  },
+  "zero beta": {
+    "definition": "A portfolio engineered to have virtually no sensitivity to broad market movements.",
+    "application": "Market-neutral hedge funds target a zero beta profile, sourcing their returns entirely from managerial alpha."
+  }
+}
