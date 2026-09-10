@@ -2320,13 +2320,14 @@
       window.addEventListener('keydown', (e) => {
         const homeView = document.getElementById('view-home');
         if (homeView && homeView.classList.contains('active')) {
-        const scrollPos = scrollContainer.scrollTop;
-        const height = window.innerHeight;
-        const activeIndex = Math.round(scrollPos / height);
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-          if (activeIndex < 2) { e.preventDefault(); scrollToHomeScreen(activeIndex + 1); }
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-          if (activeIndex > 0) { e.preventDefault(); scrollToHomeScreen(activeIndex - 1); }
+          const scrollPos = scrollContainer.scrollTop;
+          const height = window.innerHeight;
+          const activeIndex = Math.round(scrollPos / height);
+          if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+            if (activeIndex < 2) { e.preventDefault(); scrollToHomeScreen(activeIndex + 1); }
+          } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            if (activeIndex > 0) { e.preventDefault(); scrollToHomeScreen(activeIndex - 1); }
+          }
         }
       });
     }
