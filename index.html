@@ -2065,9 +2065,15 @@
         <div class="space-y-4 pb-10 border-b border-slate-100 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div class="space-y-3 max-w-4xl">
             <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block">Investment Sprints</span>
-            <h1 class="font-serif font-normal text-4xl sm:text-6xl md:text-7xl text-club-dark tracking-tight leading-[1.08]">
-              Deal <span class="font-serif italic font-semibold text-club-purpleHighlight">Sprints.</span>
-            </h1>
+            <div class="flex items-baseline gap-4 flex-wrap">
+              <h1 class="font-serif font-normal text-4xl sm:text-6xl md:text-7xl text-club-dark tracking-tight leading-[1.08]">
+                Deal <span class="font-serif italic font-semibold text-club-purpleHighlight">Sprints.</span>
+              </h1>
+              <button onclick="openHowItWorksModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-club-purple hover:text-club-purpleDeep bg-club-purpleSubtle hover:bg-purple-100/80 border border-club-purpleBorder/60 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                <i data-lucide="help-circle" class="w-3.5 h-3.5 text-club-purpleHighlight"></i>
+                <span>How does this work?</span>
+              </button>
+            </div>
             <p class="text-sm sm:text-base text-slate-500 font-normal max-w-2xl leading-relaxed">
               Active investment analysis projects for this term. Explore each opportunity and submit your top three priorities to join a dedicated deal team.
             </p>
@@ -2085,8 +2091,8 @@
           </div>
         </div>
 
-        <!-- DYNAMIC DEALS LIST / GRID (Large Titles, Clean & Direct) -->
-        <div id="portal-deals-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- DYNAMIC DEALS LIST / GRID (3 Columns, Large Titles, Clean & Direct) -->
+        <div id="portal-deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           <!-- Populated dynamically via JS -->
         </div>
 
@@ -2106,14 +2112,139 @@
 
       </div>
 
-      <!-- BOARD MODAL: CREATE / EDIT DEAL SPRINT -->
-      <div id="board-deal-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-7 space-y-5 border border-slate-200 text-left my-8 shadow-xl">
+      <!-- MODAL 1: HOW DOES THIS WORK (Blurred Backdrop Overlay) -->
+      <div id="how-it-works-modal" onclick="if(event.target === this) closeHowItWorksModal()" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 sm:p-10 space-y-8 border border-slate-200 text-left my-8 shadow-2xl relative">
+          
+          <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
+            <div class="space-y-1">
+              <span class="text-[10px] font-bold text-club-purple uppercase tracking-widest block">Process Overview</span>
+              <h3 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal">How Deal Sprints Work</h3>
+            </div>
+            <button onclick="closeHowItWorksModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Step-by-Step Walkthrough -->
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0">01</span>
+              <div class="space-y-1">
+                <h4 class="font-serif text-base font-medium text-club-dark">Explore the Sprints</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Review the active investment cases listed in the catalogue. Click <strong>Learn More</strong> on any card to read the full thesis, project lead, and key areas of research.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0">02</span>
+              <div class="space-y-1">
+                <h4 class="font-serif text-base font-medium text-club-dark">Rank Your Top 3 Choices</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Open the official submission form below and select your first, second, and third project priorities. This ensures everyone gets placed in a project they are genuinely excited about.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0">03</span>
+              <div class="space-y-1">
+                <h4 class="font-serif text-base font-medium text-club-dark">Team Formation & Kick-Off</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Teams of 4–5 analysts will be structured by the Board, combining engineering (ICAI) and business/law (ICADE) profiles. Your project lead will reach out to schedule the initial kick-off call.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="w-8 h-8 rounded-full bg-club-purple text-white text-xs font-serif font-semibold flex items-center justify-center shrink-0">04</span>
+              <div class="space-y-1">
+                <h4 class="font-serif text-base font-medium text-club-dark">Research, Deliver & Publish</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Over 2–3 weeks, work closely with your lead to produce institutional-grade research. High-performing outputs will be published directly on the Club's website as student-authored deal memos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+            <button onclick="closeHowItWorksModal()" class="px-6 py-2.5 rounded-full text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm">
+              Understood
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MODAL 2: LEARN MORE (Deal Detail Blurred Backdrop Overlay) -->
+      <div id="deal-detail-modal" onclick="if(event.target === this) closeDealDetailModal()" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 sm:p-10 space-y-7 border border-slate-200 text-left my-8 shadow-2xl relative">
+          
+          <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
+            <div class="space-y-1">
+              <span class="text-[10px] font-bold text-club-purple uppercase tracking-widest block">Project Deep-Dive</span>
+              <h3 id="detail-deal-title" class="font-serif text-2xl sm:text-3xl text-club-dark font-normal">Project Title</h3>
+            </div>
+            <button onclick="closeDealDetailModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Metadata Pill Grid -->
+          <div class="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs">
+            <div>
+              <span class="text-slate-400 uppercase tracking-wider text-[10px] block">Project Lead</span>
+              <span id="detail-deal-lead" class="font-semibold text-club-dark">Lead Name</span>
+            </div>
+            <div>
+              <span class="text-slate-400 uppercase tracking-wider text-[10px] block">Duration & Team Size</span>
+              <span id="detail-deal-duration" class="font-semibold text-club-dark">Duration</span>
+            </div>
+          </div>
+
+          <!-- Full Description -->
+          <div class="space-y-2">
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Overview & Investment Thesis</h4>
+            <p id="detail-deal-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              Full description text goes here...
+            </p>
+          </div>
+
+          <!-- Deliverable Section -->
+          <div class="space-y-2 pt-3 border-t border-slate-100">
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Core Deliverable & Key Learnings</h4>
+            <p id="detail-deal-deliverable" class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+              Deliverable details...
+            </p>
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="closeDealDetailModal()" class="px-4 py-2 rounded-full text-xs text-slate-500 hover:text-club-dark transition-colors">
+              Close
+            </button>
+            <a href="#portal-forms-section" onclick="closeDealDetailModal()" class="px-6 py-2.5 rounded-full text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm flex items-center gap-1.5">
+              <span>Select as Priority</span>
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BOARD MODAL: CREATE / EDIT DEAL SPRINT (Blurred Backdrop Overlay) -->
+      <div id="board-deal-modal" onclick="if(event.target === this) closeCreateDealModal()" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 space-y-6 border border-slate-200 text-left my-8 shadow-2xl relative">
           
           <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <h3 id="modal-deal-title" class="font-serif text-xl text-club-dark font-normal">New Deal Sprint</h3>
+            <div class="space-y-0.5">
+              <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider">Board Admin</span>
+              <h3 id="modal-deal-title" class="font-serif text-xl text-club-dark font-normal">New Deal Sprint</h3>
+            </div>
             <button onclick="closeCreateDealModal()" class="text-slate-400 hover:text-slate-700">
-              <i data-lucide="x" class="w-4 h-4"></i>
+              <i data-lucide="x" class="w-5 h-5"></i>
             </button>
           </div>
 
@@ -2122,35 +2253,35 @@
             
             <div>
               <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1">Project Title</label>
-              <input type="text" id="deal-input-title" required placeholder="e.g. Spanish Mid-Market Fund Economics" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-club-purple outline-none" />
+              <input type="text" id="deal-input-title" required placeholder="e.g. Spanish Mid-Market Fund Economics" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none" />
             </div>
 
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1">Project Lead</label>
-                <input type="text" id="deal-input-lead" required placeholder="e.g. Quique Vela" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-club-purple outline-none" />
+                <input type="text" id="deal-input-lead" required placeholder="e.g. Quique Vela" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none" />
               </div>
               <div>
                 <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1">Duration & Team</label>
-                <input type="text" id="deal-input-duration" required placeholder="e.g. 2–3 weeks · 4–5 analysts" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-club-purple outline-none" />
+                <input type="text" id="deal-input-duration" required placeholder="e.g. 2–3 weeks · 4–5 analysts" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none" />
               </div>
             </div>
 
             <div>
               <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1">Description</label>
-              <textarea id="deal-input-desc" required rows="3" placeholder="Core investment thesis, research scope and focus areas..." class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-club-purple outline-none leading-relaxed"></textarea>
+              <textarea id="deal-input-desc" required rows="3" placeholder="Core investment thesis, research scope and focus areas..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none leading-relaxed"></textarea>
             </div>
 
             <div>
-              <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1">Deliverable</label>
-              <input type="text" id="deal-input-deliverable" required placeholder="e.g. Executive Deck + Financial Tear-Sheet" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-club-purple outline-none" />
+              <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1">Deliverable / Output</label>
+              <input type="text" id="deal-input-deliverable" required placeholder="e.g. Executive Deck + Financial Tear-Sheet" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none" />
             </div>
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-              <button type="button" onclick="closeCreateDealModal()" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-50">
+              <button type="button" onclick="closeCreateDealModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-50">
                 Cancel
               </button>
-              <button type="submit" class="px-5 py-2 rounded-lg bg-club-purple text-white font-semibold">
+              <button type="submit" class="px-5 py-2 rounded-xl bg-club-purple text-white font-semibold shadow-sm">
                 Save Sprint
               </button>
             </div>
@@ -2625,6 +2756,10 @@
       renderDealsGrid(role);
     }
 
+    function getPortalRole() {
+      return currentPortalRole;
+    }
+
     function renderDealsGrid(role) {
       const grid = document.getElementById('portal-deals-grid');
       if (!grid) return;
@@ -2643,7 +2778,7 @@
 
       grid.innerHTML = deals.map(deal => {
         return `
-          <div class="p-8 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 transition-all flex flex-col justify-between space-y-6">
+          <div class="p-7 sm:p-8 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 transition-all flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md">
             
             <div class="space-y-4">
               <!-- Large Minimalist Title -->
@@ -2652,29 +2787,29 @@
               </h3>
 
               <!-- Clean Metadata Row -->
-              <div class="flex items-center gap-4 text-xs text-slate-500 border-t border-slate-100 pt-3">
+              <div class="flex items-center gap-3 text-xs text-slate-500 border-t border-slate-100 pt-3 flex-wrap">
                 <div>Lead: <span class="font-medium text-club-dark">${deal.lead}</span></div>
                 <span>·</span>
                 <div>${deal.duration}</div>
               </div>
 
-              <!-- Deal Description -->
-              <p class="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
+              <!-- Deal Description Excerpt -->
+              <p class="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed line-clamp-3">
                 ${deal.description}
               </p>
             </div>
 
-            <!-- Deliverable & Board Actions -->
-            <div class="pt-4 border-t border-slate-100 space-y-3">
-              <div class="text-xs text-slate-500">
-                <span class="text-slate-400 uppercase tracking-wider text-[10px] block mb-0.5">Core Deliverable</span>
-                <span class="font-medium text-slate-800">${deal.deliverable}</span>
-              </div>
+            <!-- Card Bottom Bar: Learn More Modal Trigger + Board Actions -->
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <button onclick="openDealDetailModal('${deal.id}')" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-club-purple hover:text-club-purpleDeep bg-club-purpleSubtle hover:bg-purple-100/80 border border-club-purpleBorder/60 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                <span>Learn More</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
 
               ${isBoard ? `
-                <div class="pt-2 flex items-center justify-end gap-3 border-t border-slate-100">
-                  <button onclick="editDealSprint('${deal.id}')" class="text-xs text-club-purple hover:underline font-medium">Edit</button>
-                  <button onclick="deleteDealSprint('${deal.id}')" class="text-xs text-rose-600 hover:underline font-medium">Delete</button>
+                <div class="flex items-center gap-3">
+                  <button onclick="editDealSprint('${deal.id}')" class="text-xs text-slate-500 hover:text-club-purple font-medium transition-colors">Edit</button>
+                  <button onclick="deleteDealSprint('${deal.id}')" class="text-xs text-rose-500 hover:text-rose-700 font-medium transition-colors">Delete</button>
                 </div>
               ` : ''}
             </div>
@@ -2686,15 +2821,65 @@
       lucide.createIcons();
     }
 
-    // Board Modal Functions
+    // Modal 1: How Does This Work Handlers
+    function openHowItWorksModal() {
+      const modal = document.getElementById('how-it-works-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      lucide.createIcons();
+    }
+
+    function closeHowItWorksModal() {
+      const modal = document.getElementById('how-it-works-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Modal 2: Deal Deep-Dive Details Handlers
+    function openDealDetailModal(dealId) {
+      const deals = getStoredDeals();
+      const deal = deals.find(d => d.id === dealId);
+      if (!deal) return;
+
+      const titleEl = document.getElementById('detail-deal-title');
+      const leadEl = document.getElementById('detail-deal-lead');
+      const durationEl = document.getElementById('detail-deal-duration');
+      const descEl = document.getElementById('detail-deal-desc');
+      const deliverableEl = document.getElementById('detail-deal-deliverable');
+
+      if (titleEl) titleEl.textContent = deal.title;
+      if (leadEl) leadEl.textContent = deal.lead;
+      if (durationEl) durationEl.textContent = deal.duration;
+      if (descEl) descEl.textContent = deal.description;
+      if (deliverableEl) deliverableEl.textContent = deal.deliverable;
+
+      const modal = document.getElementById('deal-detail-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      lucide.createIcons();
+    }
+
+    function closeDealDetailModal() {
+      const modal = document.getElementById('deal-detail-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Modal 3: Board Admin Create / Edit Modal Handlers
     function openCreateDealModal() {
-      document.getElementById('modal-deal-title').textContent = 'Create New Deal Sprint';
+      document.getElementById('modal-deal-title').textContent = 'New Deal Sprint';
       document.getElementById('deal-form-id').value = '';
       document.getElementById('deal-input-title').value = '';
-      document.getElementById('deal-input-category').value = 'Private Equity';
-      document.getElementById('deal-input-difficulty').value = 'Iniciación';
       document.getElementById('deal-input-lead').value = '';
-      document.getElementById('deal-input-duration').value = '2–3 semanas · 4–5 analistas';
+      document.getElementById('deal-input-duration').value = '2–3 weeks · 4–5 analysts';
       document.getElementById('deal-input-desc').value = '';
       document.getElementById('deal-input-deliverable').value = '';
 
@@ -2718,14 +2903,12 @@
       e.preventDefault();
       const id = document.getElementById('deal-form-id').value || ('sprint-' + Date.now());
       const title = document.getElementById('deal-input-title').value.trim();
-      const category = document.getElementById('deal-input-category').value;
-      const difficulty = document.getElementById('deal-input-difficulty').value;
       const lead = document.getElementById('deal-input-lead').value.trim();
       const duration = document.getElementById('deal-input-duration').value.trim();
       const description = document.getElementById('deal-input-desc').value.trim();
       const deliverable = document.getElementById('deal-input-deliverable').value.trim();
 
-      const newDeal = { id, title, category, difficulty, lead, duration, description, deliverable };
+      const newDeal = { id, title, lead, duration, description, deliverable };
 
       let deals = getStoredDeals();
       const existingIdx = deals.findIndex(d => d.id === id);
@@ -2748,8 +2931,6 @@
       document.getElementById('modal-deal-title').textContent = 'Edit Deal Sprint';
       document.getElementById('deal-form-id').value = deal.id;
       document.getElementById('deal-input-title').value = deal.title;
-      document.getElementById('deal-input-category').value = deal.category;
-      document.getElementById('deal-input-difficulty').value = deal.difficulty;
       document.getElementById('deal-input-lead').value = deal.lead;
       document.getElementById('deal-input-duration').value = deal.duration;
       document.getElementById('deal-input-desc').value = deal.description;
@@ -2764,12 +2945,21 @@
     }
 
     function deleteDealSprint(dealId) {
-      if (!confirm('¿Seguro que deseas eliminar este sprint del catálogo?')) return;
+      if (!confirm('Are you sure you want to delete this sprint from the catalog?')) return;
       let deals = getStoredDeals();
       deals = deals.filter(d => d.id !== dealId);
       saveStoredDeals(deals);
       renderDealsGrid(getPortalRole());
     }
+
+    // Global escape key listener to close modals
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeHowItWorksModal();
+        closeDealDetailModal();
+        closeCreateDealModal();
+      }
+    });
   </script>
 </body>
 </html>
