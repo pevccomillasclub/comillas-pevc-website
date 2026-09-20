@@ -2693,10 +2693,80 @@
       }
     ];
 
+    // =========================================================================
+    // SUPABASE CLOUD SYNC ENGINE (Real-Time Cross-Device Persistence)
+    // =========================================================================
+    const SUPABASE_URL = 'https://hsjdzcidjbnzjeyroesl.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_l3l_LIPtxeRxWOJq57fKWw_87QMh2DR';
+
+    let cachedCloudDeals = null;
+    let isFetchingCloud = false;
+
+    async function fetchDealsFromCloud() {
+      if (isFetchingCloud) return;
+      isFetchingCloud = true;
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/deal_sprints?select=*&order=created_at.asc`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY
+          }
+        });
+        if (res.ok) {
+          const cloudData = await res.json();
+          if (Array.isArray(cloudData) && cloudData.length > 0) {
+            cachedCloudDeals = cloudData;
+            localStorage.setItem('pevc_portal_deals_v3', JSON.stringify(cloudData));
+            if (currentPortalRole) {
+              renderDealsGrid(currentPortalRole);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Supabase sync fallback to local cache:', err);
+      } finally {
+        isFetchingCloud = false;
+      }
+    }
+
+    async function saveDealToCloud(deal) {
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/deal_sprints`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'resolution=merge-duplicates'
+          },
+          body: JSON.stringify(deal)
+        });
+      } catch (err) {
+        console.warn('Error saving deal to Supabase:', err);
+      }
+    }
+
+    async function deleteDealFromCloud(dealId) {
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/deal_sprints?id=eq.${encodeURIComponent(dealId)}`, {
+          method: 'DELETE',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY
+          }
+        });
+      } catch (err) {
+        console.warn('Error deleting deal from Supabase:', err);
+      }
+    }
+
     // In-memory session state (resets on page reload)
     let currentPortalRole = null;
 
     function getStoredDeals() {
+      if (cachedCloudDeals && cachedCloudDeals.length > 0) {
+        return cachedCloudDeals;
+      }
       try {
         const stored = localStorage.getItem('pevc_portal_deals_v3');
         if (stored) {
@@ -2710,6 +2780,7 @@
     }
 
     function saveStoredDeals(deals) {
+      cachedCloudDeals = deals;
       try {
         localStorage.setItem('pevc_portal_deals_v3', JSON.stringify(deals));
       } catch (e) {
@@ -2720,6 +2791,9 @@
     function initAnalystPortalView() {
       const lockScreen = document.getElementById('portal-lock-screen');
       const dashboard = document.getElementById('portal-dashboard');
+
+      // Trigger cloud sync in background
+      fetchDealsFromCloud();
 
       if (!currentPortalRole) {
         if (lockScreen) lockScreen.classList.remove('hidden');
@@ -2939,6 +3013,7 @@
       }
 
       saveStoredDeals(deals);
+      saveDealToCloud(newDeal);
       closeCreateDealModal();
       renderDealsGrid(getPortalRole());
     }
@@ -2969,8 +3044,12 @@
       let deals = getStoredDeals();
       deals = deals.filter(d => d.id !== dealId);
       saveStoredDeals(deals);
+      deleteDealFromCloud(dealId);
       renderDealsGrid(getPortalRole());
     }
+
+    // Initialize cloud sync immediately on load
+    fetchDealsFromCloud();
 
     // Global escape key listener to close modals
     window.addEventListener('keydown', (e) => {
