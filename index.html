@@ -2072,7 +2072,7 @@
               Deal <span class="font-serif italic font-semibold text-club-purpleHighlight">Sprints.</span>
             </h1>
             <p class="text-sm sm:text-base text-slate-500 font-normal max-w-2xl leading-relaxed">
-              Active investment analysis projects for this term. Explore each opportunity and apply directly with your contact details to join dedicated deal teams.
+              Active investment analysis projects for this term. Explore each opportunity and submit your top three priorities to join a dedicated deal team.
             </p>
           </div>
 
@@ -2095,6 +2095,20 @@
         <!-- DYNAMIC DEALS LIST / GRID (3 Columns, Large Titles, Clean & Direct) -->
         <div id="portal-deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- SELECTION & FORMS SECTION (Minimalist in English) -->
+        <div id="portal-forms-section" class="p-8 sm:p-10 rounded-2xl border border-slate-200 bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div class="space-y-1.5 max-w-2xl">
+            <h3 class="font-serif text-2xl text-club-dark font-normal">Select Your Top 3 Preferences</h3>
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+              Submit your project choices via the official form. Teams of 4–5 analysts will be structured to balance diverse academic and technical skills.
+            </p>
+          </div>
+          <a id="btn-portal-open-forms" href="https://forms.cloud.microsoft/e/De419veAPP" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white shadow-sm transition-all hover:scale-105 active:scale-95 shrink-0 flex items-center gap-2">
+            <span>Submit Preferences</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
 
       </div>
@@ -2131,9 +2145,9 @@
             <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between space-y-4 hover:border-club-purple/30 transition-all">
               <div class="space-y-3">
                 <span class="w-8 h-8 rounded-xl bg-club-purple/10 text-club-purple font-serif font-bold text-sm flex items-center justify-center">2</span>
-                <h4 class="font-serif text-base font-semibold text-club-dark">Apply Directly</h4>
+                <h4 class="font-serif text-base font-semibold text-club-dark">Rank Preferences</h4>
                 <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                  Click <strong>Join Sprint</strong> on any deal that interests you. Simply enter your name and phone number to sign up instantly in the portal.
+                  Open the official submission form and rank your first, second, and third project choices according to your interests.
                 </p>
               </div>
             </div>
@@ -2144,7 +2158,7 @@
                 <span class="w-8 h-8 rounded-xl bg-club-purple/10 text-club-purple font-serif font-bold text-sm flex items-center justify-center">3</span>
                 <h4 class="font-serif text-base font-semibold text-club-dark">Team Kick-Off</h4>
                 <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                  Teams of 4–5 analysts will be curated by the Board and Leads. Your designated lead will reach out directly on WhatsApp to schedule the kick-off.
+                  Teams of 4–5 analysts will be structured by the Board. Your designated project lead will reach out directly to schedule the initial kick-off call.
                 </p>
               </div>
             </div>
@@ -2230,14 +2244,10 @@
 
           </div>
 
-          <!-- Bottom Actions -->
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <button onclick="closeDealDetailModal()" class="px-5 py-2.5 rounded-xl text-xs font-medium text-slate-500 hover:text-slate-800 transition-colors">
+          <!-- Bottom Actions (Single Understood button) -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-end">
+            <button onclick="closeDealDetailModal()" class="px-6 py-2.5 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm">
               Understood
-            </button>
-            <button id="detail-btn-join-sprint" onclick="handleDetailJoinClick()" class="px-6 py-2.5 rounded-xl text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
-              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-              <span>Join This Sprint</span>
             </button>
           </div>
 
@@ -2298,84 +2308,6 @@
           </form>
 
         </div>
-      </div>
-
-      <!-- MODAL 4: ANALYST SIGNUP MODAL (Join Deal Team) -->
-      <div id="deal-signup-modal" onclick="if(event.target === this) closeDealSignupModal()" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-md w-full p-8 space-y-6 border border-slate-200 text-left my-8 shadow-2xl relative">
-          
-          <div class="flex items-start justify-between pb-3 border-b border-slate-100">
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">Sprint Application</span>
-              <h3 class="font-serif text-2xl text-club-dark font-normal">Join Sprint Team</h3>
-              <p id="signup-modal-deal-title" class="text-xs text-slate-500 font-medium line-clamp-1"></p>
-            </div>
-            <button onclick="closeDealSignupModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
-              <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-          </div>
-
-          <form onsubmit="handleDealSignupSubmit(event)" class="space-y-4 text-xs">
-            <input type="hidden" id="signup-deal-id" />
-            
-            <div>
-              <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Full Name</label>
-              <input type="text" id="signup-user-name" required placeholder="e.g. Quique Vela" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none text-slate-800 text-sm" />
-            </div>
-
-            <div>
-              <label class="block font-semibold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp / Phone</label>
-              <input type="tel" id="signup-user-phone" required placeholder="+34 600 000 000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-club-purple outline-none text-slate-800 font-mono text-xs" />
-              <p class="text-[11px] text-slate-400 mt-1.5">Used by the Board lead to coordinate and kick off the deal sprint.</p>
-            </div>
-
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-              <button type="button" onclick="closeDealSignupModal()" class="px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 font-medium">
-                Cancel
-              </button>
-              <button type="submit" id="btn-submit-deal-signup" class="px-5 py-2.5 rounded-xl bg-club-purple hover:bg-club-purpleDeep text-white font-semibold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
-                <span>Confirm Sign-Up</span>
-                <i data-lucide="check" class="w-3.5 h-3.5"></i>
-              </button>
-            </div>
-          </form>
-
-        </div>
-      </div>
-
-      <!-- MODAL 5: BOARD APPLICANTS LIST (Roster of Registered Analysts) -->
-      <div id="board-applicants-modal" onclick="if(event.target === this) closeBoardApplicantsModal()" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-xl w-full p-8 space-y-6 border border-slate-200 text-left my-8 shadow-2xl relative">
-          
-          <div class="flex items-start justify-between pb-3 border-b border-slate-100">
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-club-purple uppercase tracking-wider block">Sprint Roster</span>
-              <h3 id="roster-modal-deal-title" class="font-serif text-xl sm:text-2xl text-club-dark font-normal">Applicants</h3>
-            </div>
-            <button onclick="closeBoardApplicantsModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
-              <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-          </div>
-
-          <!-- Applicants List Container -->
-          <div id="roster-applicants-list" class="space-y-2.5 max-h-80 overflow-y-auto pr-1">
-            <!-- Dynamically populated via JS -->
-          </div>
-
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span id="roster-applicants-count" class="font-medium">Total: 0</span>
-            <button onclick="closeBoardApplicantsModal()" class="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition-colors cursor-pointer">
-              Close
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- GLOBAL PORTAL TOAST NOTIFICATION -->
-      <div id="portal-toast" class="fixed bottom-8 right-8 z-[60] transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 max-w-sm px-5 py-3.5 rounded-2xl bg-club-dark text-white text-xs shadow-2xl flex items-center gap-3">
-        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-        <span id="portal-toast-msg">Success</span>
       </div>
 
     </div>
@@ -2828,137 +2760,6 @@
       }
     }
 
-    // =========================================================================
-    // APPLICANTS / SIGNUPS CLOUD SYNC ENGINE
-    // =========================================================================
-    let cachedSignups = [];
-    let isFetchingSignups = false;
-    let currentViewingDealId = null;
-
-    function getLocalSignups() {
-      try {
-        const stored = localStorage.getItem('pevc_portal_signups_v1');
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed)) return parsed;
-        }
-      } catch (e) {
-        console.warn('Error reading local signups', e);
-      }
-      return [];
-    }
-
-    function saveLocalSignups(signups) {
-      cachedSignups = signups;
-      try {
-        localStorage.setItem('pevc_portal_signups_v1', JSON.stringify(signups));
-      } catch (e) {
-        console.warn('Error saving local signups', e);
-      }
-    }
-
-    async function fetchSignupsFromCloud() {
-      if (isFetchingSignups) return;
-      isFetchingSignups = true;
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/deal_signups?select=*&order=created_at.desc`, {
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_KEY
-          }
-        });
-        if (res.ok) {
-          const cloudData = await res.json();
-          if (Array.isArray(cloudData)) {
-            cachedSignups = cloudData;
-            saveLocalSignups(cloudData);
-            if (currentPortalRole) {
-              renderDealsGrid(currentPortalRole);
-            }
-          }
-        } else {
-          cachedSignups = getLocalSignups();
-        }
-      } catch (err) {
-        console.warn('Supabase signups fallback to local:', err);
-        cachedSignups = getLocalSignups();
-      } finally {
-        isFetchingSignups = false;
-      }
-    }
-
-    async function saveSignupToCloud(signup) {
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/deal_signups`, {
-          method: 'POST',
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_KEY,
-            'Content-Type': 'application/json',
-            'Prefer': 'resolution=merge-duplicates'
-          },
-          body: JSON.stringify(signup)
-        });
-        if (!res.ok) {
-          // Fallback if status column does not exist yet in cloud table
-          const fallbackPayload = {
-            id: signup.id,
-            deal_id: signup.deal_id,
-            name: signup.name,
-            phone: signup.phone,
-            created_at: signup.created_at
-          };
-          await fetch(`${SUPABASE_URL}/rest/v1/deal_signups`, {
-            method: 'POST',
-            headers: {
-              'apikey': SUPABASE_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_KEY,
-              'Content-Type': 'application/json',
-              'Prefer': 'resolution=merge-duplicates'
-            },
-            body: JSON.stringify(fallbackPayload)
-          });
-        }
-      } catch (err) {
-        console.warn('Error saving signup to Supabase:', err);
-      }
-    }
-
-    async function updateSignupStatusInCloud(signupId, status) {
-      try {
-        await fetch(`${SUPABASE_URL}/rest/v1/deal_signups?id=eq.${encodeURIComponent(signupId)}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_KEY,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ status: status })
-        });
-      } catch (err) {
-        console.warn('Error updating signup status in Supabase:', err);
-      }
-    }
-
-    async function deleteSignupFromCloud(signupId) {
-      try {
-        await fetch(`${SUPABASE_URL}/rest/v1/deal_signups?id=eq.${encodeURIComponent(signupId)}`, {
-          method: 'DELETE',
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_KEY
-          }
-        });
-      } catch (err) {
-        console.warn('Error deleting signup from Supabase:', err);
-      }
-    }
-
-    function getSignupsForDeal(dealId) {
-      const all = (cachedSignups && cachedSignups.length > 0) ? cachedSignups : getLocalSignups();
-      return all.filter(s => s.deal_id === dealId);
-    }
-
     // In-memory session state (resets on page reload)
     let currentPortalRole = null;
 
@@ -2993,7 +2794,6 @@
 
       // Trigger cloud sync in background
       fetchDealsFromCloud();
-      fetchSignupsFromCloud();
 
       if (!currentPortalRole) {
         if (lockScreen) lockScreen.classList.remove('hidden');
@@ -3071,13 +2871,6 @@
       }
 
       grid.innerHTML = deals.map(deal => {
-        const signups = getSignupsForDeal(deal.id);
-        const count = signups.length;
-        const assignedCount = signups.filter(s => s.status === 'assigned').length;
-        const countBadge = count > 0 
-          ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-50 text-club-purple border border-club-purpleBorder/60"><i data-lucide="users" class="w-3 h-3"></i><span>${count} ${count === 1 ? 'applicant' : 'applicants'}</span></span>`
-          : `<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-normal text-slate-400"><i data-lucide="users" class="w-3 h-3"></i><span>0 applicants</span></span>`;
-
         return `
           <div class="p-7 sm:p-8 rounded-2xl border border-slate-200 bg-white hover:border-club-purple/40 transition-all flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md">
             
@@ -3087,14 +2880,11 @@
                 ${deal.title}
               </h3>
 
-              <!-- Clean Metadata Row + Live Deal Count Badge -->
-              <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-100 pt-3 gap-2 flex-wrap">
-                <div class="flex items-center gap-2 flex-wrap">
-                  <div>Lead: <span class="font-medium text-club-dark">${deal.lead}</span></div>
-                  <span>·</span>
-                  <div>${deal.duration}</div>
-                </div>
-                ${countBadge}
+              <!-- Clean Metadata Row -->
+              <div class="flex items-center gap-3 text-xs text-slate-500 border-t border-slate-100 pt-3 flex-wrap">
+                <div>Lead: <span class="font-medium text-club-dark">${deal.lead}</span></div>
+                <span>·</span>
+                <div>${deal.duration}</div>
               </div>
 
               <!-- Deal Description Excerpt -->
@@ -3103,28 +2893,12 @@
               </p>
             </div>
 
-            <!-- Card Bottom Bar: Actions -->
-            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
-              
-              <div class="flex items-center gap-2">
-                <button onclick="openDealDetailModal('${deal.id}')" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-club-purple bg-slate-50 hover:bg-purple-50 border border-slate-200 transition-all cursor-pointer">
-                  <span>Learn More</span>
-                  <i data-lucide="arrow-right" class="w-3 h-3"></i>
-                </button>
-
-                ${isBoard ? `
-                  <button onclick="openBoardApplicantsModal('${deal.id}')" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-sm cursor-pointer">
-                    <i data-lucide="users" class="w-3 h-3"></i>
-                    <span>Applicants (${count})</span>
-                    ${assignedCount > 0 ? `<span class="bg-emerald-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold ml-0.5">${assignedCount} assigned</span>` : ''}
-                  </button>
-                ` : `
-                  <button onclick="openDealSignupModal('${deal.id}')" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-club-purple hover:bg-club-purpleDeep text-white shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer">
-                    <i data-lucide="user-plus" class="w-3 h-3"></i>
-                    <span>Join Sprint</span>
-                  </button>
-                `}
-              </div>
+            <!-- Card Bottom Bar: Learn More Modal Trigger + Board Actions -->
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <button onclick="openDealDetailModal('${deal.id}')" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-club-purple hover:text-club-purpleDeep bg-club-purpleSubtle hover:bg-purple-100/80 border border-club-purpleBorder/60 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                <span>Learn More</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
 
               ${isBoard ? `
                 <div class="flex items-center gap-3">
@@ -3132,7 +2906,6 @@
                   <button onclick="deleteDealSprint('${deal.id}')" class="text-xs text-rose-500 hover:text-rose-700 font-medium transition-colors">Delete</button>
                 </div>
               ` : ''}
-
             </div>
 
           </div>
@@ -3166,28 +2939,17 @@
       const deal = deals.find(d => d.id === dealId);
       if (!deal) return;
 
-      currentViewingDealId = dealId;
-
       const titleEl = document.getElementById('detail-deal-title');
       const leadEl = document.getElementById('detail-deal-lead');
       const durationEl = document.getElementById('detail-deal-duration');
       const descEl = document.getElementById('detail-deal-desc');
       const requirementsEl = document.getElementById('detail-deal-requirements');
-      const joinBtn = document.getElementById('detail-btn-join-sprint');
 
       if (titleEl) titleEl.textContent = deal.title;
       if (leadEl) leadEl.textContent = deal.lead;
       if (durationEl) durationEl.textContent = deal.duration;
       if (descEl) descEl.textContent = deal.description;
       if (requirementsEl) requirementsEl.textContent = deal.requirements || 'Open to all Deal Analysts. Analytical curiosity and teamwork mindset required.';
-
-      if (joinBtn) {
-        if (currentPortalRole === 'BOARD') {
-          joinBtn.classList.add('hidden');
-        } else {
-          joinBtn.classList.remove('hidden');
-        }
-      }
 
       const modal = document.getElementById('deal-detail-modal');
       if (modal) {
@@ -3202,13 +2964,6 @@
       if (modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
-      }
-    }
-
-    function handleDetailJoinClick() {
-      if (currentViewingDealId) {
-        closeDealDetailModal();
-        openDealSignupModal(currentViewingDealId);
       }
     }
 
@@ -3293,210 +3048,15 @@
       renderDealsGrid(getPortalRole());
     }
 
-    // Modal 4: Analyst Sign-Up Handlers
-    function openDealSignupModal(dealId) {
-      const deals = getStoredDeals();
-      const deal = deals.find(d => d.id === dealId);
-      if (!deal) return;
-
-      closeDealDetailModal();
-
-      document.getElementById('signup-modal-deal-title').textContent = deal.title;
-      document.getElementById('signup-deal-id').value = deal.id;
-      document.getElementById('signup-user-name').value = '';
-      document.getElementById('signup-user-phone').value = '';
-
-      const modal = document.getElementById('deal-signup-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        setTimeout(() => {
-          const nameInput = document.getElementById('signup-user-name');
-          if (nameInput) nameInput.focus();
-        }, 100);
-      }
-      lucide.createIcons();
-    }
-
-    function closeDealSignupModal() {
-      const modal = document.getElementById('deal-signup-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-    }
-
-    async function handleDealSignupSubmit(e) {
-      e.preventDefault();
-      const dealId = document.getElementById('signup-deal-id').value;
-      const name = document.getElementById('signup-user-name').value.trim();
-      const phone = document.getElementById('signup-user-phone').value.trim();
-
-      if (!dealId || !name || !phone) return;
-
-      const newSignup = {
-        id: 'signup-' + Date.now(),
-        deal_id: dealId,
-        name: name,
-        phone: phone,
-        status: 'applied',
-        created_at: new Date().toISOString()
-      };
-
-      // Optimistic update
-      const allSignups = [newSignup, ...((cachedSignups && cachedSignups.length > 0) ? cachedSignups : getLocalSignups())];
-      saveLocalSignups(allSignups);
-
-      // Save to Supabase in background
-      saveSignupToCloud(newSignup);
-
-      closeDealSignupModal();
-      renderDealsGrid(getPortalRole());
-
-      showPortalToast("Application confirmed! The deal lead will contact you soon.");
-    }
-
-    // Modal 5: Board Applicants Roster Handlers
-    function openBoardApplicantsModal(dealId) {
-      const deals = getStoredDeals();
-      const deal = deals.find(d => d.id === dealId);
-      if (!deal) return;
-
-      document.getElementById('roster-modal-deal-title').textContent = deal.title;
-
-      const signups = getSignupsForDeal(dealId);
-      const assignedCount = signups.filter(s => s.status === 'assigned').length;
-      const countEl = document.getElementById('roster-applicants-count');
-      const listContainer = document.getElementById('roster-applicants-list');
-
-      if (countEl) {
-        countEl.innerHTML = `
-          <div class="flex items-center gap-2 flex-wrap">
-            <span>Total: <strong>${signups.length}</strong> ${signups.length === 1 ? 'applicant' : 'applicants'}</span>
-            <span class="text-slate-300">·</span>
-            <span class="text-emerald-700 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Assigned: <strong>${assignedCount}</strong></span>
-            </span>
-          </div>
-        `;
-      }
-
-      if (listContainer) {
-        if (signups.length === 0) {
-          listContainer.innerHTML = `
-            <div class="py-12 text-center text-slate-400 space-y-1">
-              <i data-lucide="inbox" class="w-8 h-8 mx-auto text-slate-300 stroke-1"></i>
-              <p class="text-xs">No analysts have applied for this sprint yet.</p>
-            </div>
-          `;
-        } else {
-          listContainer.innerHTML = signups.map(s => {
-            const isAssigned = s.status === 'assigned';
-            const timeFormatted = new Date(s.created_at || Date.now()).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-            return `
-              <div class="p-3.5 rounded-2xl ${isAssigned ? 'bg-emerald-50/60 border-emerald-300/80 shadow-xs' : 'bg-slate-50 border-slate-200/80'} border flex items-center justify-between gap-3 text-xs transition-all">
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <span class="font-semibold text-club-dark text-sm truncate">${s.name}</span>
-                    ${isAssigned ? `
-                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
-                        <i data-lucide="check" class="w-3 h-3 text-emerald-600"></i>
-                        <span>Accepted</span>
-                      </span>
-                    ` : ''}
-                  </div>
-                  <div class="text-slate-500 font-mono text-xs flex items-center gap-1.5 flex-wrap">
-                    <i data-lucide="phone" class="w-3 h-3 text-slate-400"></i>
-                    <span>${s.phone}</span>
-                    <span class="text-slate-300">·</span>
-                    <span class="text-[10px] text-slate-400">${timeFormatted}</span>
-                  </div>
-                </div>
-                <div class="flex items-center gap-2 shrink-0">
-                  <button onclick="handleToggleAssignApplicant('${s.id}', '${dealId}')" class="px-3 py-1.5 rounded-xl text-xs font-semibold ${isAssigned ? 'bg-white text-emerald-800 border border-emerald-300 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200' : 'bg-club-purple text-white hover:bg-club-purpleDeep'} transition-all shadow-sm cursor-pointer flex items-center gap-1.5" title="${isAssigned ? 'Click to unassign' : 'Assign analyst to this deal'}">
-                    <i data-lucide="${isAssigned ? 'user-check' : 'user-plus'}" class="w-3.5 h-3.5"></i>
-                    <span>${isAssigned ? 'Assigned' : 'Assign to Deal'}</span>
-                  </button>
-                  <button onclick="handleDeleteApplicant('${s.id}', '${dealId}')" class="p-1.5 text-slate-300 hover:text-rose-500 rounded-lg hover:bg-white transition-colors cursor-pointer" title="Remove applicant">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            `;
-          }).join('');
-        }
-      }
-
-      const modal = document.getElementById('board-applicants-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-      lucide.createIcons();
-    }
-
-    function handleToggleAssignApplicant(signupId, dealId) {
-      const allSignups = ((cachedSignups && cachedSignups.length > 0) ? cachedSignups : getLocalSignups());
-      const signup = allSignups.find(s => s.id === signupId);
-      if (!signup) return;
-
-      const newStatus = signup.status === 'assigned' ? 'applied' : 'assigned';
-      signup.status = newStatus;
-
-      saveLocalSignups(allSignups);
-      updateSignupStatusInCloud(signupId, newStatus);
-
-      openBoardApplicantsModal(dealId);
-      renderDealsGrid(getPortalRole());
-
-      showPortalToast(newStatus === 'assigned' ? `${signup.name} assigned to deal` : `${signup.name} unassigned`);
-    }
-
-    function closeBoardApplicantsModal() {
-      const modal = document.getElementById('board-applicants-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-    }
-
-    function handleDeleteApplicant(signupId, dealId) {
-      if (!confirm('Are you sure you want to remove this applicant from the roster?')) return;
-      const allSignups = ((cachedSignups && cachedSignups.length > 0) ? cachedSignups : getLocalSignups()).filter(s => s.id !== signupId);
-      saveLocalSignups(allSignups);
-      deleteSignupFromCloud(signupId);
-      openBoardApplicantsModal(dealId);
-      renderDealsGrid(getPortalRole());
-    }
-
-    // Global Toast Notification Helper
-    function showPortalToast(msg) {
-      const toast = document.getElementById('portal-toast');
-      const toastMsg = document.getElementById('portal-toast-msg');
-      if (!toast || !toastMsg) return;
-      toastMsg.textContent = msg;
-      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-      }, 3500);
-      lucide.createIcons();
-    }
-
     // Initialize cloud sync immediately on load
     fetchDealsFromCloud();
-    fetchSignupsFromCloud();
 
-    // Global escape key listener to close all modals
+    // Global escape key listener to close modals
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeHowItWorksModal();
         closeDealDetailModal();
         closeCreateDealModal();
-        closeDealSignupModal();
-        closeBoardApplicantsModal();
       }
     });
   </script>
