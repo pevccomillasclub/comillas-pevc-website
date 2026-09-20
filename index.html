@@ -2706,7 +2706,7 @@
       if (isFetchingCloud) return;
       isFetchingCloud = true;
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/deal_sprints?select=*&order=created_at.asc`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/deal_sprints?select=*&order=title.asc`, {
           headers: {
             'apikey': SUPABASE_KEY,
             'Authorization': 'Bearer ' + SUPABASE_KEY
@@ -2715,6 +2715,7 @@
         if (res.ok) {
           const cloudData = await res.json();
           if (Array.isArray(cloudData) && cloudData.length > 0) {
+            cloudData.sort((a, b) => (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' }));
             cachedCloudDeals = cloudData;
             localStorage.setItem('pevc_portal_deals_v3', JSON.stringify(cloudData));
             if (currentPortalRole) {
@@ -2764,19 +2765,21 @@
     let currentPortalRole = null;
 
     function getStoredDeals() {
+      let deals = DEFAULT_DEAL_SPRINTS;
       if (cachedCloudDeals && cachedCloudDeals.length > 0) {
-        return cachedCloudDeals;
-      }
-      try {
-        const stored = localStorage.getItem('pevc_portal_deals_v3');
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        deals = cachedCloudDeals;
+      } else {
+        try {
+          const stored = localStorage.getItem('pevc_portal_deals_v3');
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) deals = parsed;
+          }
+        } catch (e) {
+          console.warn('Error reading stored deals', e);
         }
-      } catch (e) {
-        console.warn('Error reading stored deals', e);
       }
-      return DEFAULT_DEAL_SPRINTS;
+      return [...deals].sort((a, b) => (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' }));
     }
 
     function saveStoredDeals(deals) {
@@ -3009,8 +3012,9 @@
       if (existingIdx >= 0) {
         deals[existingIdx] = newDeal;
       } else {
-        deals.unshift(newDeal);
+        deals.push(newDeal);
       }
+      deals.sort((a, b) => (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' }));
 
       saveStoredDeals(deals);
       saveDealToCloud(newDeal);
