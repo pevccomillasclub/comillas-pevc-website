@@ -156,6 +156,10 @@
           <button onclick="switchView('resources')" id="nav-link-resources" class="nav-item text-xs font-semibold tracking-wider text-slate-600 hover:text-club-purple transition-colors py-1">
             RESOURCES
           </button>
+          <button onclick="switchView('analyst-portal')" id="nav-link-analyst-portal" class="nav-item text-xs font-semibold tracking-wider text-slate-600 hover:text-club-purple transition-colors py-1 flex items-center gap-1.5">
+            <span>ANALYST PORTAL</span>
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-club-purpleHighlight"></span>
+          </button>
           <button onclick="switchView('contact')" id="nav-link-contact" class="nav-item text-xs font-semibold tracking-wider text-slate-600 hover:text-club-purple transition-colors py-1">
             CONTACT
           </button>
@@ -189,6 +193,13 @@
         <button onclick="switchView('resources')" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-slate-700 hover:text-club-purple hover:bg-slate-50 transition-colors flex items-center justify-between">
           <span>RESOURCES</span>
           <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </button>
+        <button onclick="switchView('analyst-portal')" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-slate-700 hover:text-club-purple hover:bg-slate-50 transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span>ANALYST PORTAL</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-club-purpleHighlight"></span>
+          </span>
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-club-purple"></i>
         </button>
         <button onclick="switchView('contact')" class="text-left py-2.5 px-3.5 rounded-xl text-xs font-bold tracking-wider text-slate-700 hover:text-club-purple hover:bg-slate-50 transition-colors flex items-center justify-between">
           <span>CONTACT</span>
@@ -2022,6 +2033,272 @@
     </div>
   </div>
 
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 6: ANALYST PORTAL (DEAL SPRINTS & BOARD MANAGEMENT) -->
+  <!-- ========================================================================= -->
+  <div id="view-analyst-portal" class="view-container pt-36 sm:pt-40 pb-20 px-6 sm:px-12 md:px-20 min-h-screen bg-white text-club-dark text-left">
+    <div class="max-w-7xl mx-auto space-y-12">
+      
+      <!-- GATEKEEPER LOCK SCREEN (Shown when not authenticated) -->
+      <div id="portal-lock-screen" class="max-w-md mx-auto py-12 px-8 rounded-3xl bg-white border border-slate-200/90 shadow-xl text-center space-y-7">
+        <div class="w-16 h-16 rounded-2xl bg-club-purpleSubtle border border-club-purpleBorder/60 flex items-center justify-center mx-auto text-club-purple">
+          <i data-lucide="shield-check" class="w-8 h-8"></i>
+        </div>
+        <div class="space-y-2">
+          <span class="text-[10px] font-bold text-club-purple uppercase tracking-widest block">Restricted Access</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal">Deal Analyst Portal</h2>
+          <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+            Acceso exclusivo para analistas admitidos y miembros del Board del Comillas PE&VC Club. Introduce tu clave de autorización.
+          </p>
+        </div>
+
+        <form onsubmit="handlePortalLogin(event)" class="space-y-4 text-left">
+          <div>
+            <label for="portal-passcode" class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Access Passcode</label>
+            <div class="relative">
+              <input type="password" id="portal-passcode" placeholder="Introduce tu código..." required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple transition-all font-mono tracking-wider text-club-dark bg-slate-50/50" />
+              <div class="absolute inset-y-0 right-3 flex items-center">
+                <i data-lucide="key" class="w-4 h-4 text-slate-400"></i>
+              </div>
+            </div>
+            <p id="portal-login-error" class="hidden text-xs text-rose-600 font-medium mt-1.5 flex items-center gap-1">
+              <i data-lucide="alert-circle" class="w-3.5 h-3.5 shrink-0"></i>
+              <span>Código incorrecto. Revisa el WhatsApp del Club.</span>
+            </p>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-4 rounded-xl text-xs font-bold bg-club-purple hover:bg-club-purpleDeep text-white transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+            <span>Entrar al Portal</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Q1 2026/27 Cohort</span>
+          <a href="https://chat.whatsapp.com/HLazwxHRJiKKeSJCA5w662?s=cl&p=i&ilr=0" target="_blank" rel="noopener noreferrer" class="hover:text-club-purple font-medium flex items-center gap-1 transition-colors">
+            <span>Soporte WhatsApp</span>
+            <i data-lucide="message-circle" class="w-3 h-3"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- MAIN PORTAL DASHBOARD (Shown when unlocked) -->
+      <div id="portal-dashboard" class="hidden space-y-12">
+        
+        <!-- Top Status & Role Header -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-slate-900 text-white flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden shadow-lg">
+          <div class="space-y-2 z-10">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="portal-role-badge" class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-club-purpleHighlight text-white shadow-sm">
+                Analyst Session
+              </span>
+              <span class="text-xs text-slate-400 font-medium">· Academic Year 2026/27 (Q1 Cohort)</span>
+            </div>
+            <h1 class="font-serif text-2xl sm:text-4xl text-white font-normal">
+              Active Deal Sprints & Research Hub.
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+              Explora los proyectos de inversión y análisis activos de este mes. Selecciona tus preferencias (Top 3) para asignarte a un equipo de trabajo reducido (4–5 analistas).
+            </p>
+          </div>
+
+          <!-- Header Right Action & Signout -->
+          <div class="flex flex-wrap items-center gap-3 shrink-0 z-10">
+            <!-- Board Only: Add New Deal Button -->
+            <button id="board-add-deal-btn" onclick="openCreateDealModal()" class="hidden px-5 py-2.5 rounded-xl text-xs font-bold bg-amber-400 hover:bg-amber-300 text-slate-950 transition-all flex items-center gap-2 shadow-md">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>New Deal Sprint (Board)</span>
+            </button>
+
+            <!-- Rank Preferences CTA -->
+            <a href="#portal-forms-section" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-club-dark hover:bg-slate-100 transition-all flex items-center gap-2 shadow-sm">
+              <i data-lucide="check-square" class="w-4 h-4 text-club-purple"></i>
+              <span>Select Top 3 Priorities</span>
+            </a>
+
+            <!-- Sign Out Button -->
+            <button onclick="handlePortalLogout()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors" title="Cerrar sesión">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Decorative subtle circle -->
+          <div class="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-club-purple/30 blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- Sprint Dynamics / Rules Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="p-5 rounded-2xl border border-slate-200/90 bg-white flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-club-purple shrink-0">
+              <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-serif text-sm font-semibold text-club-dark">Equipos Reducidos</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">4 a 5 analistas por sprint con mentoría directa de un miembro del Board.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-slate-200/90 bg-white flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-club-purple shrink-0">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-serif text-sm font-semibold text-club-dark">Sprints de 2–3 Semanas</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Kick-off con el lead, research asíncrono, sesión intermedia y presentación final.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-slate-200/90 bg-white flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-club-purple shrink-0">
+              <i data-lucide="award" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-serif text-sm font-semibold text-club-dark">Proof of Work & Output</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Publicación del deck de inversión en la web oficial con autoría de los analistas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Bar & Section Header -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-[11px] font-semibold text-club-purple uppercase tracking-widest block mb-1">Catalog</span>
+            <h2 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal">Active Sprints Catalogue</h2>
+          </div>
+          
+          <!-- Category Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto max-w-full pb-1">
+            <button onclick="filterPortalDeals('all')" class="deal-filter-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-club-purple text-white transition-all shadow-sm">
+              All Sprints
+            </button>
+            <button onclick="filterPortalDeals('Private Equity')" class="deal-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+              Private Equity
+            </button>
+            <button onclick="filterPortalDeals('Venture & Tech')" class="deal-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+              Venture & Tech
+            </button>
+            <button onclick="filterPortalDeals('Special Situations')" class="deal-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+              Special Sits & Credit
+            </button>
+          </div>
+        </div>
+
+        <!-- DYNAMIC DEALS GRID -->
+        <div id="portal-deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <!-- Populated by Javascript -->
+        </div>
+
+        <!-- SELECTION & FORMS SECTION -->
+        <section id="portal-forms-section" class="p-8 sm:p-10 rounded-3xl bg-club-purpleSubtle border border-club-purpleBorder/70 text-left space-y-6">
+          <div class="max-w-3xl space-y-2">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-club-purple font-semibold text-[10px] tracking-wider uppercase shadow-sm">
+              <i data-lucide="clipboard-list" class="w-3.5 h-3.5"></i>
+              <span>Asignación de Proyectos</span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl text-club-dark font-normal">
+              Envía tus 3 opciones de prioridad.
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Para asegurar que todos los analistas participéis en sprints que os motiven y con el tamaño de equipo ideal, cada analista seleccionará su <strong class="font-semibold text-club-dark">Top 1, Top 2 y Top 3</strong>. Desde el Board asignaremos los equipos balanceando perfiles técnicos y de negocio.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <!-- Forms CTA Button -->
+            <a id="btn-portal-open-forms" href="https://forms.cloud.microsoft" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 rounded-full text-xs font-bold bg-club-purple hover:bg-club-purpleDeep text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2.5 hover:scale-105 active:scale-95">
+              <span>Abrir Formulario de Preferencias (Top 3)</span>
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+
+            <div class="text-xs text-slate-500 flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+              <span>Plazo de selección: 72 horas desde apertura</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- BOARD ONLY: CREATE / EDIT DEAL MODAL (Hidden by default) -->
+      <div id="board-deal-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-8 space-y-6 shadow-2xl border border-slate-200 text-left my-8">
+          
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div class="space-y-0.5">
+              <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Board Admin Mode</span>
+              <h3 id="modal-deal-title" class="font-serif text-xl sm:text-2xl text-club-dark font-medium">Create New Deal Sprint</h3>
+            </div>
+            <button onclick="closeCreateDealModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <form onsubmit="handleSaveDealSprint(event)" class="space-y-4">
+            <input type="hidden" id="deal-form-id" />
+            
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Título del Proyecto</label>
+              <input type="text" id="deal-input-title" required placeholder="Ej. LBO Analysis: Nazca Capital Portfolio" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Vertical</label>
+                <select id="deal-input-category" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none bg-white">
+                  <option value="Private Equity">Private Equity</option>
+                  <option value="Venture & Tech">Venture & Tech</option>
+                  <option value="Special Situations">Special Situations & Credit</option>
+                  <option value="Real Estate & Infra">Real Estate & Infra</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Dificultad</label>
+                <select id="deal-input-difficulty" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none bg-white">
+                  <option value="Iniciación">Iniciación (Accesible)</option>
+                  <option value="Intermedio">Intermedio</option>
+                  <option value="Avanzado">Avanzado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Project Lead (Board)</label>
+                <input type="text" id="deal-input-lead" required placeholder="Ej. Quique Vela / Diana Casterá" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Duración & Plazas</label>
+                <input type="text" id="deal-input-duration" required placeholder="Ej. 2–3 semanas · 4–5 analistas" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Descripción / Tesis del Deal</label>
+              <textarea id="deal-input-desc" required rows="3" placeholder="Explica de qué trata la operación, el fondo analizado y qué investigará el equipo..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none leading-relaxed"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 uppercase tracking-wider mb-1">Entregable Principal (Deliverable)</label>
+              <input type="text" id="deal-input-deliverable" required placeholder="Ej. Tear-sheet financiero + Deck ejecutivo para Comité" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-club-purple/30 focus:border-club-purple outline-none" />
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+              <button type="button" onclick="closeCreateDealModal()" class="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+                Cancelar
+              </button>
+              <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-club-purple hover:bg-club-purpleDeep text-white shadow-md transition-all">
+                Guardar Sprint
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- JAVASCRIPT: HOME SNAP SCROLL & VIEW ROUTER -->
   <script>
     // Initialize Lucide Icons
@@ -2096,6 +2373,11 @@
       // Trigger initial scroll calculations if Deal Analyst is active
       if (viewName === 'deal-analyst') {
         setTimeout(handleDealAnalystScroll, 50);
+      }
+
+      // Check access session when entering Analyst Portal
+      if (viewName === 'analyst-portal') {
+        setTimeout(initAnalystPortalView, 50);
       }
 
       if (targetElementId) {
@@ -2343,6 +2625,362 @@
         activeBtn.classList.add('bg-club-purple', 'text-white', 'shadow-sm');
         activeBtn.classList.remove('text-slate-600');
       }
+    }
+
+    // =========================================================================
+    // ANALYST PORTAL: PASSCODE AUTH & DEAL SPRINTS CATALOG ENGINE
+    // =========================================================================
+    const PORTAL_PASSCODES = {
+      ANALYST: 'ANALYST2026',
+      BOARD: 'BOARD2026' // Also accepts BOARD26 or PEVCBOARD
+    };
+
+    // Initial Deal Sprints Catalog
+    const DEFAULT_DEAL_SPRINTS = [
+      {
+        id: 'sprint-tokenization',
+        title: 'Tokenización de Fondos de PE & Real World Assets (RWA)',
+        category: 'Venture & Tech',
+        difficulty: 'Intermedio',
+        lead: 'Quique Vela (Presidencia)',
+        duration: '2–3 semanas · 4–5 analistas',
+        description: 'Análisis práctico y regulatorio sobre cómo fondos globales (BlackRock, KKR, Hamilton Lane) están tokenizando participaciones de Private Equity para generar liquidez en secundarios, programar capital calls y democratizar el acceso mediante el estándar ERC-3643.',
+        deliverable: 'Deck ejecutivo de estructuración + Whitepaper de inversión'
+      },
+      {
+        id: 'sprint-midcap-pe',
+        title: 'Análisis Integral de un Fondo Mid-Market Español (Fund Economics)',
+        category: 'Private Equity',
+        difficulty: 'Iniciación',
+        lead: 'Quique Vela (Presidencia)',
+        duration: '2 semanas · 4–5 analistas',
+        description: 'Deep-dive formativo para abrir el capó de una gestora líder de PE en España (MCH Private Equity, Nazca Capital o similar). Comprensión de comisiones de gestión (2%), hurdle rate, carried interest (20%), cascadas de retorno a LPs y análisis de múltiplos MoIC e IRR de su portfolio histórico.',
+        deliverable: 'Tear-sheet financiero del fondo + Análisis de participadas'
+      },
+      {
+        id: 'sprint-lbo-healthcare',
+        title: 'LBO Valuation Drill: Buyout en el Sector Salud / Farma',
+        category: 'Private Equity',
+        difficulty: 'Avanzado',
+        lead: 'Marco Martínez / Alvaro Rama',
+        duration: '2 semanas · 4 analistas',
+        description: 'Construcción y stress-test de un modelo LBO de compra apalancada para una compañía mid-market en Healthcare. Modelado de tramos de deuda senior y mezzanine, sinergias de EBITDA y análisis de sensibilidad de retornos para Comité de Inversión.',
+        deliverable: 'Modelo financiero dinámico en Excel + Investment Memo'
+      },
+      {
+        id: 'sprint-private-credit',
+        title: 'Private Credit & Direct Lending: Estructuración y Riesgo de Liquidez',
+        category: 'Special Situations',
+        difficulty: 'Intermedio',
+        lead: 'Eduardo Diosdado / Sergio Gutiérrez',
+        duration: '2 semanas · 4 analistas',
+        description: 'Investigación del auge del crédito privado frente a la banca tradicional. Análisis de covenants, spreads de rentabilidad y lecciones del ciclo de liquidez en fondos de direct lending (ej. caso Blue Owl y dinámicas de redemption waves).',
+        deliverable: 'Research Note ejecutiva de Crédito Privado'
+      },
+      {
+        id: 'sprint-vc-secondaries',
+        title: 'Venture Capital: Cap Tables, Secondaries & Down-Rounds',
+        category: 'Venture & Tech',
+        difficulty: 'Intermedio',
+        lead: 'Liam Esgueva / Pablo Cristóbal',
+        duration: '2–3 semanas · 4–5 analistas',
+        description: 'Modelado de dilución accionarial, notas convertibles y SAFE en rondas Growth. Análisis del mercado secundario de acciones pre-IPO y estructuración de cláusulas de liquidación preferente (liquidation preferences con y sin participación).',
+        deliverable: 'Simulador de Cap Table + Caso práctico de salida secundaria'
+      }
+    ];
+
+    let currentPortalFilter = 'all';
+
+    function getStoredDeals() {
+      try {
+        const stored = localStorage.getItem('pevc_portal_deals');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {
+        console.warn('Error reading stored deals', e);
+      }
+      return DEFAULT_DEAL_SPRINTS;
+    }
+
+    function saveStoredDeals(deals) {
+      try {
+        localStorage.setItem('pevc_portal_deals', JSON.stringify(deals));
+      } catch (e) {
+        console.warn('Error saving deals to localStorage', e);
+      }
+    }
+
+    function getPortalRole() {
+      return sessionStorage.getItem('pevc_portal_role') || null;
+    }
+
+    function setPortalRole(role) {
+      if (role) {
+        sessionStorage.setItem('pevc_portal_role', role);
+      } else {
+        sessionStorage.removeItem('pevc_portal_role');
+      }
+    }
+
+    function initAnalystPortalView() {
+      const role = getPortalRole();
+      const lockScreen = document.getElementById('portal-lock-screen');
+      const dashboard = document.getElementById('portal-dashboard');
+
+      if (!role) {
+        if (lockScreen) lockScreen.classList.remove('hidden');
+        if (dashboard) dashboard.classList.add('hidden');
+        setTimeout(() => {
+          const input = document.getElementById('portal-passcode');
+          if (input) input.focus();
+        }, 100);
+      } else {
+        if (lockScreen) lockScreen.classList.add('hidden');
+        if (dashboard) dashboard.classList.remove('hidden');
+        renderPortalDashboard(role);
+      }
+      lucide.createIcons();
+    }
+
+    function handlePortalLogin(e) {
+      e.preventDefault();
+      const input = document.getElementById('portal-passcode');
+      const errorMsg = document.getElementById('portal-login-error');
+      if (!input) return;
+
+      const code = input.value.trim().toUpperCase();
+
+      if (code === PORTAL_PASSCODES.BOARD || code === 'BOARD26' || code === 'PEVCBOARD') {
+        if (errorMsg) errorMsg.classList.add('hidden');
+        setPortalRole('BOARD');
+        initAnalystPortalView();
+      } else if (code === PORTAL_PASSCODES.ANALYST || code === 'ANALYST26' || code === 'PEVC2026') {
+        if (errorMsg) errorMsg.classList.add('hidden');
+        setPortalRole('ANALYST');
+        initAnalystPortalView();
+      } else {
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        input.classList.add('border-rose-500');
+        input.focus();
+      }
+    }
+
+    function handlePortalLogout() {
+      setPortalRole(null);
+      initAnalystPortalView();
+    }
+
+    function renderPortalDashboard(role) {
+      const roleBadge = document.getElementById('portal-role-badge');
+      const boardAddBtn = document.getElementById('board-add-deal-btn');
+
+      if (role === 'BOARD') {
+        if (roleBadge) {
+          roleBadge.textContent = 'Board Executive Mode';
+          roleBadge.className = 'px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-amber-400 text-slate-950 shadow-sm';
+        }
+        if (boardAddBtn) boardAddBtn.classList.remove('hidden');
+      } else {
+        if (roleBadge) {
+          roleBadge.textContent = 'Analyst Session';
+          roleBadge.className = 'px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-club-purpleHighlight text-white shadow-sm';
+        }
+        if (boardAddBtn) boardAddBtn.classList.add('hidden');
+      }
+
+      renderDealsGrid(role);
+    }
+
+    function filterPortalDeals(category) {
+      currentPortalFilter = category;
+      document.querySelectorAll('.deal-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-club-purple', 'text-white', 'active', 'shadow-sm');
+        btn.classList.add('bg-slate-100', 'text-slate-600');
+      });
+      event.target.classList.remove('bg-slate-100', 'text-slate-600');
+      event.target.classList.add('bg-club-purple', 'text-white', 'active', 'shadow-sm');
+
+      renderDealsGrid(getPortalRole());
+    }
+
+    function renderDealsGrid(role) {
+      const grid = document.getElementById('portal-deals-grid');
+      if (!grid) return;
+
+      const deals = getStoredDeals();
+      const filtered = currentPortalFilter === 'all' 
+        ? deals 
+        : deals.filter(d => d.category.toLowerCase().includes(currentPortalFilter.toLowerCase()) || (currentPortalFilter.includes('Special') && d.category.includes('Special')));
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-400 space-y-2">
+            <i data-lucide="folder-open" class="w-8 h-8 mx-auto text-slate-300"></i>
+            <p class="text-xs">No hay sprints activos en esta categoría por ahora.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(deal => {
+        // Difficulty badge color
+        let diffBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        if (deal.difficulty === 'Intermedio') diffBadge = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+        if (deal.difficulty === 'Avanzado') diffBadge = 'bg-rose-50 text-rose-700 border-rose-200';
+
+        const isBoard = role === 'BOARD';
+
+        return `
+          <div class="card-clean rounded-2xl p-6 flex flex-col justify-between space-y-5 relative group hover:border-club-purple/50 transition-all border-slate-200/90 shadow-sm hover:shadow-md">
+            
+            <div class="space-y-3.5">
+              <!-- Top Badges -->
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <span class="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700">
+                  ${deal.category}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${diffBadge}">
+                  ${deal.difficulty}
+                </span>
+              </div>
+
+              <!-- Deal Title -->
+              <h3 class="font-serif text-lg font-semibold text-club-dark group-hover:text-club-purple transition-colors leading-snug">
+                ${deal.title}
+              </h3>
+
+              <!-- Lead & Duration Meta -->
+              <div class="space-y-1 text-xs text-slate-500 pt-1 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <i data-lucide="user-check" class="w-3.5 h-3.5 text-club-purple"></i>
+                  <span>Lead: <strong class="text-slate-700 font-medium">${deal.lead}</strong></span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                  <span>${deal.duration}</span>
+                </div>
+              </div>
+
+              <!-- Deal Description -->
+              <p class="text-xs text-slate-600 leading-relaxed font-normal line-clamp-4">
+                ${deal.description}
+              </p>
+            </div>
+
+            <!-- Deliverable & Bottom Controls -->
+            <div class="space-y-3 pt-3 border-t border-slate-100">
+              <div class="flex items-start gap-1.5 text-[11px] text-slate-500">
+                <i data-lucide="file-text" class="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5"></i>
+                <span class="leading-tight"><strong class="text-slate-700 font-medium">Output:</strong> ${deal.deliverable}</span>
+              </div>
+
+              ${isBoard ? `
+                <div class="pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
+                  <button onclick="editDealSprint('${deal.id}')" class="text-[11px] font-semibold text-club-purple hover:underline flex items-center gap-1">
+                    <i data-lucide="pencil" class="w-3 h-3"></i>
+                    <span>Editar</span>
+                  </button>
+                  <button onclick="deleteDealSprint('${deal.id}')" class="text-[11px] font-semibold text-rose-600 hover:underline flex items-center gap-1">
+                    <i data-lucide="trash-2" class="w-3 h-3"></i>
+                    <span>Eliminar</span>
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Board Modal Functions
+    function openCreateDealModal() {
+      document.getElementById('modal-deal-title').textContent = 'Create New Deal Sprint';
+      document.getElementById('deal-form-id').value = '';
+      document.getElementById('deal-input-title').value = '';
+      document.getElementById('deal-input-category').value = 'Private Equity';
+      document.getElementById('deal-input-difficulty').value = 'Iniciación';
+      document.getElementById('deal-input-lead').value = '';
+      document.getElementById('deal-input-duration').value = '2–3 semanas · 4–5 analistas';
+      document.getElementById('deal-input-desc').value = '';
+      document.getElementById('deal-input-deliverable').value = '';
+
+      const modal = document.getElementById('board-deal-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      lucide.createIcons();
+    }
+
+    function closeCreateDealModal() {
+      const modal = document.getElementById('board-deal-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function handleSaveDealSprint(e) {
+      e.preventDefault();
+      const id = document.getElementById('deal-form-id').value || ('sprint-' + Date.now());
+      const title = document.getElementById('deal-input-title').value.trim();
+      const category = document.getElementById('deal-input-category').value;
+      const difficulty = document.getElementById('deal-input-difficulty').value;
+      const lead = document.getElementById('deal-input-lead').value.trim();
+      const duration = document.getElementById('deal-input-duration').value.trim();
+      const description = document.getElementById('deal-input-desc').value.trim();
+      const deliverable = document.getElementById('deal-input-deliverable').value.trim();
+
+      const newDeal = { id, title, category, difficulty, lead, duration, description, deliverable };
+
+      let deals = getStoredDeals();
+      const existingIdx = deals.findIndex(d => d.id === id);
+      if (existingIdx >= 0) {
+        deals[existingIdx] = newDeal;
+      } else {
+        deals.unshift(newDeal);
+      }
+
+      saveStoredDeals(deals);
+      closeCreateDealModal();
+      renderDealsGrid(getPortalRole());
+    }
+
+    function editDealSprint(dealId) {
+      const deals = getStoredDeals();
+      const deal = deals.find(d => d.id === dealId);
+      if (!deal) return;
+
+      document.getElementById('modal-deal-title').textContent = 'Edit Deal Sprint';
+      document.getElementById('deal-form-id').value = deal.id;
+      document.getElementById('deal-input-title').value = deal.title;
+      document.getElementById('deal-input-category').value = deal.category;
+      document.getElementById('deal-input-difficulty').value = deal.difficulty;
+      document.getElementById('deal-input-lead').value = deal.lead;
+      document.getElementById('deal-input-duration').value = deal.duration;
+      document.getElementById('deal-input-desc').value = deal.description;
+      document.getElementById('deal-input-deliverable').value = deal.deliverable;
+
+      const modal = document.getElementById('board-deal-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      lucide.createIcons();
+    }
+
+    function deleteDealSprint(dealId) {
+      if (!confirm('¿Seguro que deseas eliminar este sprint del catálogo?')) return;
+      let deals = getStoredDeals();
+      deals = deals.filter(d => d.id !== dealId);
+      saveStoredDeals(deals);
+      renderDealsGrid(getPortalRole());
     }
   </script>
 </body>
