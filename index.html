@@ -2364,6 +2364,10 @@
         }
       }
 
+      if (window.pevcTrackEvent) {
+        window.pevcTrackEvent('view_change', viewName + (targetElementId ? ' #' + targetElementId : ''));
+      }
+
       if (viewName === 'home') {
         scrollToHomeScreen(0);
       }
@@ -2826,14 +2830,17 @@
         if (errorMsg) errorMsg.classList.add('hidden');
         currentPortalRole = 'BOARD';
         initAnalystPortalView();
+        if (window.pevcTrackEvent) window.pevcTrackEvent('portal_access', 'Board Portal Unlocked');
       } else if (code === PORTAL_PASSCODES.ANALYST || code === 'ANALYST26' || code === 'PEVC2026') {
         if (errorMsg) errorMsg.classList.add('hidden');
         currentPortalRole = 'ANALYST';
         initAnalystPortalView();
+        if (window.pevcTrackEvent) window.pevcTrackEvent('portal_access', 'Analyst Portal Unlocked');
       } else {
         if (errorMsg) errorMsg.classList.remove('hidden');
         input.classList.add('border-rose-500');
         input.focus();
+        if (window.pevcTrackEvent) window.pevcTrackEvent('portal_attempt_failed', 'Invalid Passcode Attempt');
       }
     }
 
@@ -3063,6 +3070,143 @@
         closeCreateDealModal();
       }
     });
+
+    // =========================================================================
+    // PEVC WEB TELEMETRY & LIVE GOOGLE SHEETS ANALYTICS ENGINE
+    // =========================================================================
+    (function() {
+      const ANALYTICS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyEdJPVMyGn2V2RH0MPStidVCG5HHTudL2GIjmKrgcAUp9jvuRwsYmqC3lUwR446fZ04A/exec';
+
+      // 1. Session ID (Persisted across tab session)
+      let sessionId = sessionStorage.getItem('pevc_analytics_session_id');
+      if (!sessionId) {
+        sessionId = 'sess_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now().toString(36);
+        sessionStorage.setItem('pevc_analytics_session_id', sessionId);
+      }
+
+      const sessionStartTime = Date.now();
+
+      // Device & Screen resolution
+      function getDeviceType() {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'Tablet';
+        if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated/i.test(ua)) return 'Mobile';
+        return 'Desktop';
+      }
+
+      const device = getDeviceType();
+      const screenResolution = `${window.screen.width}x${window.screen.height}`;
+      let referrer = 'Direct';
+      try {
+        if (document.referrer) {
+          const refUrl = new URL(document.referrer);
+          referrer = refUrl.hostname || document.referrer;
+        }
+      } catch (e) {
+        referrer = document.referrer || 'Direct';
+      }
+
+      window.pevcMaxScrollDepth = 0;
+
+      // Event Dispatcher via lightweight Image beacon
+      function sendEvent(eventType, details, extraData = {}) {
+        try {
+          const durationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
+          const currentPath = window.location.pathname + (window.location.hash || '');
+          const maxScroll = extraData.scrollDepth !== undefined ? extraData.scrollDepth : (window.pevcMaxScrollDepth || 0);
+
+          const params = new URLSearchParams({
+            sessionId: sessionId,
+            eventType: eventType,
+            details: details || '',
+            page: currentPath || '/',
+            duration: durationSeconds,
+            scrollDepth: maxScroll,
+            device: device,
+            screen: screenResolution,
+            referrer: referrer
+          });
+
+          const fullUrl = `${ANALYTICS_WEBHOOK_URL}?${params.toString()}`;
+          const beaconImg = new Image();
+          beaconImg.src = fullUrl;
+        } catch (e) {
+          // Silent fallback
+        }
+      }
+
+      // Expose globally
+      window.pevcTrackEvent = sendEvent;
+
+      // 2. Initial Page View
+      sendEvent('page_view', 'Initial Visit');
+
+      // 3. Scroll Depth Tracking (25%, 50%, 75%, 90%)
+      const scrollMilestones = { 25: false, 50: false, 75: false, 90: false };
+
+      function checkScroll() {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) return;
+        const currentScroll = Math.min(100, Math.round((window.scrollY / docHeight) * 100));
+        if (currentScroll > window.pevcMaxScrollDepth) {
+          window.pevcMaxScrollDepth = currentScroll;
+        }
+
+        [25, 50, 75, 90].forEach(m => {
+          if (currentScroll >= m && !scrollMilestones[m]) {
+            scrollMilestones[m] = true;
+            sendEvent('scroll_depth', `Scrolled past ${m}%`, { scrollDepth: m });
+          }
+        });
+      }
+
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+          scrollTimeout = setTimeout(() => {
+            checkScroll();
+            scrollTimeout = null;
+          }, 250);
+        }
+      }, { passive: true });
+
+      // 4. Download & Link Click Tracking
+      document.addEventListener('click', (e) => {
+        const target = e.target.closest('a');
+        if (!target) return;
+
+        const href = target.getAttribute('href') || '';
+        const downloadAttr = target.getAttribute('download');
+
+        const isDownload = downloadAttr !== null || /\.(pptx|pdf|xlsx|zip|docx)(\?.*)?$/i.test(href);
+        const isMicrosoftForm = href.includes('forms.cloud.microsoft') || href.includes('forms.office.com');
+        const isExternal = href.startsWith('http') && !href.includes(window.location.hostname);
+
+        if (isDownload) {
+          const fileName = href.split('/').pop().split('?')[0] || target.innerText.trim() || 'Document';
+          sendEvent('file_download', decodeURIComponent(fileName));
+        } else if (isMicrosoftForm) {
+          sendEvent('form_click', 'Preference / Application Form Clicked');
+        } else if (isExternal) {
+          sendEvent('outbound_click', href);
+        }
+      }, { passive: true });
+
+      // 5. Active Session Duration Heartbeats (30s, 60s, 120s, 300s)
+      const heartbeats = [30, 60, 120, 300];
+      heartbeats.forEach(seconds => {
+        setTimeout(() => {
+          sendEvent('heartbeat', `Active on site for ${seconds}s`);
+        }, seconds * 1000);
+      });
+
+      // 6. Page exit tracking
+      window.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          sendEvent('session_exit', 'Tab Hidden / Closed');
+        }
+      });
+    })();
   </script>
 </body>
 </html>
