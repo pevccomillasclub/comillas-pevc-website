@@ -3106,6 +3106,19 @@
         referrer = document.referrer || 'Direct';
       }
 
+      // Geolocation lookup (IP-based, fallback to browser timezone)
+      function getFallbackLocation() {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+          return tz ? tz.replace('_', ' ') : 'Unknown';
+        } catch (e) {
+          return 'Unknown';
+        }
+      }
+
+      let userLocation = sessionStorage.getItem('pevc_user_location') || getFallbackLocation();
+      sessionStorage.setItem('pevc_user_location', userLocation);
+
       window.pevcMaxScrollDepth = 0;
 
       // Event Dispatcher via lightweight Image beacon
@@ -3124,7 +3137,8 @@
             scrollDepth: maxScroll,
             device: device,
             screen: screenResolution,
-            referrer: referrer
+            referrer: referrer,
+            location: userLocation || sessionStorage.getItem('pevc_user_location') || getFallbackLocation()
           });
 
           const fullUrl = `${ANALYTICS_WEBHOOK_URL}?${params.toString()}`;
@@ -3138,8 +3152,42 @@
       // Expose globally
       window.pevcTrackEvent = sendEvent;
 
-      // 2. Initial Page View
-      sendEvent('page_view', 'Initial Visit');
+      // 2. Initial Page View (resolves rich location before sending if fast)
+      if (sessionStorage.getItem('pevc_geo_resolved')) {
+        sendEvent('page_view', 'Initial Visit');
+      } else {
+        let sent = false;
+        const fallbackTimer = setTimeout(() => {
+          if (!sent) {
+            sent = true;
+            sendEvent('page_view', 'Initial Visit');
+          }
+        }, 350);
+
+        fetch('https://ipwho.is/')
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.success) {
+              const flag = data.flag && data.flag.emoji ? data.flag.emoji + ' ' : '';
+              const city = data.city ? data.city + ', ' : '';
+              const country = data.country || data.country_code || '';
+              const locStr = `${flag}${city}${country}`.trim();
+              if (locStr) {
+                userLocation = locStr;
+                sessionStorage.setItem('pevc_user_location', locStr);
+                sessionStorage.setItem('pevc_geo_resolved', '1');
+              }
+            }
+          })
+          .catch(() => {})
+          .finally(() => {
+            if (!sent) {
+              sent = true;
+              clearTimeout(fallbackTimer);
+              sendEvent('page_view', 'Initial Visit');
+            }
+          });
+      }
 
       // 3. Scroll Depth Tracking (25%, 50%, 75%, 90%)
       const scrollMilestones = { 25: false, 50: false, 75: false, 90: false };
