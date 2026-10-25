@@ -6,6 +6,23 @@
   <title>Comillas PE&VC Club — Private Equity & Venture Capital</title>
   <meta name="description" content="The official student-led Private Equity and Venture Capital Club at Universidad Pontificia Comillas (ICAI & ICADE)." />
   
+  <!-- Base URL for deep-link routing & static assets -->
+  <base href="/" />
+
+  <!-- Single Page Apps for GitHub Pages: Route Decoder -->
+  <script>
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) { 
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location));
+  </script>
+  
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/club-logo.png" />
   <link rel="apple-touch-icon" href="assets/club-logo.png" />
@@ -2349,8 +2366,108 @@
       }
     }
 
+    // =========================================================================
+    // PEVC DEEP-LINK CLIENT-SIDE ROUTER ENGINE
+    // =========================================================================
+    const PEVC_ROUTES = {
+      'home': { canonical: '/', aliases: ['/home', '/index.html'] },
+      'deal-analyst': { canonical: '/deal-analyst', aliases: ['/deal_analyst', '/deal-analyst-program', '/program', '/apply'] },
+      'resources': { canonical: '/resources', aliases: ['/resources/'] },
+      'pm101': { canonical: '/resources/private_markets_101', aliases: ['/resources/pm101', '/resources/private-markets-101', '/private_markets_101', '/pm101'] },
+      'analyst-insights': { canonical: '/resources/analyst_insights', aliases: ['/resources/analyst-insights', '/analyst_insights', '/analyst-insights'] },
+      'industry-reports': { canonical: '/resources/industry_reports', aliases: ['/resources/industry-reports', '/industry_reports', '/industry-reports'] },
+      'specialized-reports': { canonical: '/resources/specialized_reports', aliases: ['/resources/specialized-reports', '/specialized_reports', '/specialized-reports'] },
+      'analyst-portal': { canonical: '/analyst-portal', aliases: ['/portal', '/analyst_portal'] },
+      'contact': { canonical: '/contact', aliases: ['/contact-us', '/contacto'] },
+      'legal': { canonical: '/legal', aliases: ['/legal-notice', '/disclaimer'] }
+    };
+
+    function viewToCanonicalPath(viewName) {
+      if (PEVC_ROUTES[viewName]) {
+        return PEVC_ROUTES[viewName].canonical;
+      }
+      return '/';
+    }
+
+    function pathToViewName(pathname) {
+      if (!pathname) return 'home';
+      let clean = pathname.toLowerCase().trim();
+      if (clean.length > 1 && clean.endsWith('/')) {
+        clean = clean.slice(0, -1);
+      }
+      if (!clean.startsWith('/')) {
+        clean = '/' + clean;
+      }
+
+      // 1. Direct match on canonical path or aliases
+      for (const [view, config] of Object.entries(PEVC_ROUTES)) {
+        if (config.canonical.toLowerCase() === clean) return view;
+        if (config.aliases && config.aliases.some(a => a.toLowerCase() === clean)) {
+          return view;
+        }
+      }
+
+      // 2. Sub-string checks for robust matching
+      if (clean.includes('private_markets_101') || clean.includes('private-markets-101') || clean.includes('pm101')) return 'pm101';
+      if (clean.includes('analyst_insights') || clean.includes('analyst-insights')) return 'analyst-insights';
+      if (clean.includes('industry_reports') || clean.includes('industry-reports')) return 'industry-reports';
+      if (clean.includes('specialized_reports') || clean.includes('specialized-reports')) return 'specialized-reports';
+      if (clean.includes('resources')) return 'resources';
+      if (clean.includes('deal-analyst') || clean.includes('deal_analyst')) return 'deal-analyst';
+      if (clean.includes('portal')) return 'analyst-portal';
+      if (clean.includes('contact')) return 'contact';
+      if (clean.includes('legal')) return 'legal';
+
+      return 'home';
+    }
+
+    function resolveRouteFromUrl(updateHistory = false) {
+      let pathname = window.location.pathname || '/';
+      let hash = window.location.hash || '';
+
+      let resolvedView = pathToViewName(pathname);
+      let targetElementId = null;
+
+      if (hash) {
+        const rawHash = hash.replace(/^#/, '');
+        if (rawHash === 'da-application-section' || rawHash === 'application' || rawHash === 'apply') {
+          targetElementId = 'da-application-section';
+          if (resolvedView === 'home') resolvedView = 'deal-analyst';
+        } else if (rawHash.startsWith('view-')) {
+          const viewFromHash = rawHash.replace('view-', '');
+          if (document.getElementById(rawHash)) {
+            resolvedView = viewFromHash;
+          }
+        } else if (document.getElementById(rawHash)) {
+          targetElementId = rawHash;
+        } else {
+          // Check if hash matches a route
+          const viewFromHash = pathToViewName('/' + rawHash);
+          if (viewFromHash !== 'home') {
+            resolvedView = viewFromHash;
+          }
+        }
+      }
+
+      if (pathname.includes('/apply')) {
+        resolvedView = 'deal-analyst';
+        targetElementId = 'da-application-section';
+      }
+
+      switchView(resolvedView, targetElementId, updateHistory);
+    }
+
+    // Handle browser back and forward button navigation
+    window.addEventListener('popstate', function(e) {
+      if (e.state && e.state.viewName) {
+        switchView(e.state.viewName, e.state.targetElementId, false);
+      } else {
+        resolveRouteFromUrl(false);
+      }
+    });
+
     // Switch between views (Home, Deal Analyst, Resources, Contact, Legal, etc.)
-    function switchView(viewName, targetElementId) {
+    function switchView(viewName, targetElementId, updateHistory = true) {
       // Always close mobile menu drawer when switching views
       closeMobileMenu();
 
@@ -2361,6 +2478,17 @@
         targetView.classList.add('active');
         if (!targetElementId) {
           window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+      }
+
+      // Synchronize browser URL bar and History state
+      if (updateHistory) {
+        const canonicalPath = viewToCanonicalPath(viewName);
+        const targetHash = targetElementId ? '#' + targetElementId : '';
+        const targetUrl = canonicalPath + targetHash;
+        const currentUrl = (window.location.pathname || '/') + (window.location.hash || '');
+        if (currentUrl !== targetUrl) {
+          window.history.pushState({ viewName, targetElementId }, '', targetUrl);
         }
       }
 
@@ -3061,6 +3189,9 @@
 
     // Initialize cloud sync immediately on load
     fetchDealsFromCloud();
+
+    // Initialize deep-link client-side route immediately on load
+    resolveRouteFromUrl(false);
 
     // Global escape key listener to close modals
     window.addEventListener('keydown', (e) => {
